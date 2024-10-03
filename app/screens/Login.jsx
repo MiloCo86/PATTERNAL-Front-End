@@ -63,6 +63,7 @@ const Login = () => {
                         <Link href="/screens/SignUp" style={styles.signUpButton} >Sign Up</Link>  
                     </View>
                 </View>
+            
             </View>
 
 
