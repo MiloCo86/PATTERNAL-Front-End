@@ -15,23 +15,21 @@ const SignUpSecondScreen = () => {
     }
   return (
     <SafeAreaView style={styles.mainContainer}>
-        <View style={styles.container} >
-            
-            <Image source={require('../assets/logo.png')} style={styles.logo} />
-            <Text style={styles.title} >How Many Children Do You Have?</Text>
-            <View style={styles.buttonContainer} >
-                <MainButton buttonText='1 Child' />
-                <MainButton buttonText='2 Children' />
-                <MainButton buttonText='3 Children' />
-                <MainButton buttonText='4 Children' />
-                <MainButton buttonText='5+ Children' />
-            </View>
-
-            <PrimarySubmitButton buttonText='Create Account' onPress={handleCreateAccount} />
-
-
+     
+        <Image source={require('../assets/logo.png')} style={styles.logo} />
+        <Text style={styles.title} >How Many Children Do You Have?</Text>
+        <View style={styles.buttonContainer} >
+            <MainButton buttonText='1 Child' />
+            <MainButton buttonText='2 Children' />
+            <MainButton buttonText='3 Children' />
+            <MainButton buttonText='4 Children' />
+            <MainButton buttonText='5+ Children' />
         </View>
-               
+
+        <View style={styles.createAccountContainer}>
+            <PrimarySubmitButton buttonText='Create Account' onPress={handleCreateAccount} />
+        </View>
+           
       </SafeAreaView>
   )
 }
@@ -39,11 +37,7 @@ const SignUpSecondScreen = () => {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: colors.white
-    },
-    container: {
-        flex: 1,
-        padding: 20,
+        backgroundColor: colors.white,
         alignItems: 'center'
     },
     logo: {
@@ -57,9 +51,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     buttonContainer: {
-        width: '100%',
+        flexGrow: 1,
         marginTop: 50,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
     },
     button: {
         backgroundColor: colors.secondary,
@@ -75,7 +70,11 @@ const styles = StyleSheet.create({
         color: colors.primary,
         fontSize: 18,
         fontWeight: 'bold'
-    }
+    },
+    createAccountContainer: {
+        marginTop: 50,
+        marginBottom: 50
+    }   
 
 })
 
