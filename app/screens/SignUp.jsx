@@ -24,7 +24,7 @@ const SignUp = () => {
     };
 
     return (
-        <KeyboardAvoidingView>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
             <ScrollView style={styles.scrollFormContainer} indicatorStyle='white'>
                 <SafeAreaView style={styles.mainContainer}>
                     <View style={styles.container}>
@@ -102,20 +102,21 @@ const SignUp = () => {
                             />
 
                         </View>
-                   
 
 
-                    <View style={styles.buttonContainer}>
-                        <View style={styles.continueButton}>
-                            <TouchableOpacity style={styles.button} onPress={handleContinue}>
-                                <Text style={styles.continueButtonText}>Continue</Text>
-                            </TouchableOpacity>
+
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.continueButton}>
+                                <TouchableOpacity style={styles.button} onPress={handleContinue}>
+                                    <Text style={styles.continueButtonText}>Continue</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
-                </View>
-            </SafeAreaView >
+                </SafeAreaView >
             </ScrollView>
         </KeyboardAvoidingView>
+
 
     );
 };
