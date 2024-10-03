@@ -1,5 +1,7 @@
 import React from 'react'
-import { Text, TouchableOpacity, StyleSheet } from 'react-native'
+
+import { Button } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 
 import colors from '../config/colors'
 
@@ -7,27 +9,36 @@ import colors from '../config/colors'
 
 const MainButton = ({buttonText}) => {
   return (
-    <TouchableOpacity style={styles.button} >
-        <Text style={styles.loginButtonText} >{buttonText}</Text>
-    </TouchableOpacity>
+    <Button
+      buttonColor={colors.altSecondary}  
+      mode="contained"  
+      onPress={() => console.log('Button  1 Pressed')}
+      textColor={colors.primary}
+      accessibilityLabel={buttonText}
+      style={styles.button}
+      labelStyle={styles.buttonText}
+    >
+
+    {buttonText}
+  </Button>
   )
 }
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: colors.primary,
-        padding: 10,
-        borderRadius: 10,
-        width: '90%',
-        height: 50,
-        alignItems: 'center',
-        marginBottom: 10,
-        marginTop: 10
-    },
-    loginButtonText: {
-        color: colors.secondary,
-        fontSize: 18
-    }
+  button: {
+      borderRadius: 10,
+      width: 190,
+      height: 50,
+      justifyContent: 'center',
+      borderWidth: 2, // Add border width
+    borderColor: colors.primary,
+
+  },
+  buttonText: {
+      color: colors.primary,
+      fontSize: 16,    
+  }
 })
+
 
 export default MainButton
