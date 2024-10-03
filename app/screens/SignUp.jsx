@@ -29,16 +29,16 @@ const SignUp = () => {
             <View style={styles.container}>
                 <View style={styles.backButton}>
                     <Pressable onPress={handleBackArrow}>
-                        <Image source={require('../assets/back-arrow.png')} style={styles.backButton}/>
+                        <Image source={require('../assets/back-arrow.png')} style={styles.backButton} />
                     </Pressable>
                 </View>
                 <KeyboardAvoidingView>
                     <ScrollView style={styles.scrollFormContainer} indicatorStyle='white'>
                         <View style={styles.header}>
-                            
-                                <Image source={require('../assets/profile-img.png')} style={styles.profile} />
-                                <Text style={styles.title}>User Details</Text>
-                            
+
+                            <Image source={require('../assets/profile-img.png')} style={styles.profile} />
+                            <Text style={styles.title}>User Details</Text>
+
                         </View>
                         <View style={styles.formContainer}>
                             <Text>First Name</Text>
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingLeft: 5,
         borderRadius: 5,
-        color: colors.secondary,
+        color: colors.primary,
     },
     formContainer: {
         marginTop: 80
