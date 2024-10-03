@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { Link, router } from 'expo-router'
-
+import { Link, router } from 'expo-router';
 import { Text, View, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, Pressable } from 'react-native';
-
 import colors from '../config/colors';
 
 const SignUp = () => {
@@ -14,17 +12,34 @@ const SignUp = () => {
         password: '',
         verify_password: ''
     });
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleContinue = () => {
-        return router.push('/screens/Home')
+        if (form.password !== form.verify_password) {
+            setErrorMessage("Passwords do not match!");
+        } else {
+            setErrorMessage(''); // Clear any previous error
+            router.push('/screens/Home');
+        }
+    };
+
+    const handleVerifyPasswordChange = (verify_password) => {
+        setForm({ ...form, verify_password });
+
+        // Update error message while typing
+        if (verify_password !== form.password) {
+            setErrorMessage("Passwords do not match!");
+        } else {
+            setErrorMessage(''); // Clear error if they match
+        }
     };
 
     const handleBackArrow = () => {
-        return router.push('/screens/Login')
+        router.push('/screens/Login');
     };
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <ScrollView style={styles.scrollFormContainer} indicatorStyle='white'>
                 <SafeAreaView style={styles.mainContainer}>
                     <View style={styles.container}>
@@ -34,10 +49,8 @@ const SignUp = () => {
                             </Pressable>
                         </View>
                         <View style={styles.header}>
-
                             <Image source={require('../assets/profile-img.png')} style={styles.profile} />
                             <Text style={styles.title}>User Details</Text>
-
                         </View>
                         <View style={styles.formContainer}>
                             <Text>First Name</Text>
@@ -94,16 +107,17 @@ const SignUp = () => {
                                 placeholder='Verify Password'
                                 style={styles.inputControl}
                                 value={form.verify_password}
-                                onChangeText={verify_password => setForm({ ...form, verify_password })}
+                                onChangeText={handleVerifyPasswordChange}
                                 autoCapitalize='none'
                                 autoCorrect={false}
                                 keyboardType='default'
                                 secureTextEntry={true}
                             />
-
                         </View>
 
-
+                        {errorMessage ? (
+                            <Text style={styles.errorMessage}>{errorMessage}</Text>
+                        ) : null}
 
                         <View style={styles.buttonContainer}>
                             <View style={styles.continueButton}>
@@ -113,11 +127,9 @@ const SignUp = () => {
                             </View>
                         </View>
                     </View>
-                </SafeAreaView >
+                </SafeAreaView>
             </ScrollView>
         </KeyboardAvoidingView>
-
-
     );
 };
 
@@ -127,10 +139,6 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         flex: 1,
-    },
-    scrollContainer: {
-        flexGrow: 1, // Ensures the content fills the scroll view
-        justifyContent: 'center', // Centers content vertically
     },
     backButton: {
         flex: 1,
@@ -193,21 +201,11 @@ const styles = StyleSheet.create({
         width: 200,
         borderRadius: 10
     },
-    continueArea: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: 20
-    },
-    continueText: {
-        fontSize: 15
-    },
-    continueButton: {
-        marginTop: 20,
-        fontSize: 15,
-        color: colors.secondary,
-        alignSelf: 'center'
+    errorMessage: {
+        color: 'red',
+        textAlign: 'center',
+        marginTop: 10,
     }
-
 });
 
 export default SignUp;
