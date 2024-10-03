@@ -137,9 +137,6 @@ const styles = StyleSheet.create({
     scrollFormContainer: {
         padding: 0,
     },
-    mainContainer: {
-        flex: 1,
-    },
     backButton: {
         flex: 1,
         paddingTop: 50,
