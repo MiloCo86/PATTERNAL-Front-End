@@ -1,13 +1,18 @@
 import React from 'react'
-
 import { Text, View, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Image } from 'react-native'
-import { useState } from 'react'
+import { router } from 'expo-router'
 
+//importing local components
 import MainButton from '../components/MainButton'
+import PrimarySubmitButton from '../components/PrimarySubmitButton'
 
 import colors from '../config/colors'
 
 const SignUpSecondScreen = () => {
+
+    const handleCreateAccount = () => {
+        return router.push('/screens/Home')
+    }
   return (
     <SafeAreaView style={styles.mainContainer}>
         <View style={styles.container} >
@@ -22,9 +27,7 @@ const SignUpSecondScreen = () => {
                 <MainButton buttonText='5+ Children' />
             </View>
 
-            <TouchableOpacity style={styles.button} >
-                <Text style={styles.loginButtonText} >Create Account</Text>
-            </TouchableOpacity>
+            <PrimarySubmitButton buttonText='Create Account' onPress={handleCreateAccount} />
 
 
         </View>

@@ -4,7 +4,7 @@
     "slug": "PATTERNAL-Front-End",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/logo.ico",
+    "icon": "./app/assets/logo.png",
     "scheme": "patternal",
     "userInterfaceStyle": "automatic",
     "splash": {
