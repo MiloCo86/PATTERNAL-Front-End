@@ -102,7 +102,7 @@ const SignUp = () => {
                             />
 
                         </View>
-                    </ScrollView>
+                   
 
 
                     <View style={styles.buttonContainer}>
@@ -114,6 +114,7 @@ const SignUp = () => {
                     </View>
                 </View>
             </SafeAreaView >
+            </ScrollView>
         </KeyboardAvoidingView>
 
     );
