@@ -2,8 +2,10 @@ import React from 'react'
 
 import { Text, View, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native'
 import { useState } from 'react'
-
 import { Link, router } from 'expo-router'
+
+//importing local components
+import PrimarySubmitButton from '../components/PrimarySubmitButton'
 
 
 import colors from '../config/colors'
@@ -18,13 +20,16 @@ const Login = () => {
         return router.push('/screens/Home') 
     }
 
+    const handleSignUp = () => {
+        return router.push('/screens/SignUp') 
+    }
+
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-        <ScrollView 
-        >
+        <ScrollView >
 
-            <View style={styles.container} >
+            <View style={styles.loginContainer} >
                 <View style={styles.header}>
                     <Image source={require('../assets/logo.png')} style={styles.logo} />
                     <Text style={styles.title} >Create Better Patterns For Your Family</Text>
@@ -54,9 +59,7 @@ const Login = () => {
 
                 <View style={styles.buttonContainer} >
                     <View style={styles.loginButton} >
-                        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                            <Text style={styles.loginButtonText} >Login</Text>
-                        </TouchableOpacity>
+                        <PrimarySubmitButton buttonText='Login' onPress={handleLogin} />
                     </View>
                     <View style={styles.signUpArea}>
                         <Text style={styles.signUpText}>Don't have an account? </Text>
@@ -66,11 +69,7 @@ const Login = () => {
             
             </View>
 
-
         </ScrollView>
-
-        
-        
             
       </SafeAreaView>
   )
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1
     },
-    container: {
+    loginContainer: {
         flex: 1,
         padding: 25,
         justifyContent: 'flex-start',
@@ -118,18 +117,6 @@ const styles = StyleSheet.create({
     loginButton: {
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    loginButtonText: {
-        color: colors.primary,
-        fontSize: 20,
-        fontWeight: 'bold',
-        alignSelf: 'center'
-    },
-    button: {
-        backgroundColor: colors.secondary,
-        padding: 10,
-        width: 200,
-        borderRadius: 10
     },
     signUpArea: {
         flexDirection: 'row',
