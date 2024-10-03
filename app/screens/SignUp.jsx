@@ -40,7 +40,7 @@ const SignUp = () => {
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <ScrollView style={styles.scrollFormContainer} >
+            <ScrollView>
                 <SafeAreaView>
                     <View style={styles.container}>
                         <View style={styles.backButton}>
@@ -134,9 +134,6 @@ const SignUp = () => {
 };
 
 const styles = StyleSheet.create({
-    scrollFormContainer: {
-        padding: 0,
-    },
     backButton: {
         flex: 1,
         paddingTop: 50,
