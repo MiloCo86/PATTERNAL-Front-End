@@ -7,12 +7,12 @@ import colors from '../config/colors'
 
 
 
-const PrimarySubmitButton = ({buttonText}) => {
+const PrimarySubmitButton = ({buttonText, onPress}) => {
   return (
     <Button 
       buttonColor={colors.primary}  
       mode="contained"  
-      onPress={() => console.log('Button  1 Pressed')}
+      onPress={onPress}
       textColor={colors.secondary}
       accessibilityLabel={buttonText}
       style={styles.button}

@@ -7,12 +7,12 @@ import colors from '../config/colors'
 
 
 
-const MainButton = ({buttonText}) => {
+const MainButton = ({buttonText, onPress}) => {
   return (
     <Button
       buttonColor={colors.altSecondary}  
       mode="contained"  
-      onPress={() => console.log('Button  1 Pressed')}
+      onPress={onPress}
       textColor={colors.primary}
       accessibilityLabel={buttonText}
       style={styles.button}
