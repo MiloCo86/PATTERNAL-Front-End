@@ -181,13 +181,15 @@ const styles = StyleSheet.create({
     },
     continueButton: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 20,
     },
     continueButtonText: {
         color: colors.primary,
         fontSize: 20,
         fontWeight: 'bold',
-        alignSelf: 'center'
+        alignSelf: 'center',
+
     },
     button: {
         backgroundColor: colors.secondary,
@@ -196,7 +198,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     errorMessage: {
-        color: 'red',
+        color: colors.tertiery,
         textAlign: 'center',
         marginTop: 10,
     }
