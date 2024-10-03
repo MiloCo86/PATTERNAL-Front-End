@@ -24,16 +24,15 @@ const SignUp = () => {
     };
 
     return (
-
-        <SafeAreaView style={styles.mainContainer}>
-            <View style={styles.container}>
-                <View style={styles.backButton}>
-                    <Pressable onPress={handleBackArrow}>
-                        <Image source={require('../assets/back-arrow.png')} style={styles.backButton} />
-                    </Pressable>
-                </View>
-                <KeyboardAvoidingView>
-                    <ScrollView style={styles.scrollFormContainer} indicatorStyle='white'>
+        <KeyboardAvoidingView>
+            <ScrollView style={styles.scrollFormContainer} indicatorStyle='white'>
+                <SafeAreaView style={styles.mainContainer}>
+                    <View style={styles.container}>
+                        <View style={styles.backButton}>
+                            <Pressable onPress={handleBackArrow}>
+                                <Image source={require('../assets/back-arrow.png')} style={styles.backButton} />
+                            </Pressable>
+                        </View>
                         <View style={styles.header}>
 
                             <Image source={require('../assets/profile-img.png')} style={styles.profile} />
@@ -104,17 +103,18 @@ const SignUp = () => {
 
                         </View>
                     </ScrollView>
-                </KeyboardAvoidingView>
 
-                <View style={styles.buttonContainer}>
-                    <View style={styles.continueButton}>
-                        <TouchableOpacity style={styles.button} onPress={handleContinue}>
-                            <Text style={styles.continueButtonText}>Continue</Text>
-                        </TouchableOpacity>
+
+                    <View style={styles.buttonContainer}>
+                        <View style={styles.continueButton}>
+                            <TouchableOpacity style={styles.button} onPress={handleContinue}>
+                                <Text style={styles.continueButtonText}>Continue</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
-            </View>
-        </SafeAreaView >
+            </SafeAreaView >
+        </KeyboardAvoidingView>
 
     );
 };
