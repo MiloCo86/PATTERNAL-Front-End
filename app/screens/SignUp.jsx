@@ -41,7 +41,7 @@ const SignUp = () => {
     return (
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <ScrollView style={styles.scrollFormContainer} >
-                <SafeAreaView style={styles.mainContainer}>
+                <SafeAreaView>
                     <View style={styles.container}>
                         <View style={styles.backButton}>
                             <Pressable onPress={handleBackArrow}>
