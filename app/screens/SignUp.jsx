@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, router } from 'expo-router';
-import { Text, View, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, Pressable, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../config/colors';
 
 const SignUp = () => {
@@ -39,102 +40,96 @@ const SignUp = () => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <KeyboardAvoidingView
-                    style={{ flex: 1 }}
-                    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-                    keyboardVerticalOffset={100}r
-                >
-                    <ScrollView contentContainerStyle={styles.scrollContainer}>
-                        <View style={styles.container}>
-                            <View style={styles.backButton}>
-                                <Pressable onPress={handleBackArrow}>
-                                    <Image source={require('../assets/back-arrow.png')} style={styles.backButton} />
-                                </Pressable>
-                            </View>
-                            <View style={styles.header}>
-                                <Image source={require('../assets/profile-img.png')} style={styles.profile} />
-                                <Text style={styles.title}>User Details</Text>
-                            </View>
-                            <View style={styles.formContainer}>
-                                <Text>First Name</Text>
-                                <TextInput
-                                    placeholder='First Name'
-                                    style={styles.inputControl}
-                                    value={form.first_name}
-                                    onChangeText={first_name => setForm({ ...form, first_name })}
-                                    autoCorrect={false}
-                                    keyboardType='default'
-                                />
-                                <Text>Last Name</Text>
-                                <TextInput
-                                    placeholder='Last Name'
-                                    style={styles.inputControl}
-                                    value={form.last_name}
-                                    onChangeText={last_name => setForm({ ...form, last_name })}
-                                    autoCorrect={false}
-                                    keyboardType='default'
-                                />
-                                <Text>E-mail</Text>
-                                <TextInput
-                                    placeholder='E-mail'
-                                    style={styles.inputControl}
-                                    value={form.email}
-                                    onChangeText={email => setForm({ ...form, email })}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    keyboardType='email-address'
-                                />
-                                <Text>Username</Text>
-                                <TextInput
-                                    placeholder='Username'
-                                    style={styles.inputControl}
-                                    value={form.username}
-                                    onChangeText={username => setForm({ ...form, username })}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    keyboardType='default'
-                                />
-                                <Text>Password</Text>
-                                <TextInput
-                                    placeholder='Password'
-                                    style={styles.inputControl}
-                                    value={form.password}
-                                    onChangeText={password => setForm({ ...form, password })}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    keyboardType='default'
-                                    secureTextEntry={true}
-                                />
-                                <Text>Verify Password</Text>
-                                <TextInput
-                                    placeholder='Verify Password'
-                                    style={styles.inputControl}
-                                    value={form.verify_password}
-                                    onChangeText={handleVerifyPasswordChange}
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                    keyboardType='default'
-                                    secureTextEntry={true}
-                                />
-                            </View>
+        <SafeAreaView>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <ScrollView>
+                    <View style={styles.container}>
+                        <View style={styles.backButton}>
+                            <Pressable onPress={handleBackArrow}>
+                                <Image source={require('../assets/back-arrow.png')} style={styles.backButton} />
+                            </Pressable>
+                        </View>
+                        <View style={styles.header}>
+                            <Image source={require('../assets/profile-img.png')} style={styles.profile} />
+                            <Text style={styles.title}>User Details</Text>
+                        </View>
+                        <View style={styles.formContainer}>
+                            <Text>First Name</Text>
+                            <TextInput
+                                placeholder='First Name'
+                                style={styles.inputControl}
+                                value={form.first_name}
+                                onChangeText={first_name => setForm({ ...form, first_name })}
+                                autoCorrect={false}
+                                keyboardType='default'
+                            />
+                            <Text>Last Name</Text>
+                            <TextInput
+                                placeholder='Last Name'
+                                style={styles.inputControl}
+                                value={form.last_name}
+                                onChangeText={last_name => setForm({ ...form, last_name })}
+                                autoCorrect={false}
+                                keyboardType='default'
+                            />
+                            <Text>E-mail</Text>
+                            <TextInput
+                                placeholder='E-mail'
+                                style={styles.inputControl}
+                                value={form.email}
+                                onChangeText={email => setForm({ ...form, email })}
+                                autoCapitalize='none'
+                                autoCorrect={false}
+                                keyboardType='email-address'
+                            />
+                            <Text>Username</Text>
+                            <TextInput
+                                placeholder='Username'
+                                style={styles.inputControl}
+                                value={form.username}
+                                onChangeText={username => setForm({ ...form, username })}
+                                autoCapitalize='none'
+                                autoCorrect={false}
+                                keyboardType='default'
+                            />
+                            <Text>Password</Text>
+                            <TextInput
+                                placeholder='Password'
+                                style={styles.inputControl}
+                                value={form.password}
+                                onChangeText={password => setForm({ ...form, password })}
+                                autoCapitalize='none'
+                                autoCorrect={false}
+                                keyboardType='default'
+                                secureTextEntry={true}
+                            />
+                            <Text>Verify Password</Text>
+                            <TextInput
+                                placeholder='Verify Password'
+                                style={styles.inputControl}
+                                value={form.verify_password}
+                                onChangeText={handleVerifyPasswordChange}
+                                autoCapitalize='none'
+                                autoCorrect={false}
+                                keyboardType='default'
+                                secureTextEntry={true}
+                            />
+                        </View>
 
                             {errorMessage ? (
                                 <Text style={styles.errorMessage}>{errorMessage}</Text>
                             ) : null}
 
-                            <View style={styles.buttonContainer}>
-                                <View style={styles.continueButton}>
-                                    <TouchableOpacity style={styles.button} onPress={handleContinue}>
-                                        <Text style={styles.continueButtonText}>Continue</Text>
-                                    </TouchableOpacity>
-                                </View>
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.continueButton}>
+                                <TouchableOpacity style={styles.button} onPress={handleContinue}>
+                                    <Text style={styles.continueButtonText}>Continue</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                    </ScrollView>
-                </KeyboardAvoidingView>
-            </TouchableWithoutFeedback>
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 };
