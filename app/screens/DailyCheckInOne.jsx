@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import MainButton from '../components/MainButton';
 import PrimarySubmitButton from '../components/PrimarySubmitButton';
 
-import colors from '../config/colors';
+
 
 const DailyCheckInOne = () => {
   return (
