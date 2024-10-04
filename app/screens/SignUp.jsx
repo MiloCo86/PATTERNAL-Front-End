@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, router } from 'expo-router';
-import { Text, View, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, Pressable } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../config/colors';
 
 const SignUp = () => {
@@ -39,9 +40,9 @@ const SignUp = () => {
     };
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <ScrollView>
-                <SafeAreaView>
+        <SafeAreaView>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                <ScrollView>
                     <View style={styles.container}>
                         <View style={styles.backButton}>
                             <Pressable onPress={handleBackArrow}>
@@ -127,9 +128,9 @@ const SignUp = () => {
                             </View>
                         </View>
                     </View>
-                </SafeAreaView>
-            </ScrollView>
-        </KeyboardAvoidingView>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     );
 };
 
