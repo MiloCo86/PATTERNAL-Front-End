@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { Link } from 'expo-router'
 
 import TopBar from '../layout/TopBar'
 import NavBar from '../layout/NavBar'
@@ -13,9 +12,6 @@ export class Home extends Component {
 
         <TopBar />
         <Text>Hello Team!!</Text>
-        <View>
-        <Link href="screens/TestPaper">Test Paper</Link>
-        </View>
         <NavBar />
       
       </View>
