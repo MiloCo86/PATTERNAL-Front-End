@@ -1,80 +1,92 @@
-import React from 'react'
-
-import { Text, View, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native'
-import { useState } from 'react'
-import { Link, router } from 'expo-router'
-
-//importing local components
-import PrimarySubmitButton from '../components/PrimarySubmitButton'
-
-
-import colors from '../config/colors'
+import React, { useState } from 'react';
+import { Text, View, TextInput, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
+import { Link, router } from 'expo-router';
+import axios from 'axios';
+import PrimarySubmitButton from '../components/PrimarySubmitButton';
+import { API_URL } from '@env'; 
+import colors from '../config/colors';
 
 const Login = () => {
     const [form, setForm] = useState({
         email: '',
         password: ''
-    })
+    });
 
-    const handleLogin = () => {
-        return router.push('/screens/Home') 
-    }
+    const [errorMessage, setErrorMessage] = useState(''); 
+
+    const handleLogin = async () => {
+        if (!form.email || !form.password) {
+            setErrorMessage('Email and password are required.');
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${API_URL}users/login`, form);
+            setErrorMessage('');
+            console.log('User object:', response.data.user)
+            router.push('/screens/Home');
+        } catch (err) {
+            setErrorMessage('Invalid email or password.');
+            console.log('Error:', err);
+            console.log('Form data being sent:', form);
+            console.log('API_URL:', API_URL);
+
+
+        }
+    };
 
     const handleSignUp = () => {
-        return router.push('/screens/SignUp') 
-    }
+        return router.push('/screens/SignUp'); 
+    };
 
-
-  return (
-    <SafeAreaView style={styles.mainContainer}>
-        <ScrollView >
-
-            <View style={styles.loginContainer} >
-                <View style={styles.header}>
-                    <Image source={require('../assets/logo.png')} style={styles.logo} />
-                    <Text style={styles.title} >Create Better Patterns For Your Family</Text>
-                </View>
-                
-                <View style={styles.formContainer} >
-                    <Text>Email:</Text>
-                    <TextInput
-                        placeholder='jhon@example.com' 
-                        style={styles.inputControl}
-                        value={form.email}
-                        onChange={email => setForm({...form, email})}
-                        autoCapitalize='none'
-                        autoCorrect={false}
-                        keyboardType='email-address' 
-                    />
-                    <Text>Password:</Text>
-                    <TextInput 
-                        placeholder='***********' 
-                        style={styles.inputControl}
-                        value={form.password}
-                        onChange={password => setForm({...form, password})}
-                        secureTextEntry={true}
-                        
-                    />
-                </View>
-
-                <View style={styles.buttonContainer} >
-                    <View style={styles.loginButton} >
-                        <PrimarySubmitButton buttonText='Login' onPress={handleLogin} />
+    return (
+        <SafeAreaView style={styles.mainContainer}>
+            <ScrollView>
+                <View style={styles.loginContainer}>
+                    <View style={styles.header}>
+                        <Image source={require('../assets/logo.png')} style={styles.logo} />
+                        <Text style={styles.title}>Create Better Patterns For Your Family</Text>
                     </View>
-                    <View style={styles.signUpArea}>
-                        <Text style={styles.signUpText}>Don't have an account? </Text>
-                        <Link href="/screens/SignUp" style={styles.signUpButton} >Sign Up</Link>  
+                    
+                    <View style={styles.formContainer}>
+                        <Text>Email:</Text>
+                        <TextInput
+                            placeholder='jhon@example.com' 
+                            style={styles.inputControl}
+                            value={form.email}
+                            onChangeText={email => setForm({ ...form, email })}
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            keyboardType='email-address' 
+                        />
+                        <Text>Password:</Text>
+                        <TextInput 
+                            placeholder='***********' 
+                            style={styles.inputControl}
+                            value={form.password}
+                            onChangeText={password => setForm({ ...form, password })}
+                            secureTextEntry={true}
+                        />
+                    </View>
+
+                    {errorMessage ? (
+                        <Text style={styles.errorText}>{errorMessage}</Text>
+                    ) : null}
+
+                    <View style={styles.buttonContainer}>
+                        <View style={styles.loginButton}>
+                            <PrimarySubmitButton buttonText='Login' onPress={handleLogin} />
+                        </View>
+                        <View style={styles.signUpArea}>
+                            <Text style={styles.signUpText}>Don't have an account? </Text>
+                            <Link href="/screens/SignUp" style={styles.signUpButton}>Sign Up</Link>  
+                        </View>
                     </View>
                 </View>
-            
-            </View>
-
-        </ScrollView>
-            
-      </SafeAreaView>
-  )
-}
-
+            </ScrollView>
+        </SafeAreaView>
+    );
+};
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -111,6 +123,11 @@ const styles = StyleSheet.create({
     formContainer: {
         marginTop: 80
     },
+    errorText: {
+        color: 'red',
+        marginTop: 10,
+        textAlign: 'center',
+    },
     buttonContainer: {
         marginTop: 80
     },
@@ -130,8 +147,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: colors.secondary
     }
-   
 });
 
-
-export default Login
+export default Login;

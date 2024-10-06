@@ -7,5 +7,5 @@ import DailyCheckInTwo from "./screens/DailyCheckInTwo";
 
 
 export default function Index() {
-  return <DailyCheckInTwo />;
+  return <Login />;
 }
