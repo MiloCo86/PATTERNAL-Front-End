@@ -8,6 +8,8 @@ import TextInputBox from '../components/TextInputBox';
 
 import colors from '../config/colors';
 
+import { router } from 'expo-router';
+
 
 // tempData will be replaced with questions data from the backend
 const tempData = [ 
@@ -19,6 +21,11 @@ const tempData = [
 
 // DailyCheckInTwo will be the second screen in the Daily Check-In flow. It will display a list of questions that the user will answer.
 const DailyCheckInTwo = () => {
+
+    const handleFinish = () => {
+        return router.push('/screens/Home')
+    }
+
   return (
     <SafeAreaView style={styles.container}>
 
@@ -49,7 +56,7 @@ const DailyCheckInTwo = () => {
         </View>
 
         <View style={styles.finishButton}>
-            <PrimarySubmitButton   buttonText="Finish" />
+            <PrimarySubmitButton   buttonText="Finish" onPress={handleFinish}/>
         </View>
     
 
