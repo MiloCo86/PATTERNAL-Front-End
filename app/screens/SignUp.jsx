@@ -116,9 +116,9 @@ const SignUp = () => {
                             />
                         </View>
 
-                        {errorMessage ? (
-                            <Text style={styles.errorMessage}>{errorMessage}</Text>
-                        ) : null}
+                            {errorMessage ? (
+                                <Text style={styles.errorMessage}>{errorMessage}</Text>
+                            ) : null}
 
                         <View style={styles.buttonContainer}>
                             <View style={styles.continueButton}>
@@ -135,10 +135,12 @@ const SignUp = () => {
 };
 
 const styles = StyleSheet.create({
+    scrollContainer: {
+        flexGrow: 1, 
+        justifyContent: 'center',  
+    },
     backButton: {
-        flex: 1,
         paddingTop: 50,
-        justifyContent: 'flex-start',
         height: 30,
         width: 30,
         color: colors.secondary,
@@ -172,10 +174,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingLeft: 5,
         borderRadius: 5,
+        marginBottom: 10,  
         color: colors.primary,
     },
     formContainer: {
-        marginTop: 80
+        marginTop: 20 
     },
     buttonContainer: {
         marginBottom: 80
@@ -190,7 +193,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         alignSelf: 'center',
-
     },
     button: {
         backgroundColor: colors.secondary,
@@ -199,7 +201,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     errorMessage: {
-        color: colors.tertiery,
+        color: colors.tertiary,
         textAlign: 'center',
         marginTop: 10,
     }
