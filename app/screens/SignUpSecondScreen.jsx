@@ -11,7 +11,7 @@ import colors from '../config/colors'
 const SignUpSecondScreen = () => {
 
     const handleCreateAccount = () => {
-        return router.push('/screens/Home')
+        return router.push('/screens/DailyCheckInOne')
     }
   return (
     <SafeAreaView style={styles.mainContainer}>

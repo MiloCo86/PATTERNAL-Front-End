@@ -3,10 +3,16 @@ import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import MainButton from '../components/MainButton';
 import PrimarySubmitButton from '../components/PrimarySubmitButton';
+import { router } from 'expo-router';
 
 
 
 const DailyCheckInOne = () => {
+
+  const handleContinue = () => {
+    return router.push('/screens/DailyCheckInTwo')
+  }
+
   return (
     <SafeAreaView style={styles.container}>
 
@@ -26,7 +32,7 @@ const DailyCheckInOne = () => {
         </View>
 
         <View style={styles.continueButton}>
-            <PrimarySubmitButton   buttonText="Continue" />
+            <PrimarySubmitButton  buttonText="Continue" onPress={handleContinue} />
         </View>
         
 
