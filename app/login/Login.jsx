@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
 import { Link, router } from 'expo-router';
 import axios from 'axios';
+
+import { API_URL } from '@env';
+
+//Components
 import PrimarySubmitButton from '../components/PrimarySubmitButton';
-import { API_URL } from '@env'; 
+
+//Config
 import colors from '../config/colors';
 
 const Login = () => {
@@ -36,7 +41,7 @@ const Login = () => {
     };
 
     const handleSignUp = () => {
-        return router.push('/screens/SignUp'); 
+        return router.push('/login/SignUp'); 
     };
 
     return (
@@ -79,7 +84,7 @@ const Login = () => {
                         </View>
                         <View style={styles.signUpArea}>
                             <Text style={styles.signUpText}>Don't have an account? </Text>
-                            <Link href="/screens/SignUp" style={styles.signUpButton}>Sign Up</Link>  
+                            <Link href="/login/SignUp" style={styles.signUpButton}>Sign Up</Link>  
                         </View>
                     </View>
                 </View>

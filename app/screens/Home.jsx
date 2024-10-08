@@ -12,7 +12,6 @@ export class Home extends Component {
 
         <TopBar />
         <Text>Hello Team!!</Text>
-        <NavBar />
       
       </View>
     )
