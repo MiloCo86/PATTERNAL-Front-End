@@ -15,6 +15,7 @@ export default function Layout() {
 const styles = StyleSheet.create({
   mainLayout: {
     flex: 1,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
   },
