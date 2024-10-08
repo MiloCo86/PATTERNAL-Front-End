@@ -7,10 +7,10 @@ import colors from '../config/colors'
 
 
 
-const MainButton = ({buttonText, onPress}) => {
+const MainButton = ({buttonText, onPress, color}) => {
   return (
     <Button
-      buttonColor={colors.altSecondary}  
+      buttonColor={color ? color : colors.altSecondary}  
       mode="contained"  
       onPress={onPress}
       textColor={colors.primary}
