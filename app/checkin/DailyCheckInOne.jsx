@@ -10,7 +10,7 @@ import { router } from 'expo-router';
 const DailyCheckInOne = () => {
 
   const handleContinue = () => {
-    return router.push('/screens/DailyCheckInTwo')
+    return router.push('/checkin/DailyCheckInTwo')
   }
 
   return (

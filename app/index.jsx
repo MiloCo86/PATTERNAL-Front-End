@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 
 
-import Login from "./screens/Login";
+import Login from "./login/Login";
 
 
 
