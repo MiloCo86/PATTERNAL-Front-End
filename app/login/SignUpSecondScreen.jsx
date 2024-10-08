@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { Text, View, TextInput, TouchableOpacity, SafeAreaView, StyleSheet, Image } from 'react-native'
 import { router } from 'expo-router'
 
@@ -6,32 +7,50 @@ import { router } from 'expo-router'
 import MainButton from '../components/MainButton'
 import PrimarySubmitButton from '../components/PrimarySubmitButton'
 
+//importing colors
 import colors from '../config/colors'
 
 const SignUpSecondScreen = () => {
 
-    const handleCreateAccount = () => {
-        return router.push('/checkin/DailyCheckInOne')
+    const [children, setChildren] = useState(0)
+
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const handleChildren = (num) => {
+        setErrorMessage('')
+        setChildren(num)
     }
-  return (
+
+    const handleCreateAccount = () => {
+        if (children == 0) {
+            setErrorMessage('Please select number of children.')
+        }else{
+            return router.push('/checkin/DailyCheckInOne')
+        }
+    }
+return (
     <SafeAreaView style={styles.mainContainer}>
      
-        <Image source={require('../assets/logo.png')} style={styles.logo} />
-        <Text style={styles.title} >How Many Children Do You Have?</Text>
-        <View style={styles.buttonContainer} >
-            <MainButton buttonText='1 Child' />
-            <MainButton buttonText='2 Children' />
-            <MainButton buttonText='3 Children' />
-            <MainButton buttonText='4 Children' />
-            <MainButton buttonText='5+ Children' />
-        </View>
+            <Image source={require('../assets/logo.png')} style={styles.logo} />
+            <Text style={styles.title} >How Many Children Do You Have?</Text>
+            <View style={styles.buttonContainer} >
+                    <MainButton buttonText='1 Child' borderColor={children == 1 ? colors.secondary : ''} onPress={() => handleChildren(1)}/>
+                    <MainButton buttonText='2 Children' borderColor={children == 2 ? colors.secondary : ''} onPress={() => handleChildren(2)}/>
+                    <MainButton buttonText='3 Children' borderColor={children == 3 ? colors.secondary : ''} onPress={() => handleChildren(3)}/>
+                    <MainButton buttonText='4 Children' borderColor={children == 4 ? colors.secondary : ''} onPress={() => handleChildren(4)}/>
+                    <MainButton buttonText='5+ Children' borderColor={children >= 5 ? colors.secondary : ''} onPress={() => handleChildren(5)}/>
+            </View>
 
-        <View style={styles.createAccountContainer}>
-            <PrimarySubmitButton buttonText='Create Account' onPress={handleCreateAccount} />
-        </View>
-           
-      </SafeAreaView>
-  )
+            {errorMessage ? (
+                <Text style={styles.errorText}>{errorMessage}</Text>
+            ) : null}
+
+            <View style={styles.createAccountContainer}>
+                    <PrimarySubmitButton buttonText='Create Account' onPress={handleCreateAccount} />
+            </View>
+                 
+        </SafeAreaView>
+)
 }
 
 const styles = StyleSheet.create({
@@ -74,6 +93,10 @@ const styles = StyleSheet.create({
     createAccountContainer: {
         marginTop: 50,
         marginBottom: 50
+    },
+    errorText: {
+        color: 'red',
+        marginTop: 10
     }   
 
 })
