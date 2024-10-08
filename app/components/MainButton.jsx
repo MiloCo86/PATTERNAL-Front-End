@@ -7,7 +7,7 @@ import colors from '../config/colors'
 
 
 
-const MainButton = ({buttonText, onPress}) => {
+const MainButton = ({buttonText, onPress, color}) => {
   return (
     <Button
       buttonColor={colors.altSecondary}  
@@ -15,7 +15,7 @@ const MainButton = ({buttonText, onPress}) => {
       onPress={onPress}
       textColor={colors.primary}
       accessibilityLabel={buttonText}
-      style={styles.button}
+      style={{...styles.button, borderColor: color ? color : colors.primary }}
       labelStyle={styles.buttonText}
     >
 
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
       height: 50,
       justifyContent: 'center',
       borderWidth: 2, // Add border width
-    borderColor: colors.primary,
 
   },
   buttonText: {

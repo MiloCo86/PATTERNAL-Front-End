@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet,Image, SafeAreaView, FlatList } from 'react-native';
+import { View, Text, StyleSheet,Image, SafeAreaView, FlatList, Pressable } from 'react-native';
 import { TextInput } from 'react-native-paper';
+
 
 import PrimarySubmitButton from '../components/PrimarySubmitButton';
 import PrimaryCard from '../components/PrimaryCard';
@@ -25,11 +26,18 @@ const DailyCheckInTwo = () => {
     const handleFinish = () => {
         return router.push('/screens/Home')
     }
+    const handleBack = () => {
+        return router.push('/checkin/DailyCheckInOne')
+    }
+
 
   return (
     <SafeAreaView style={styles.container}>
-
-        <Image source={require('../assets/logo.png')} style={styles.logo}   />
+        <Pressable onPress={handleBack} style={styles.arrowContainer} >
+            <Image source={require('../assets/back-arrow.png')} style={styles.backArrow} />
+        </Pressable>
+        
+        <Image source={require('../assets/logo.png')} style={styles.logo} />
 
         <View style={styles.headersContainer}>
             <Text style={styles.headerText}>Daily Check-In</Text> 
@@ -81,6 +89,19 @@ const styles = StyleSheet.create({
         marginTop: 8,
         color: colors.secondary
     },
+    // back arrow container
+    arrowContainer: {
+        alignSelf: 'flex-start',
+        marginTop: 25,
+        marginLeft: 25,
+    },
+    // back arrow
+    backArrow: {
+        
+        width: 26,
+        height: 26,
+       
+    },
     
     // header and subheader
     headersContainer: {
@@ -123,6 +144,7 @@ const styles = StyleSheet.create({
     finishButton: {
         marginBottom: 64,
     }
+
 });
 
 export default DailyCheckInTwo;
