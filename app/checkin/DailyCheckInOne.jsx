@@ -49,11 +49,11 @@ const DailyCheckInOne = () => {
 
         <View style={styles.buttonContainer}>
 
-            <MainButton buttonText="1. Overwhelmed" color={moodColor == 1 || moodColor == 0 ? colors.mood.one : ''} onPress={() => handleMood(1)}/>
-            <MainButton buttonText="2. Stressed" color={moodColor == 2 || moodColor == 0 ? colors.mood.two : ''} onPress={() => handleMood(2)}/>
-            <MainButton buttonText="3. Neutral" color={moodColor == 3 || moodColor == 0 ? colors.mood.three : ''}  onPress={() => handleMood(3)}/>
-            <MainButton buttonText="4. Content" color={moodColor == 4 || moodColor == 0 ? colors.mood.four : ''}  onPress={() => handleMood(4)}/>
-            <MainButton buttonText="5. Peaceful" color={moodColor == 5 || moodColor == 0 ? colors.mood.five : ''} onPress={() => handleMood(5)}/>
+            <MainButton buttonText="1. Overwhelmed" color={moodColor == 1  ? colors.mood.one : ''} onPress={() => handleMood(1)}/>
+            <MainButton buttonText="2. Stressed" color={moodColor == 2  ? colors.mood.two : ''} onPress={() => handleMood(2)}/>
+            <MainButton buttonText="3. Neutral" color={moodColor == 3  ? colors.mood.three : ''}  onPress={() => handleMood(3)}/>
+            <MainButton buttonText="4. Content" color={moodColor == 4  ? colors.mood.four : ''}  onPress={() => handleMood(4)}/>
+            <MainButton buttonText="5. Peaceful" color={moodColor == 5  ? colors.mood.five : ''} onPress={() => handleMood(5)}/>
        
         </View>
 
