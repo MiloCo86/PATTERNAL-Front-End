@@ -26,10 +26,10 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post(`${API_URL}users/login`, form);
+            const response = await axios.post(`${API_URL}/users/login`, form);
             setErrorMessage('');
             console.log('User object:', response.data.user)
-            router.push('/screens/Home');
+            router.push('checkin/DailyCheckInOne');
         } catch (err) {
             setErrorMessage('Invalid email or password.');
             console.log('Error:', err);
