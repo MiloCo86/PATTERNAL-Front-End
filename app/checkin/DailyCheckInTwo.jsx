@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
         
         width: 26,
         height: 26,
+        marginBottom: -32,
        
     },
     
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
 
     //journal text entry
     textInputContainer: {
-        marginBottom: 8,
+       top: 32,
         justifyContent: 'center',
         alignItems: 'center',
     },
