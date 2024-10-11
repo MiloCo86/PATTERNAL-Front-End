@@ -8,7 +8,7 @@
     "scheme": "patternal",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./app/assets/logo.png",
+      "image": "./app/assets/logo-full.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

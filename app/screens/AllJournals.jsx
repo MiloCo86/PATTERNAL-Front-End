@@ -2,6 +2,8 @@ import React from 'react'
 import { View, SafeAreaView, Text, Image, StyleSheet } from 'react-native'
 //React Native Paper
 import { Divider } from 'react-native-paper'
+
+import { router } from 'expo-router'
 //Config files
 import colors from '../config/colors'
 //Components
@@ -11,32 +13,35 @@ import ButtonList from '../components/ButtonList'
 
 
 const AllJournals = () => {
-    const handleFilterBy = () => {
-        console.log('Filter by pressed')
-    }
-    const handleSortBy = () => {
-        console.log('Sort by pressed')
-    }
-  return (
-    <SafeAreaView style={styles.journalsContainer}>
-        
-        <View style={styles.headersContainer}>
-            <Image source={require('../assets/logo-full.png')} style={styles.logo}   />
-            <Text style={styles.headerText}>All Journals</Text>
-        </View>
-        <View style={styles.buttonsContainer}>
-            <ButtonList />
-        </View>
-        <Divider />
-        <View style={styles.journalList}>
-            <JournalMiniCard mood={1} note={'Today was not a good day, financial issues are generating problems with Debi'}/>
-            <JournalMiniCard mood={3} note={'It was a regular day, I was not able to see my daughter, but I call her in the morning'}/>
-            <JournalMiniCard mood={5} note={'We had a great time at six flag today!!!'}/>
-            <JournalMiniCard mood={2} note={'I am feeling a little bit down today, I am not sure why'}/>
-        </View>
 
-    </SafeAreaView>
-  )
+    const handleFilterBy = (value) => {
+        console.log('Filter by pressed by:', value)
+    }
+    const handleSelectNote = (value) => {
+        return router.push('/journals/Note')
+    }
+
+    return (
+    
+        <SafeAreaView style={styles.journalsContainer}>
+            {/* Headers and logo section */}
+            <View style={styles.headersContainer}>
+                <Image source={require('../assets/logo-full.png')} style={styles.logo} />
+                <Text style={styles.headerText}>All Journals</Text>
+            </View>
+            <View style={styles.buttonsContainer}>
+                <ButtonList handleSelect={handleFilterBy} />
+            </View>
+            <Divider />
+            <View style={styles.journalList}>
+                <JournalMiniCard mood={1} note={'Today was not a good day, financial issues are generating problems with Debi'}/>
+                <JournalMiniCard mood={3} note={'It was a regular day, I was not able to see my daughter, but I call her in the morning'}/>
+                <JournalMiniCard mood={5} note={'We had a great time at six flag today!!!'}/>
+                <JournalMiniCard mood={2} note={'I am feeling a little bit down today, I am not sure why'}/>
+            </View>
+
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -59,10 +64,10 @@ const styles = StyleSheet.create({
         height: 144
     },
     buttonsContainer: {
-        width: '100%',
+        width: '70%',
         justifyContent: 'flex-start',
-        alignItems: 'center',
-        marginTop: 20
+        alignItems: 'flex-end',
+        marginTop: 20,
     },
     headerText: {
         fontSize: 18,
@@ -78,4 +83,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default AllJournals
+export default AllJournals;
