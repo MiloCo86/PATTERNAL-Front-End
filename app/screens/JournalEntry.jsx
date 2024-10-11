@@ -36,11 +36,12 @@ const JournalEntry = () => {
                     <Text style={styles.ownYourFatherHoodBottomText}>Fatherhood</Text>
                 </View>
                 <View>
-                    <Text style={styles.dailyObservationsTitle}>Daily Observations</Text>
+                    <Text style={styles.dailyJournalTitle}>Daily Observations</Text>
                     <Divider />
-                    <View>
-                    <JournalNote />
+                    <View style={styles.mainArea}>
+                        <JournalNote />
                     </View>
+                    <Divider />
                 </View>
             </View>
         </SafeAreaView>
@@ -54,14 +55,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         height: 40,
-        width: '100%',
-        alignItems: 'center',
-    },
-    noteHeader: {
-        alignItems: 'center',
-        backgroundColor: 'blue',
-        height: 100,
-        margin: 10,
+        width: '90%',
+        alignSelf: 'center',
+        paddingTop: 10,
     },
     ownYourFatherHoodTopText: {
         color: 'black',
@@ -78,9 +74,18 @@ const styles = StyleSheet.create({
         lineHeight: 32,
     },
     mainArea: {
-        flex: 4,
-        flexDirection: 'row',
-    }
+        padding: 40,
+        alignSelf: 'center',
+    },
+    dailyJournalTitle: {
+        color: '#757575',
+        fontSize: 20,
+        fontWeight: '800',
+        textAlign: 'center',
+        lineHeight: 32,
+        fontFamily: 'Roboto',
+        paddingTop: 40,
+    },
 
 
 
