@@ -12,7 +12,7 @@ import { Divider } from 'react-native-paper';
 const JournalEntry = () => {
 
     const handleBackArrow = () => {
-        router.push('/login/Login');
+        router.push('/screens/AllJournals');
     };
 
     const handleAddCircle = () => {
