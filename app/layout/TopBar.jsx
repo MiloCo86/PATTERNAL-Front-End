@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Image, Text, TouchableHighlight, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Image, SafeAreaView } from 'react-native';
 
 import colors from '../config/colors';
 
@@ -7,7 +7,7 @@ const TopBar = () => {
     return (
         <SafeAreaView style={styles.topBarContainer}>
             <View style={styles.logo}>
-                <Image source={require('../assets/logos/Artboard 20 copy 16.png')} />
+                <Image source={require('../assets/logos/Artboard-20-copy-16.png')} />
             </View>
         </SafeAreaView>
     )

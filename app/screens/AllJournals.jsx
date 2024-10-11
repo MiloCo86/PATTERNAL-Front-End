@@ -18,7 +18,7 @@ const AllJournals = () => {
         console.log('Filter by pressed by:', value)
     }
     const handleSelectNote = (value) => {
-        return router.push('/journals/Note')
+        return router.push('/screens/JournalEntry')
     }
 
     return (
@@ -34,7 +34,7 @@ const AllJournals = () => {
             </View>
             <Divider />
             <View style={styles.journalList}>
-                <JournalMiniCard mood={1} note={'Today was not a good day, financial issues are generating problems with Debi'}/>
+                <JournalMiniCard mood={1} note={'Today was not a good day, financial issues are generating problems with Debi'} onPress={handleSelectNote}/>
                 <JournalMiniCard mood={3} note={'It was a regular day, I was not able to see my daughter, but I call her in the morning'}/>
                 <JournalMiniCard mood={5} note={'We had a great time at six flag today!!!'}/>
                 <JournalMiniCard mood={2} note={'I am feeling a little bit down today, I am not sure why'}/>
@@ -50,8 +50,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: 'white'
+        alignItems: 'center'
     },
     headersContainer: {
         width: '100%',
