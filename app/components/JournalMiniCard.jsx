@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         width: '90%',
         color: colors.primary,
     }
-    })
+})
 
 
 export default JournalMiniCard

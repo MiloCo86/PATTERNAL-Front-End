@@ -1,52 +1,58 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { useState } from 'react'
 //React Native Paper
-import { List } from 'react-native-paper'
+import { SelectList } from 'react-native-dropdown-select-list'
 //Config files
 import colors from '../config/colors'
 
 
-const ButtonList = () => {
+const ButtonList = ({handleSelect}) => {
+
+    const [selected, setSelected] = useState('')
+
+    const data = [
+        { key: '1', value: 'Date' },
+        { key: '2', value: 'Mood' }
+    ]
   return (
-    <List.Section  
-        style={styles.container} 
-        
-    >
-        <List.Accordion
-            title="Sort By"
-            left={props => <List.Icon {...props} icon="magnify" />}
-            style={styles.listContainer}
-            background={colors.primary}
-        >
-            <List.Item 
-                title="Mood" style={styles.listItem}
-                left={props => <List.Icon {...props} icon="folder" />} 
-            />
-            <List.Item title="Date" style={styles.listItem} />
-        </List.Accordion>
-    </List.Section>
+     <SelectList
+        placeholder='Order By '
+        selected={selected}
+        setSelected={(val) => setSelected(val)}
+        data={data}
+        save='value'
+        search={false}
+        onSelect={()=>handleSelect(selected)}
+        maxHeight={90}
+        boxStyles={styles.boxStyles}
+        inputStyles={styles.inputStyles}
+        dropdownStyles={styles.dropdownStyles}
+    />
   )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width: 200,
-        height: 50,
-        justifyContent: 'flex-start',
-        alignItems: 'center'
-    },
-    listContainer: {
-        backgroundColor: colors.secondary,
+    boxStyles: {
+        backgroundColor: colors.white,
         borderRadius: 10,
-        width: 180,
-        height: 50
+        borderColor: colors.primary,
+        width: 120,
     },
-    listItem: {
-        backgroundColor: colors.secondary,
+    inputStyles: {
+        color: colors.primary,
+        fontSize: 14,
+        fontFamily: 'Roboto',
+    },
+    dropdownStyles: {
+        marginTop: 0,
+        backgroundColor: colors.white,
         borderRadius: 10,
-        width: 180,
-        height: 50
+        borderColor: colors.secondary,
+        width: 120,
     }
 })
+
+
 
 export default ButtonList
