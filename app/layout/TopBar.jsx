@@ -1,47 +1,29 @@
 import React from 'react'
-import { StyleSheet, View, Image, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableHighlight, SafeAreaView } from 'react-native';
 
 import colors from '../config/colors';
 
 const TopBar = () => {
-  return (
-    <View style={styles.topBar}>
-        <Image source={require('../assets/logo.png')} style={styles.logo} />
-        <Text style={styles.title}>PATTERNAL</Text>
-        <TouchableHighlight onPress={()=> alert('menu icon pressed')} >
-            <Image source={require('../assets/menu-icon.png')} style={styles.menuIcon} />
-        </TouchableHighlight>
-    </View>
-  )
+    return (
+        <SafeAreaView style={styles.topBarContainer}>
+            <View style={styles.logo}>
+                <Image source={require('../assets/logos/Artboard 20 copy 16.png')} />
+            </View>
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
     topBar: {
-        padding: 10,
-        paddingBottom: 0,
-        paddingTop: 30,
+        paddingTop: 60,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: colors.primary,
-        width: '100%',
+        width: '90%',
         height: '17%'
     },
-    title: {
-        marginTop: 30,
-        fontSize: 35,
-        fontWeight: 'bold',
-        color: colors.secondary
-    },
     logo: {
-        width: 100,
-        height: 100
+        alignSelf: 'center',
     },
-    menuIcon: {
-        marginTop: -40,
-        width: 30,
-        height: 30
-    }
+
 });
 
 export default TopBar
