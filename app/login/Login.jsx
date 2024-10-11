@@ -12,7 +12,6 @@ import PrimarySubmitButton from '../components/PrimarySubmitButton';
 import colors from '../config/colors';
 
 const Login = () => {
-    console.log(API_URL);
     const [form, setForm] = useState({
         email: '',
         password: ''
@@ -27,7 +26,8 @@ const Login = () => {
         }
 
         try {
-            const response = await fetch(`http://10.0.2.2:4001/users/login`, {
+            // const response = await axios.post(`${API_URL}/users/login`, form);
+            const response = await fetch(`${API_URL}/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -42,8 +42,6 @@ const Login = () => {
             console.log('Error:', err);
             console.log('Form data being sent:', form);
             console.log('API_URL:', API_URL);
-
-
         }
     };
 
