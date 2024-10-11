@@ -26,14 +26,14 @@ const Login = () => {
         }
 
         try {
-            // const response = await axios.post(`${API_URL}/users/login`, form);
-            const response = await fetch(`${API_URL}/users/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(form)
-            });
+            const response = await axios.post(`${API_URL}/users/login`, form);
+            // const response = await fetch(`${API_URL}/users/login`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(form)
+            // });
             setErrorMessage('');
             console.log('User object:', response.data.user)
             router.push('checkin/DailyCheckInOne');
