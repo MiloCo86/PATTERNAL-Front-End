@@ -12,12 +12,13 @@ import PrimarySubmitButton from '../components/PrimarySubmitButton';
 import colors from '../config/colors';
 
 const Login = () => {
+    console.log(API_URL);
     const [form, setForm] = useState({
         email: '',
         password: ''
     });
 
-    const [errorMessage, setErrorMessage] = useState(''); 
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleLogin = async () => {
         if (!form.email || !form.password) {
@@ -26,7 +27,13 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post(`${API_URL}/users/login`, form);
+            const response = await fetch(`http://10.0.2.2:4001/users/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(form)
+            });
             setErrorMessage('');
             console.log('User object:', response.data.user)
             router.push('checkin/DailyCheckInOne');
@@ -41,7 +48,7 @@ const Login = () => {
     };
 
     const handleSignUp = () => {
-        return router.push('/login/SignUp'); 
+        return router.push('/login/SignUp');
     };
 
     return (
@@ -52,21 +59,21 @@ const Login = () => {
                         <Image source={require('../assets/logo.png')} style={styles.logo} />
                         <Text style={styles.title}>Create Better Patterns For Your Family</Text>
                     </View>
-                    
+
                     <View style={styles.formContainer}>
                         <Text>Email:</Text>
                         <TextInput
-                            placeholder='jhon@example.com' 
+                            placeholder='jhon@example.com'
                             style={styles.inputControl}
                             value={form.email}
                             onChangeText={email => setForm({ ...form, email })}
                             autoCapitalize='none'
                             autoCorrect={false}
-                            keyboardType='email-address' 
+                            keyboardType='email-address'
                         />
                         <Text>Password:</Text>
-                        <TextInput 
-                            placeholder='***********' 
+                        <TextInput
+                            placeholder='***********'
                             style={styles.inputControl}
                             value={form.password}
                             onChangeText={password => setForm({ ...form, password })}
@@ -84,7 +91,7 @@ const Login = () => {
                         </View>
                         <View style={styles.signUpArea}>
                             <Text style={styles.signUpText}>Don't have an account? </Text>
-                            <Link href="/login/SignUp" style={styles.signUpButton}>Sign Up</Link>  
+                            <Link href="/login/SignUp" style={styles.signUpButton}>Sign Up</Link>
                         </View>
                     </View>
                 </View>
