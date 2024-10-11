@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 
 //colors
 import colors from '../config/colors'
 
-const JournalMiniCard = ({date, mood, note}) => {
+const JournalMiniCard = ({date, mood, note, onPress}) => {
     let moodColor = colors.primary
     let textNote = note
 
@@ -34,14 +34,17 @@ const JournalMiniCard = ({date, mood, note}) => {
 
 
   return (
-    <View style={styles.container}>
-        <View style={{...styles.moodColor, backgroundColor:moodColor}}/>
-        <View style={styles.detailsContainer}>
-            <Text style={styles.date}>Sep 19th</Text>
-            <Text style={styles.note}>{textNote}</Text>
+    <Pressable onPress={onPress}>
+        <View style={styles.container}>
+            <View style={{...styles.moodColor, backgroundColor:moodColor}}/>
+            <View style={styles.detailsContainer}>
+                <Text style={styles.date}>Sep 19th</Text>
+                <Text style={styles.note}>{textNote}</Text>
+            </View>
+            
         </View>
-        
-    </View>
+    </Pressable>
+    
   )
 }
 
