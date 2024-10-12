@@ -50,11 +50,6 @@ const styles = StyleSheet.create({
     margin: 10,
     alignItems: 'center',
   },
-  noteCard: {
-    height: 377,
-    width: 294,
-    padding: 0,
-  },
   avatar: {
     marginRight: 20,
   },
