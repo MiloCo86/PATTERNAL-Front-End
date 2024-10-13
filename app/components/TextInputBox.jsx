@@ -4,8 +4,8 @@ import {View, StyleSheet, Text} from 'react-native';
 
 import colors from '../config/colors';
 
-const textInputBox = ({placeholder}) => {
-  const [text, setText] = React.useState("");
+const textInputBox = ({placeholder, text, setText}) => {
+  
 
   return (
     

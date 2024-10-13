@@ -3,29 +3,45 @@ import { Avatar, Button, Card, Text} from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
 import colors from '../config/colors'
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
 // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
-const PrimaryCard = ({CardText}) => (
-  <Card style={styles.cardContainer}>
-   
-    <Card.Content>
-      <Text variant="bodyMedium" style={styles.mainContent}>{CardText}</Text>
-    </Card.Content>
+const PrimaryCard = ({CardText,questionId, questionNum, getResponse}) => {
+  const [response, setResponse] = React.useState('')
 
-    <Card.Actions style={styles.buttonContainer}>
-      <Button
-        style={styles.button}
-        buttonColor={colors.primary}
-        textColor='white'
-        >Yes</Button>
-      <Button
-        style={styles.button}
-        buttonColor='#AAAAAA'
-        >No</Button>
-    </Card.Actions>
-  </Card>
-);
+  const handleYes = () => {
+    setResponse('Yes')
+    getResponse({'questionNum': questionNum,'questionId': questionId, 'response': 'Yes'})
+  }
+  const handleNo = () => { 
+    setResponse('No')
+    getResponse({'questionNum': questionNum,'questionId': questionId, 'response': 'No'})
+  }
+  
+  return (
+    <Card style={styles.cardContainer}>
+    
+      <Card.Content>
+        <Text variant="bodyMedium" style={styles.mainContent}>{CardText}</Text>
+      </Card.Content>
+
+      <Card.Actions style={styles.buttonContainer}>
+        <Button
+          onPress={handleYes}
+          style={styles.button}
+          buttonColor={ response === 'Yes' ? colors.primary : colors.altSecondary}
+          textColor='white'
+          >Yes</Button>
+        <Button
+          onPress={handleNo}
+          style={styles.button}
+          buttonColor={ response === 'No' ? colors.primary : colors.altSecondary}
+          >No</Button>
+      </Card.Actions>
+    </Card>
+  )
+};
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -58,7 +74,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 8,
-        borderRadius: 12,
+        borderRadius: 12
     },
 });
 

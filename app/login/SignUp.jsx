@@ -20,7 +20,7 @@ const SignUp = () => {
             setErrorMessage("Passwords do not match!");
         } else {
             setErrorMessage(''); // Clear any previous error
-            router.push('/login/SignUpSecondScreen');
+            router.push('/login/SignUpTwo');
         }
     };
 
