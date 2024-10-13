@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { View, Text, StyleSheet,Image, SafeAreaView, FlatList, Pressable } from 'react-native';
-import { TextInput } from 'react-native-paper';
 
 
 import PrimarySubmitButton from '../components/PrimarySubmitButton';
@@ -23,32 +22,44 @@ const tempData = [
 
 // DailyCheckInTwo will be the second screen in the Daily Check-In flow. It will display a list of questions that the user will answer.
 const DailyCheckInTwo = () => {
-    //array with the user's id and mood
+    //string with the user's id and mood obtained from the previous screen using useLocalSearchParams
     const { idAndMood } = useLocalSearchParams();
-
+    //splitting the string to get the user's id and mood
     const id = idAndMood.split(',')[0]
     const mood = idAndMood.split(',')[1]
 
+    const [errorMessage, setErrorMessage] = useState('');
+    //checkinData will store the user's responses to the questions and the user's journal entry
     const [checkinData, setCheckinData] = useState({
         userId: id,
         mood: mood,
         question1: { id: '', response: '' },
         question2: { id: '', response: '' },
         question3: { id: '', response: '' },
-        journal: '' // Will be replaced with the user's journal entry
+        journal: ''
     });
+
     const [journalText, setJournalText] = useState('');
+    
+    useEffect(() => {
+        console.log('Checkin Data:', checkinData)
+    }, [checkinData])
+
+    useEffect(() => {
+        console.log('Journal Text:', journalText)
+        setCheckinData({ ...checkinData, journal: journalText });
+    }, [journalText])
 
     
     const handleBack = () => {
-        console.log(idAndMood)
         return router.push({
             pathname: 'checkin/DailyCheckInOne',
             params: { userId: id }
             });
     }
-
+    // getResponse will update the checkinData state with the user's response to the question
     const getResponse = (cardData) => {
+        setErrorMessage('');
         if (cardData.questionNum === '1') {
             setCheckinData({ ...checkinData, question1: { id: cardData.questionId, response: cardData.response } });
         } else if (cardData.questionNum === '2') {
@@ -56,19 +67,21 @@ const DailyCheckInTwo = () => {
         } else if (cardData.questionNum === '3') {
             setCheckinData({ ...checkinData, question3: { id: cardData.questionId, response: cardData.response } });
         }
-        console.log(checkinData)
     }
 
     const handleFinish = () => {
-        setCheckinData({ ...checkinData, journal: journalText });
-        console.log('Checkin Data:', checkinData)
-        return router.push({
-            pathname: 'screens/Home',
-            params: { userId: id }
-        })
+        
+        if (checkinData.question1.response === '' || checkinData.question2.response === '' || checkinData.question3.response === '') {
+            setErrorMessage('Please answer all questions.');
+            return;
+        }else{
+            console.log('Checkin Data:', checkinData)
+            return router.push({
+                pathname: 'screens/Home',
+                params: { userId: id }
+            })
+        }      
     }
-
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -101,6 +114,10 @@ const DailyCheckInTwo = () => {
         <View style={styles.textInputContainer}>
             <TextInputBox placeholder="Daily Log" text={journalText} setText={setJournalText}/>    
         </View>
+
+        {errorMessage ? (
+          <Text style={styles.errorText}>{errorMessage}</Text>
+        ) : null}
 
         <View style={styles.finishButton}>
             <PrimarySubmitButton   buttonText="Finish" onPress={handleFinish}/>
@@ -156,8 +173,6 @@ const styles = StyleSheet.create({
     marginTop: 16,
     fontWeight: 'bold',
     },
-
-
     subHeader: {
         fontSize: 12,
     },
@@ -183,7 +198,12 @@ const styles = StyleSheet.create({
     // finish button
     finishButton: {
         marginBottom: 64,
-    }
+    },
+    // error message
+    errorText: {
+        color: 'red',
+        marginBottom: 16,
+    },
 
 });
 
