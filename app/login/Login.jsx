@@ -18,31 +18,32 @@ const Login = () => {
     });
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [userId, setUserId] = useState(12);
 
     const handleLogin = async () => {
         if (!form.email || !form.password) {
             setErrorMessage('Email and password are required.');
             return;
         }
-
-        try {
-            const response = await axios.post(`${API_URL}/users/login`, form);
-            // const response = await fetch(`${API_URL}/users/login`, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(form)
-            // });
-            setErrorMessage('');
-            console.log('User object:', response.data.user)
-            router.push('checkin/DailyCheckInOne');
-        } catch (err) {
-            setErrorMessage('Invalid email or password.');
-            console.log('Error:', err);
-            console.log('Form data being sent:', form);
-            console.log('API_URL:', API_URL);
-        }
+        // try {
+        //     const response = await axios.post(`${API_URL}/users/login`, form);
+        //     setErrorMessage('');
+        //     console.log('User object:', response.data.user);
+        //     setUserId(response.data.user.id);
+        //     router.push({
+        //         pathname: '/checkin/DailyCheckInOne',
+        //         params: { userId: setUserId }
+        //     });
+        // } catch (error) {
+        //     setErrorMessage('Invalid email or password.');
+        //     console.log('Error:', error);
+        //     console.log('Form data being sent:', form);
+        //     console.log('API_URL:', API_URL);
+        // }       
+        router.push({
+        pathname: 'checkin/DailyCheckInOne',
+        params: { userId: userId }
+        });
     };
 
     const handleSignUp = () => {
