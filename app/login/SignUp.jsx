@@ -50,7 +50,7 @@ const SignUp = () => {
                             </Pressable>
                         </View>
                         <View style={styles.header}>
-                            <Image source={require('../assets/profile-img.png')} style={styles.profile} />
+                            {/* <Image source={require('../assets/profile-img.png')} style={styles.profile} /> */}
                             <Text style={styles.title}>User Details</Text>
                         </View>
                         <View style={styles.formContainer}>
