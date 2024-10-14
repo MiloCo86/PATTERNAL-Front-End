@@ -25,24 +25,7 @@ const Login = () => {
             return;
         }
 
-        try {
-            const response = await axios.post(`${API_URL}/users/login`, form);
-            // const response = await fetch(`${API_URL}/users/login`, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(form)
-            // });
-            setErrorMessage('');
-            console.log('User object:', response.data.user)
-            router.push('checkin/DailyCheckInOne');
-        } catch (err) {
-            setErrorMessage('Invalid email or password.');
-            console.log('Error:', err);
-            console.log('Form data being sent:', form);
-            console.log('API_URL:', API_URL);
-        }
+        
     };
 
     const handleSignUp = () => {
