@@ -23,13 +23,15 @@ const Login = () => {
     const handleLogin = async () => {
         if (!form.email || !form.password) {
             setErrorMessage('Email and password are required.');
-            return;
+            return; // Ensure the return statement is here
+        }
 
         try {
             const response = await axios.post(`${API_URL}/users/login`, form);
             setErrorMessage('');
             console.log('User object:', response.data.user);
             
+            // Navigate to the DailyCheckInOne screen, passing userId in the params
             router.push({
                 pathname: '/checkin/DailyCheckInOne',
                 params: { userId: response.data.user.id }
@@ -39,11 +41,7 @@ const Login = () => {
             console.log('Error:', error);
             console.log('Form data being sent:', form);
             console.log('API_URL:', API_URL);
-        }       
-        // router.push({
-        // pathname: 'checkin/DailyCheckInOne',
-        // params: { userId: userId }
-        // });
+        }
     };
 
     const handleSignUp = () => {
@@ -62,7 +60,7 @@ const Login = () => {
                     <View style={styles.formContainer}>
                         <Text>Email:</Text>
                         <TextInput
-                            placeholder='jhon@example.com'
+                            placeholder='john@example.com'
                             style={styles.inputControl}
                             value={form.email}
                             onChangeText={email => setForm({ ...form, email })}
