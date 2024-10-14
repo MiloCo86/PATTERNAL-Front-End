@@ -12,7 +12,9 @@ import colors from '../config/colors';
 import { router, useLocalSearchParams } from 'expo-router';
 
 
-// tempData will be replaced with questions data from the backend
+// import helper functions
+import { getCheckInQuestions } from '../config/helperFunctions';
+
 const tempData = [ 
     { questionNum: '1', questionId: '12', text: "Question#1: Will be Sourced based on user's mood." },
     { questionNum: '2', questionId: '33', text: "Question#2: Will be Sourced based on user's mood." },
@@ -27,6 +29,8 @@ const DailyCheckInTwo = () => {
     //splitting the string to get the user's id and mood
     const id = idAndMood.split(',')[0]
     const mood = idAndMood.split(',')[1]
+
+    console.log(getCheckInQuestions)
 
     const [errorMessage, setErrorMessage] = useState('');
     //checkinData will store the user's responses to the questions and the user's journal entry
