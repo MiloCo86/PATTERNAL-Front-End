@@ -4,12 +4,14 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import MainButton from '../components/MainButton';
 import PrimarySubmitButton from '../components/PrimarySubmitButton';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams  } from 'expo-router';
 
 import colors from '../config/colors';
 
 
 const DailyCheckInOne = () => {
+
+  const { userId } = useLocalSearchParams();
 
   const [moodColor, setMoodColor] = useState(0)
 
@@ -18,6 +20,7 @@ const DailyCheckInOne = () => {
   const handleMood = (mood) => {
     setErrorMessage('')
     if (mood === 1) {
+      console.log('user id:', userId)
         setMoodColor(1)
     }else if (mood === 2) {
         setMoodColor(2)
@@ -35,7 +38,10 @@ const DailyCheckInOne = () => {
         setErrorMessage('Please select a mood.')
     }
     else{
-      return router.push('/checkin/DailyCheckInTwo')
+      return router.push({
+        pathname: '/checkin/DailyCheckInTwo',
+        params: { idAndMood: [userId,moodColor] }
+      })
     }
   }
 

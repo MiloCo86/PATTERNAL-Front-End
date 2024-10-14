@@ -51,6 +51,8 @@ const SignUp = () => {
                 setErrorMessage('Error creating user.');
                 console.error('Error:', err.response ? err.response.data : err.message);
             }
+            setErrorMessage(''); // Clear any previous error
+            router.push('/login/SignUpTwo');
         }
     };
     
@@ -80,7 +82,7 @@ const SignUp = () => {
                             </Pressable>
                         </View>
                         <View style={styles.header}>
-                            <Image source={require('../assets/profile-img.png')} style={styles.profile} />
+                            {/* <Image source={require('../assets/profile-img.png')} style={styles.profile} /> */}
                             <Text style={styles.title}>User Details</Text>
                         </View>
                         <View style={styles.formContainer}>

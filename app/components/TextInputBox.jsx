@@ -4,8 +4,8 @@ import {View, StyleSheet, Text} from 'react-native';
 
 import colors from '../config/colors';
 
-const textInputBox = ({placeholder}) => {
-  const [text, setText] = React.useState("");
+const textInputBox = ({placeholder, text, setText}) => {
+  
 
   return (
     
@@ -15,18 +15,17 @@ const textInputBox = ({placeholder}) => {
             {placeholder}    
         </Text>
 
-
         <TextInput
-        //   label="Fatherhood Log"
-        value={text}
-        onChangeText={text => setText(text)}
-        style={styles.textInput}
-        // contentStyle={styles.textInputContent}
-        outlineColor={colors.primary}
-        activeOutlineColor={colors.primary}
-        mode='outlined'
-        multiline={true}
-        // labelStyle={styles.labelStyle}
+        
+            value={text}
+            onChangeText={text => setText(text)}
+            style={styles.textInput}
+            // contentStyle={styles.textInputContent}
+            outlineColor={colors.primary}
+            activeOutlineColor={colors.primary}
+            mode='outlined'
+            multiline={true}
+        
         />
     </View>
   );
@@ -38,23 +37,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 16,
     },
-      
     textInput: {
         width: 260,
         height: 150,
         marginBottom: 48,
     },
-    
     boxLabel: {
         fontSize: 16,
         fontWeight: '',
         color: colors.primary,
         alignSelf: 'flex-start',
         marginBottom: 2,
-    },
-
-    
-
+    }
 });
     
 
