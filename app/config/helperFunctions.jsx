@@ -56,4 +56,4 @@ const getQuestionById = (questionId) => {
     }
 }
 
-export default {getCheckInQuestions, getQuestionById};
+export {getCheckInQuestions, getQuestionById};
