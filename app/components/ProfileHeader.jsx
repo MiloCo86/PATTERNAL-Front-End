@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     navigation: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '90%',
+        width: '100%',
         alignItems: 'center',
     },
     headerText: {
@@ -81,11 +81,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: '20',
         fontWeight: '700',
+        paddingRight: 10,
     },
     profile: {
         width: 100,
         height: 100,
-        borderRadius: 50,
+        borderRadius: '100%',
     },
 });
 
