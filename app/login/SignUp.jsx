@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Link, router } from 'expo-router';
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import colors from '../config/colors';
+import colors from '../config/colors'
+import axios from 'axios';
+import { API_URL } from '@env';
+
 
 const SignUp = () => {
     const [form, setForm] = useState({
@@ -13,17 +16,47 @@ const SignUp = () => {
         password: '',
         verify_password: ''
     });
+    const trimmedForm = {
+        ...form,
+        first_name: form.first_name.trim(),
+        last_name: form.last_name.trim(),
+        email: form.email.trim(),
+        username: form.username.trim(),
+        password: form.password.trim(),
+        verify_password: form.verify_password.trim()
+    };
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleContinue = () => {
-        if (form.password !== form.verify_password) {
+    const handleContinue = async () => {
+        const trimmedForm = {
+            first_Name: form.first_name.trim(),
+            last_Name: form.last_name.trim(),
+            email: form.email.trim(),
+            username: form.username.trim(),
+            password: form.password.trim(),
+            verify_password: form.verify_password.trim(),
+        };
+    
+        console.log('Trimmed form data:', trimmedForm);
+        if (trimmedForm.password !== trimmedForm.verify_password) {
             setErrorMessage("Passwords do not match!");
         } else {
+            try {
+                const response = await axios.post(`${API_URL}/users`, trimmedForm, {
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                console.log('User created:', response.data);
+                router.push('checkin/DailyCheckInOne');
+            } catch (err) {
+                setErrorMessage('Error creating user.');
+                console.error('Error:', err.response ? err.response.data : err.message);
+            }
             setErrorMessage(''); // Clear any previous error
             router.push('/login/SignUpTwo');
         }
     };
-
+    
+    
     const handleVerifyPasswordChange = (verify_password) => {
         setForm({ ...form, verify_password });
 
@@ -38,7 +71,6 @@ const SignUp = () => {
     const handleBackArrow = () => {
         router.push('/login/Login');
     };
-
     return (
         <SafeAreaView>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -59,7 +91,10 @@ const SignUp = () => {
                                 placeholder='First Name'
                                 style={styles.inputControl}
                                 value={form.first_name}
-                                onChangeText={first_name => setForm({ ...form, first_name })}
+                                onChangeText={first_name => {
+                                    console.log('First Name:', first_name); // Debugging line
+                                    setForm({ ...form, first_name });
+                                }}
                                 autoCorrect={false}
                                 keyboardType='default'
                             />
@@ -68,7 +103,10 @@ const SignUp = () => {
                                 placeholder='Last Name'
                                 style={styles.inputControl}
                                 value={form.last_name}
-                                onChangeText={last_name => setForm({ ...form, last_name })}
+                                onChangeText={last_name => {
+                                    console.log('Last Name:', last_name); // Debugging line
+                                    setForm({ ...form, last_name });
+                                }}
                                 autoCorrect={false}
                                 keyboardType='default'
                             />

@@ -24,7 +24,7 @@ const Login = () => {
         if (!form.email || !form.password) {
             setErrorMessage('Email and password are required.');
             return;
-        }
+
         try {
             const response = await axios.post(`${API_URL}/users/login`, form);
             setErrorMessage('');
