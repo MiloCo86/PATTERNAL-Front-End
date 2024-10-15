@@ -1,12 +1,12 @@
 // app/screens/DailyCheckInOne.jsx
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import MainButton from '../components/MainButton';
 import PrimarySubmitButton from '../components/PrimarySubmitButton';
-import { router, useLocalSearchParams  } from 'expo-router';
-
+import { router, useLocalSearchParams } from 'expo-router';
+import { API_URL } from '@env';
 import colors from '../config/colors';
+import axios from 'axios';
 
 
 const DailyCheckInOne = () => {
@@ -16,36 +16,39 @@ const DailyCheckInOne = () => {
   console.log('Received userId:', userId); 
 
   const [moodColor, setMoodColor] = useState(0)
+  const [mood, setMood] = useState(0)
 
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleMood = (mood) => {
     setErrorMessage('')
-    if (mood === 1) {
-      console.log('user id:', userId)
-        setMoodColor(1)
-    }else if (mood === 2) {
-        setMoodColor(2)
-    }else if (mood === 3) {
-        setMoodColor(3)
-    }else if (mood === 4) {
-        setMoodColor(4)
-    }else if (mood === 5) {
-        setMoodColor(5)
-    }
+    setMoodColor(mood);
+    setMood(mood)
   }
 
-  const handleContinue = () => {
-    if (moodColor == 0) {
-        setErrorMessage('Please select a mood.')
+  const handleContinue = async () => {
+    if (moodColor === 0) {
+      setErrorMessage('Please select a mood.');
+      return;
     }
-    else{
-      return router.push({
+
+    try {
+      // Create a new journal entry with the selected mood
+      const response = await axios.post(`${API_URL}/users/${userId}/journal-entries`, {
+        mood: mood // Ensure mood is a string
+      });
+
+      console.log('Entry created:', response.data);
+      // Navigate to the next screen with the created entry ID
+      router.push({
         pathname: '/checkin/DailyCheckInTwo',
-        params: { idAndMood: [userId,moodColor] }
-      })
+        params: { idAndMood: [userId, moodColor, response.data.id] },
+      });
+    } catch (error) {
+      console.error('Error creating entry:', error);
+      setErrorMessage('Failed to create entry.');
     }
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,11 +60,11 @@ const DailyCheckInOne = () => {
 
         <View style={styles.buttonContainer}>
 
-            <MainButton buttonText="1. Overwhelmed" borderColor={moodColor == 1  ? colors.mood.one : ''} onPress={() => handleMood(1)}/>
-            <MainButton buttonText="2. Stressed" borderColor={moodColor == 2  ? colors.mood.two : ''} onPress={() => handleMood(2)}/>
-            <MainButton buttonText="3. Neutral" borderColor={moodColor == 3  ? colors.mood.three : ''}  onPress={() => handleMood(3)}/>
-            <MainButton buttonText="4. Content" borderColor={moodColor == 4  ? colors.mood.four : ''}  onPress={() => handleMood(4)}/>
-            <MainButton buttonText="5. Peaceful" borderColor={moodColor == 5  ? colors.mood.five : ''} onPress={() => handleMood(5)}/>
+            <MainButton buttonText="1. Overwhelmed" borderColor={moodColor === 1 ? colors.mood.one : ''} onPress={() => handleMood(1)}/>
+            <MainButton buttonText="2. Stressed" borderColor={moodColor === 2 ? colors.mood.two : ''} onPress={() => handleMood(2)}/>
+            <MainButton buttonText="3. Neutral" borderColor={moodColor === 3 ? colors.mood.three : ''}  onPress={() => handleMood(3)}/>
+            <MainButton buttonText="4. Content" borderColor={moodColor === 4 ? colors.mood.four : ''}  onPress={() => handleMood(4)}/>
+            <MainButton buttonText="5. Peaceful" borderColor={moodColor === 5 ? colors.mood.five : ''} onPress={() => handleMood(5)}/>
        
         </View>
 
