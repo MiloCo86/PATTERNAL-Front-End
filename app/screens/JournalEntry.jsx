@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         lineHeight: 32,
     },
     ownYourFatherHoodBottomText: {
-        color: 'black',
+        color: colors.primary,
         fontSize: 32,
         fontWeight: '800',
         textAlign: 'center',
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     dailyJournalTitle: {
-        color: '#757575',
+        color: colors.secondary,
         fontSize: 20,
         fontWeight: '800',
         textAlign: 'center',
