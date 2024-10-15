@@ -9,18 +9,16 @@ import JournalNote from '../components/JournalNote';
 import TopBar from '../layout/TopBar';
 import JournalNavigation from '../components/JournalNavigation'
 import { Divider } from 'react-native-paper';
+import OwnYourFatherHood from '../components/OwnYourFatherhood';
 
 const JournalEntry = () => {
 
     return (
         <SafeAreaView style>
             <TopBar />
-            <View style={styles.journalEntryCard}>
-                    <JournalNavigation />
-                <View>
-                    <Text style={styles.ownYourFatherHoodTopText}>Own Your </Text>
-                    <Text style={styles.ownYourFatherHoodBottomText}>Fatherhood</Text>
-                </View>
+            <View>
+                <JournalNavigation />
+                <OwnYourFatherHood />
                 <View>
                     <Text style={styles.dailyJournalTitle}>Daily Observations</Text>
                     <Divider />
@@ -37,21 +35,6 @@ const JournalEntry = () => {
 
 const styles = StyleSheet.create({
 
-  
-    ownYourFatherHoodTopText: {
-        color: colors.primary,
-        fontSize: 20,
-        fontWeight: '800',
-        textAlign: 'center',
-        lineHeight: 32,
-    },
-    ownYourFatherHoodBottomText: {
-        color: colors.primary,
-        fontSize: 32,
-        fontWeight: '800',
-        textAlign: 'center',
-        lineHeight: 32,
-    },
     mainArea: {
         padding: 40,
         alignSelf: 'center',
