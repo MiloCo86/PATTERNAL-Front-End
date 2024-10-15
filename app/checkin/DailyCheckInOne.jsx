@@ -11,7 +11,9 @@ import colors from '../config/colors';
 
 const DailyCheckInOne = () => {
 
-  const { userId } = useLocalSearchParams();
+  const { userId } = useLocalSearchParams(); 
+
+  console.log('Received userId:', userId); 
 
   const [moodColor, setMoodColor] = useState(0)
 
