@@ -15,6 +15,8 @@ const DailyCheckInOne = () => {
 
   console.log('Received userId:', userId); 
 
+  
+
   const [moodColor, setMoodColor] = useState(0)
   const [mood, setMood] = useState(0)
 
