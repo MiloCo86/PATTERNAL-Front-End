@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   noteDate: {
     textAlign: 'right',
     fontSize: 20,
-    color: 'black',
+    color: colors.primary,
     fontFamily: 'Roboto',
     fontWeight: '700',
     lineHeight: 30,
