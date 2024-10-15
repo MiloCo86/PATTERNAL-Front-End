@@ -155,6 +155,7 @@ const SignUp = () => {
                                 autoCorrect={false}
                                 keyboardType='default'
                                 secureTextEntry={true}
+                                textContentType="none" // Prevents strong password suggestions
                             />
                             <Text>Verify Password</Text>
                             <TextInput
@@ -166,7 +167,9 @@ const SignUp = () => {
                                 autoCorrect={false}
                                 keyboardType='default'
                                 secureTextEntry={true}
+                                textContentType="none" // Prevents strong password suggestions
                             />
+
                         </View>
 
                         {errorMessage ? (
