@@ -5,10 +5,9 @@ import { router } from 'expo-router';
 //Config files
 import colors from '../config/colors'
 //Components
-import JournalNote from '../components/JournalNote';
 import TopBar from '../layout/TopBar';
-import JournalNavigation from '../components/JournalNavigation'
-import { Divider } from 'react-native-paper';
+import JournalNavigation from '../components/JournalNavigation';
+import JournalEntryComponent from '../components/JournalEntryComponent';
 import OwnYourFatherHood from '../components/OwnYourFatherhood';
 
 const JournalEntry = () => {
@@ -19,39 +18,13 @@ const JournalEntry = () => {
             <View>
                 <JournalNavigation />
                 <OwnYourFatherHood />
-                <View>
-                    <Text style={styles.dailyJournalTitle}>Daily Observations</Text>
-                    <Divider />
-                    <View style={styles.mainArea}>
-                        <JournalNote />
-                    </View>
-                    <Divider />
-                </View>
+                <JournalEntryComponent />
             </View>
         </SafeAreaView>
     )
 
 }
 
-const styles = StyleSheet.create({
-
-    mainArea: {
-        padding: 40,
-        alignSelf: 'center',
-    },
-    dailyJournalTitle: {
-        color: colors.secondary,
-        fontSize: 20,
-        fontWeight: '800',
-        textAlign: 'center',
-        lineHeight: 32,
-        fontFamily: 'Roboto',
-        paddingTop: 40,
-    },
-
-
-
-})
 
 
 export default JournalEntry;
