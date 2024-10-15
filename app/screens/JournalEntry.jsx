@@ -7,30 +7,24 @@ import colors from '../config/colors'
 //Components
 import JournalNote from '../components/JournalNote';
 import TopBar from '../layout/TopBar';
+import JournalNavigation from '../components/JournalNavigation'
 import { Divider } from 'react-native-paper';
 
 const JournalEntry = () => {
 
-    const handleBackArrow = () => {
-        router.push('/screens/AllJournals');
-    };
+    // const handleBackArrow = () => {
+    //     router.push('/screens/AllJournals');
+    // };
 
-    const handleAddCircle = () => {
-        console.log('Add Circle Button Was Clicked');
-    };
+    // const handleAddCircle = () => {
+    //     console.log('Add Circle Button Was Clicked');
+    // };
 
     return (
         <SafeAreaView style>
             <TopBar />
             <View style={styles.journalEntryCard}>
-                <View style={styles.belowTopBar}>
-                    <Pressable onPress={handleBackArrow}>
-                        <Image source={require('../assets/back-arrow.png')} />
-                    </Pressable>
-                    <Pressable onPress={handleAddCircle}>
-                        <Image source={require('../assets/add-circle.png')} />
-                    </Pressable>
-                </View>
+                    <JournalNavigation />
                 <View>
                     <Text style={styles.ownYourFatherHoodTopText}>Own Your </Text>
                     <Text style={styles.ownYourFatherHoodBottomText}>Fatherhood</Text>
@@ -51,14 +45,7 @@ const JournalEntry = () => {
 
 const styles = StyleSheet.create({
 
-    belowTopBar: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        height: 40,
-        width: '100%',
-        alignSelf: 'center',
-        paddingTop: 10,
-    },
+  
     ownYourFatherHoodTopText: {
         color: colors.primary,
         fontSize: 20,
