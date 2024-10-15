@@ -12,14 +12,6 @@ import { Divider } from 'react-native-paper';
 
 const JournalEntry = () => {
 
-    // const handleBackArrow = () => {
-    //     router.push('/screens/AllJournals');
-    // };
-
-    // const handleAddCircle = () => {
-    //     console.log('Add Circle Button Was Clicked');
-    // };
-
     return (
         <SafeAreaView style>
             <TopBar />
