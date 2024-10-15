@@ -15,12 +15,12 @@ import { router, useLocalSearchParams } from 'expo-router';
 // import helper functions
 import { getCheckInQuestions } from '../config/helperFunctions';
 
-const tempData = [ 
-    { questionNum: '1', questionId: '12', text: "Question#1: Will be Sourced based on user's mood." },
-    { questionNum: '2', questionId: '33', text: "Question#2: Will be Sourced based on user's mood." },
-    { questionNum: '3', questionId: '03', text: "Question#3: Will be Sourced based on user's mood." },
+// const tempData = [ 
+//     { questionNum: '1', questionId: '12', text: "Question#1: Will be Sourced based on user's mood." },
+//     { questionNum: '2', questionId: '33', text: "Question#2: Will be Sourced based on user's mood." },
+//     { questionNum: '3', questionId: '03', text: "Question#3: Will be Sourced based on user's mood." },
 
-];
+// ];
 
 
 // DailyCheckInTwo will be the second screen in the Daily Check-In flow. It will display a list of questions that the user will answer.
@@ -29,19 +29,29 @@ const DailyCheckInTwo = () => {
     const { idAndMood } = useLocalSearchParams();
     //splitting the string to get the user's id and mood
     const id = idAndMood.split(',')[0]
-    const mood = idAndMood.split(',')[1]
+    const mood = +idAndMood.split(',')[1]
+    const entryId = idAndMood.split(',')[2]
 
-    
+    const [tempData,setTempData] =  useState(getCheckInQuestions(mood))
     const [errorMessage, setErrorMessage] = useState('');
     //checkinData will store the user's responses to the questions and the user's journal entry
     const [checkinData, setCheckinData] = useState({
         userId: id,
         mood: mood,
-        question1: { id: '', response: '' },
-        question2: { id: '', response: '' },
-        question3: { id: '', response: '' },
+        question1: { id: '', answer: '' },
+        question2: { id: '', answer: '' },
+        question3: { id: '', answer: '' },
         journal: ''
     });
+    // const backend = {
+    //     "question_text": "Did you enjoy anything specific today?",
+    //     "mood_level": "5",
+    //     "answer": true,
+    //     "content_section": "Daily Check-in"
+    // }
+
+    // Query to note table "note": "Need to keep up with the morning run routine."
+    //
 
     const [journalText, setJournalText] = useState('');
     
@@ -57,17 +67,17 @@ const DailyCheckInTwo = () => {
     const getResponse = (cardData) => {
         setErrorMessage('');
         if (cardData.questionNum === '1') {
-            setCheckinData({ ...checkinData, question1: { id: cardData.questionId, response: cardData.response } });
+            setCheckinData({ ...checkinData, question1: { id: cardData.questionId, answer: cardData.response } });
         } else if (cardData.questionNum === '2') {
-            setCheckinData({ ...checkinData, question2: { id: cardData.questionId, response: cardData.response } });
+            setCheckinData({ ...checkinData, question2: { id: cardData.questionId, answer: cardData.response } });
         } else if (cardData.questionNum === '3') {
-            setCheckinData({ ...checkinData, question3: { id: cardData.questionId, response: cardData.response } });
+            setCheckinData({ ...checkinData, question3: { id: cardData.questionId, answer: cardData.response } });
         }
     }
 
     const handleFinish = () => {
         
-        if (checkinData.question1.response === '' || checkinData.question2.response === '' || checkinData.question3.response === '') {
+        if (checkinData.question1.answer === '' || checkinData.question2.answer === '' || checkinData.question3.answer === '') {
             setErrorMessage('Please answer all questions.');
             return;
         }else{
