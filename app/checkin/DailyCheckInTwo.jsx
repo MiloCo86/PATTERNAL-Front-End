@@ -88,7 +88,6 @@ const DailyCheckInTwo = () => {
     }, [tempData])
 
     useEffect(() => {
-        console.log('Journal Text:', journalText)
         setCheckinData({ ...checkinData, journal: journalText });
     }, [journalText])
 
