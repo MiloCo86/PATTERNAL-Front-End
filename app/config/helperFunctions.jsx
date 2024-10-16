@@ -38,6 +38,35 @@ function getCheckInQuestions (mood) {
     }
 }
 
+
+const getMoodValueWeekly = (moodsArray) => {
+  const moodCounter = {
+    overwhelmed: 0,
+    stressed: 0,
+    neutral: 0,
+    content: 0,
+    peaceful: 0,
+  };
+
+ for(mood of moodsArray){ 
+    if(mood === 1){
+      moodCounter.overwhelmed += 1;
+    }else if(mood === 2){
+      moodCounter.stressed += 1;
+    }else if(mood === 3){
+      moodCounter.neutral += 1;
+    }else if(mood === 4){
+      moodCounter.content += 1;
+    }else if(mood === 5){
+      moodCounter.peaceful += 1;
+    }
+  }
+
+  return moodCounter;
+}  
+
+
+
 const getQuestionById = (questionId) => {
     let mood = questionId[0];
     let questionNum = questionId[1];
@@ -56,4 +85,5 @@ const getQuestionById = (questionId) => {
     }
 }
 
-export {getCheckInQuestions, getQuestionById};
+export {getCheckInQuestions, getMoodValueWeekly, getQuestionById};
+
