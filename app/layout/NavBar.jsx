@@ -12,7 +12,7 @@ const NavBar = () => {
     return router.push('/login/Login')
   }
   const handleMeditation = () => {
-    return router.push('/screens/Login')
+    return router.push('/screens/Meditation')
   }
   const handleHome = () => {
     return router.push('/screens/Home')
@@ -20,22 +20,33 @@ const NavBar = () => {
   const handleJounal = () => {
     return router.push('/screens/AllJournals')
   }
+  const handleResources = () => {
+    return router.push('/screens/Resources')
+  }
 
   return (
     <View style={styles.navBar}>
+
       <Pressable onPress={handleIAChat}>
         <Image source={require('../assets/figma_icons/PATTERNAL_AIchat-icon.png')} style={styles.icon} />
       </Pressable>
+
       <Pressable onPress={handleMeditation}>
         <Image source={require('../assets/figma_icons/PATTERNAL_Meditation-icon.png')} style={styles.icon} />
       </Pressable>
+
       <Pressable onPress={handleHome}>
         <Image source={require('../assets/figma_icons/PATTERNAL_Home-icon.png')} style={styles.homeIcon} />
       </Pressable>
+
       <Pressable onPress={handleJounal}>
         <Image source={require('../assets/figma_icons/PATTERNAL_Notes-icon.png')} style={styles.icon} />
-      </Pressable> 
-      <Image source={require('../assets/figma_icons/PATTERNAL_Discover-icon.png')} style={styles.icon} />
+      </Pressable >
+
+      <Pressable onPress={handleResources}>
+        <Image source={require('../assets/figma_icons/PATTERNAL_Discover-icon.png')} style={styles.icon} /> 
+      </Pressable>
+
     </View>
   )
 }
