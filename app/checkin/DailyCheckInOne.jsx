@@ -15,7 +15,7 @@ const DailyCheckInOne = () => {
 
   console.log('Received userId:', userId); 
 
-  
+
 
   const [moodColor, setMoodColor] = useState(0)
   const [mood, setMood] = useState(0)
@@ -37,15 +37,17 @@ const DailyCheckInOne = () => {
     try {
       // Create a new journal entry with the selected mood
       const response = await axios.post(`${API_URL}/users/${userId}/journal-entries`, {
-        mood: mood // Ensure mood is a string
+        mood: mood 
       });
 
       console.log('Entry created:', response.data);
       // Navigate to the next screen with the created entry ID
       router.push({
         pathname: '/checkin/DailyCheckInTwo',
-        params: { idAndMood: [userId, moodColor, response.data.id] },
+        params: { idAndMood: [userId, mood, response.data.id] },
       });
+      console.log(typeof mood)
+
     } catch (error) {
       console.error('Error creating entry:', error);
       setErrorMessage('Failed to create entry.');
