@@ -14,6 +14,8 @@ import MeditationTimer from '../components/MeditationTimer'
 
 
 const Meditation = () => {
+
+    const [streak, setStreak] = useState(0);
     
 
   return (
@@ -27,6 +29,10 @@ const Meditation = () => {
         <Divider style={styles.Divider}/>
 
         <MeditationTimer />
+
+        <View style={styles.streakContainer}>
+            <Text style={styles.streakText}>Current Streak: {streak}</Text>
+        </View>
       
     </SafeAreaView>
   )
@@ -55,6 +61,17 @@ const styles = StyleSheet.create({
         width: 330,
         backgroundColor: colors.altSecondary,
         marginBottom: 40,
+    },
+    streakContainer: {
+        marginTop: 40,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    streakText: {
+        fontSize: 25,
+        color: colors.primary,
     },
 })
 
