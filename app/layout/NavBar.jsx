@@ -2,26 +2,48 @@ import React from 'react'
 
 import { View, StyleSheet, Image, Pressable } from 'react-native'
 
+import { useLocalSearchParams } from 'expo-router'
+
 import { router } from 'expo-router'
 
 import colors from '../config/colors';
 
 
 const NavBar = () => {
+
+  const { userId } = useLocalSearchParams();
+  console.log('Received userId:', userId);
+
+
   const handleIAChat = () => {
-    return router.push('/login/Login')
+    return router.push({
+      pathname: '/screens/IAChat',
+      params: { userId: userId }
+    })
   }
   const handleMeditation = () => {
-    return router.push('/screens/Meditation')
+    return router.push({
+      pathname: '/screens/Meditation',
+      params: { userId: userId }
+    })
   }
   const handleHome = () => {
-    return router.push('/screens/Home')
+    return router.push({
+      pathname: '/screens/Home',
+      params: { userId: userId }
+    })
   }
   const handleJounal = () => {
-    return router.push('/screens/AllJournals')
+    return router.push({
+      pathname: '/screens/AllJournals',
+      params: { userId: userId }
+    })
   }
   const handleResources = () => {
-    return router.push('/screens/Resources')
+    return router.push({
+      pathname: '/screens/Resources',
+      params: { userId: userId }
+    })
   }
 
   return (
