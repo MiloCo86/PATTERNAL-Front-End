@@ -8,8 +8,7 @@ const dailyCheckInQuestions =[
             "Do you have someone you can reach out to for support?",
             "Have you been able to sleep well?",
             "Do you feel like you're able to concentrate?",
-            "Do you feel like you're able to make decisions?",
-
+            "Do you feel like you're able to make decisions?"
         ],
         parentingQuestions: [
             "Are your emotions affecting your ability to be present with your family today?",
@@ -17,7 +16,7 @@ const dailyCheckInQuestions =[
             "Could sharing with your partner or family member help you feel better?",
             "Are you able to be patient with your child today?",
             "Do you need to adjust your expectations for today?",
-            "Do you need to adjust your family commitments today?",
+            "Do you need to adjust your family commitments today?"
         ]
     },
     {
@@ -28,7 +27,7 @@ const dailyCheckInQuestions =[
             "Are you able to take breaks when you need them?",
             "Are you able to ask for help when you need it?",
             "Would alone time help reduce your stress?",
-            "Could delegating tasks help reduce your stress?",
+            "Could delegating tasks help reduce your stress?"
         ],
         parentingQuestions: [
             "Is your stress affecting your interactions with your kids?",
@@ -36,7 +35,7 @@ const dailyCheckInQuestions =[
             "Are family responsibilities adding to your stress level today?",
             "Do you feel supported in your parenting today?",
             "Have you effectively communicated your needs to your family today?",
-            "Do you need to adjust your at home expectations for today?",
+            "Do you need to adjust your at home expectations for today?"
         ]
     },
     {
@@ -47,7 +46,7 @@ const dailyCheckInQuestions =[
             "Are you able to concentrate on your tasks today?",
             "Are you interested in doing something enjoyable today?",
             "Are you able to make efficient decisions today?",
-            "Is your problem solving ability better than usual today?",
+            "Is your problem solving ability better than usual today?"
         ],
         parentingQuestions: [
             "Do you feel ready to engage in family activities?",
@@ -55,7 +54,7 @@ const dailyCheckInQuestions =[
             "Are you satisfied with your family interactions today?",
             "Do regular parenting challenges seem easier today than usual?",
             "Have you been intentional about spending time with your kids today?",
-            "Do you feel like you're able to be present with your family today?",
+            "Do you feel like you're able to be present with your family today?"
         ]
     },
     {
@@ -88,8 +87,7 @@ const dailyCheckInQuestions =[
             "Have tou been able to maintain a positive outlook lately?",
             "Are you able to appreciate the present moment?",
             "Have you meditated today?",
-            "Have you practiced mindfulness today?",
-
+            "Have you practiced mindfulness today?"
         ],
         parentingQuestions: [
             "Are you able to maintain a peaceful demeanor with your family today?",
@@ -97,8 +95,7 @@ const dailyCheckInQuestions =[
             "Is your calm mood positively affecting your family?",
             "Do you feel especially connected with your children today?",
             "Are everyday parenting tasks feeling easier?",
-            "Have you created any special family moments today?",
-
+            "Have you created any special family moments today?"
         ]
     }
 

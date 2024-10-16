@@ -12,13 +12,16 @@ import colors from '../config/colors';
 import { router, useLocalSearchParams } from 'expo-router';
 
 
-// tempData will be replaced with questions data from the backend
+// import helper functions
+import { getCheckInQuestions } from '../config/helperFunctions';
+
 const tempData = [ 
     { questionNum: '1', questionId: '12', text: "Question#1: Will be Sourced based on user's mood." },
     { questionNum: '2', questionId: '33', text: "Question#2: Will be Sourced based on user's mood." },
     { questionNum: '3', questionId: '03', text: "Question#3: Will be Sourced based on user's mood." },
 
-]; 
+];
+
 
 // DailyCheckInTwo will be the second screen in the Daily Check-In flow. It will display a list of questions that the user will answer.
 const DailyCheckInTwo = () => {
@@ -28,6 +31,7 @@ const DailyCheckInTwo = () => {
     const id = idAndMood.split(',')[0]
     const mood = idAndMood.split(',')[1]
 
+    
     const [errorMessage, setErrorMessage] = useState('');
     //checkinData will store the user's responses to the questions and the user's journal entry
     const [checkinData, setCheckinData] = useState({
@@ -41,15 +45,7 @@ const DailyCheckInTwo = () => {
 
     const [journalText, setJournalText] = useState('');
     
-    useEffect(() => {
-        console.log('Checkin Data:', checkinData)
-    }, [checkinData])
-
-    useEffect(() => {
-        console.log('Journal Text:', journalText)
-        setCheckinData({ ...checkinData, journal: journalText });
-    }, [journalText])
-
+    
     
     const handleBack = () => {
         return router.push({
@@ -83,6 +79,18 @@ const DailyCheckInTwo = () => {
         }      
     }
 
+    useEffect(() => {
+        console.log('Checkin Data:', checkinData)
+    }, [checkinData])
+
+    useEffect(() => {
+        console.log(tempData)
+    }, [tempData])
+
+    useEffect(() => {
+        setCheckinData({ ...checkinData, journal: journalText });
+    }, [journalText])
+
   return (
     <SafeAreaView style={styles.container}>
         <Pressable onPress={handleBack} style={styles.arrowContainer} >
@@ -105,7 +113,7 @@ const DailyCheckInTwo = () => {
                 <PrimaryCard CardText={item.text} questionNum={item.questionNum} questionId={item.questionId} getResponse={getResponse}/>
                 </View>
             )}
-            keyExtractor={item => item.questionId}
+            keyExtractor={item => item.questionNum}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.flatListContent}
