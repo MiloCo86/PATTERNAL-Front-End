@@ -1,6 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
-import { View, Text, StyleSheet, SafeAreaView, Pressable} from 'react-native'
+import { View, Text, StyleSheet, Pressable} from 'react-native'
+
+
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
@@ -19,7 +23,7 @@ const MeditationTimer = () => {
 
     const handleReset = () => {
         setKey((prevKey) => prevKey + 1);
-        setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+        setIsPlaying(false);
     }
 
     const handleTimeChange = (time) => {
@@ -55,19 +59,17 @@ const MeditationTimer = () => {
   return (
     <View style={styles.container}>
 
+        <Text style={styles.insideText}>Set meditation time:</Text>
+
         <View style={styles.timerControllers}>
             <Pressable onPress={()=> {handleTimeChange('-')}} >
-                <Text style={styles.timeButton}>-</Text>
+                <MaterialCommunityIcons name="minus-circle-outline" size={40} color={colors.secondary} />
             </Pressable>
             <Text style={styles.currentTime}>{duration}</Text>
             <Pressable onPress={()=> {handleTimeChange('+')}} >
-                <Text style={styles.timeButton}>+</Text>
+                <MaterialIcons name="add-circle-outline" size={40} color= {colors.secondary} />
             </Pressable>
-        </View>
-
-        <Pressable onPress={handleStart} >
-            <Text style={styles.playingText}>{isPlaying ? 'Pause' : 'Start'}</Text>
-        </Pressable>
+        </View>     
 
         <CountdownCircleTimer
             isPlaying = {isPlaying}
@@ -78,14 +80,21 @@ const MeditationTimer = () => {
             onComplete={() => [true, 1000]}
             size={250}
             strokeWidth={25}
+            trailColor={colors.secondary}
         >
             {renderTime}
 
         </CountdownCircleTimer>
 
-        <Pressable onPress={handleReset}>
-            <Text style={styles.ResetText}>Reset</Text>
-        </Pressable>
+        <View style={styles.controllerContainer}>
+            <Pressable onPress={handleStart} >
+               {isPlaying ? <MaterialCommunityIcons name="pause-circle-outline" size={70} color={colors.secondary}/> : <MaterialIcons name="play-circle-outline" size={70} color={colors.secondary} />}
+            </Pressable>
+
+            <Pressable onPress={handleReset}>
+                <MaterialCommunityIcons name="reload" size={70} color={colors.secondary} />
+            </Pressable>
+        </View>
     
     </View>
     
@@ -101,9 +110,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    space: {
-        width: 10,
-    },
     insideText: {
         fontSize: 20,
         color: colors.primary,
@@ -112,37 +118,42 @@ const styles = StyleSheet.create({
         fontSize: 50,
         color: colors.primary,
     },
-    playingText: {
-        color: colors.primary,
-        fontSize: 20,
-        textAlign: 'center',
-        marginBottom: 20,
-    },
-    ResetText: {
-        color: colors.primary,
-        fontSize: 20,
-        textAlign: 'center',
-        marginTop: 20,
-    },
     timerControllers: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 20,
-    },
-    timeButton: {
-        fontSize: 30,
-        color: colors.primary,
-        marginHorizontal: 20,
+        shadowColor: colors.primary,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
     },
     currentTime: {
-        fontSize: 30,
+        fontSize: 40,
+        marginLeft: 5,
+        marginRight: 5,
         color: colors.primary,
     },
     wellDoneText: {
         fontSize: 30,
         color: colors.primary,
         textAlign: 'center',
+    },
+    controllerContainer: {
+        marginTop : -45,
+        paddingLeft: 45,
+        paddingRight: 45,
+        paddingBottom: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '95%',
+        borderBottomWidth: 1,
+        borderBottomColor: colors.altSecondary,
+        shadowColor: colors.primary,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
     }
 })
 
