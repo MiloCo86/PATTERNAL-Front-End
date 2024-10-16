@@ -1,9 +1,9 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState,React } from 'react';
 import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
 import TipOfTheDay from '../components/TipOfTheDay';
 import colors from '../config/colors';
 
+import { router } from 'expo-router'
 
 import { Card } from 'react-native-paper';
 
