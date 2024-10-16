@@ -11,7 +11,7 @@ import { Card } from 'react-native-paper';
 import RecommendedContent from '../components/RecommendedContentCard';
 
 // Import the visual mood trends component
-import MoodTrends from '../components/MoodTrends';
+// import MoodTrends from '../components/MoodTrends';
 
 
 const Home = () => {
@@ -37,9 +37,9 @@ const Home = () => {
                     <RecommendedContent />
                   </View>
                   
-                  <View style={styles.componentSpacing}>
+                  {/* <View style={styles.componentSpacing}>
                     <MoodTrends moodsArray={moodsArray} moodIntervalText={"Weekly Mood Report"} />
-                  </View>
+                  </View> */}
               </>
             )}
             keyExtractor={(item) => item.key}
