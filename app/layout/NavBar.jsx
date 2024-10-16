@@ -12,7 +12,7 @@ const NavBar = () => {
     return router.push('/login/Login')
   }
   const handleMeditation = () => {
-    return router.push('/screens/Breathing')
+    return router.push('/screens/Meditation')
   }
   const handleHome = () => {
     return router.push('/screens/Home')
@@ -42,7 +42,7 @@ const NavBar = () => {
       <Pressable onPress={handleJounal}>
         <Image source={require('../assets/figma_icons/PATTERNAL_Notes-icon.png')} style={styles.icon} />
       </Pressable >
-      
+
       <Pressable onPress={handleResources}>
         <Image source={require('../assets/figma_icons/PATTERNAL_Discover-icon.png')} style={styles.icon} /> 
       </Pressable>
