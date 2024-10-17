@@ -1,7 +1,9 @@
-import { useState,React } from 'react';
-import { Text, View, StyleSheet, Image, FlatList, ImageSourcePropType } from 'react-native';
+import * as React from 'react';
+import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
+import { PaperProvider } from 'react-native-paper';
 import TipOfTheDay from '../components/TipOfTheDay';
 import colors from '../config/colors';
+import Menu from '../components/icons/Menu';
 
 import { router } from 'expo-router'
 
@@ -10,18 +12,36 @@ import { Card } from 'react-native-paper';
 //Import the recommended content card component
 import RecommendedContent from '../components/RecommendedContentCard';
 
+//Import the menu overlay component
+import MenuOverlay from '../components/MenuOverlay';
+
 // Import the visual mood trends component
 // import MoodTrends from '../components/MoodTrends';
 
 
 const Home = () => {
+  //conditional rendering for the menu overlay
+  const [isMenuVisible, setIsMenuVisible] = React.useState(false);
 
-    const [moodsArray, setMoodsArray] = useState([5, 5, 3, 5, 3, 3, 2]); // sample data for the week's moods
+  const toggleMenuOverlay = () => {
+    setIsMenuVisible(!isMenuVisible);
+  };
+
+  // const [moodsArray, setMoodsArray] = React.useState([5, 5, 3, 5, 3, 3, 2]); // sample data for the week's moods
 
     return (
+    <PaperProvider>
       <View style={styles.container}>
 
         <Image source={require('../assets/logos/Artboard-1.png')} style={styles.logo} />
+        
+        <View style={styles.menu}>
+          <Menu onPress={toggleMenuOverlay} />
+          {console.log('Menu Pressed:')}
+
+        </View>
+
+        {isMenuVisible && <MenuOverlay/>}
 
         <FlatList
             data={[{ key: '1' }]} // Need to pass in a key for the FlatList to work
@@ -49,24 +69,35 @@ const Home = () => {
         </FlatList>
 
       </View>
+    </PaperProvider>
     );
 }
 
 
 const styles = StyleSheet.create({
-  logo: {
-    width: 200,
-    height: 200,
-    marginTop: 16,
-  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
     padding: 16, // Optional: Add some padding to the container
-
+    
   },
+
+  menu: {
+    position: 'absolute',
+    top: 48,
+    right: 0,
+    margin: 16,
+  },
+
+
+  logo: {
+    width: 150,
+    height: 150,
+    marginTop: 16,
+  },
+
   placeholder: {
     fontSize: 16,
     color: colors.primary,

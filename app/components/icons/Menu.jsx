@@ -9,7 +9,7 @@ import colors from '../../config/colors'
 const Menu = ({onPress}) => {
   return (
     <Pressable onPress={onPress}>
-        <MaterialIcons name="menu" size={40} color={colors.primary} />
+        <MaterialIcons name="menu" size={44} color={colors.primary} />
     </Pressable>
   )
 }
