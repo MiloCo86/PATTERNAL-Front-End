@@ -41,7 +41,7 @@ const NavBar = () => {
   }
   const handleResources = () => {
     return router.push({
-      pathname: '/screens/Resources',
+      pathname: '/screens/Forum',
       params: { userId: userId }
     })
   }

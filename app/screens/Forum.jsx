@@ -5,12 +5,13 @@ import { View, Text, StyleSheet, SafeAreaView} from 'react-native'
 import colors from '../config/colors'
 
 //Components
+import TopBar from '../layout/TopBar'
 
 const Forum = () => {
   return (
     <SafeAreaView style={styles.container}>
+      <TopBar title="Forum" />
       <View style={styles.headersContainer}>
-        <Text style={styles.title}>Forum</Text>
         <Text style={styles.subHeader}>Share your thoughts...</Text>
       </View>
     </SafeAreaView>
@@ -20,16 +21,13 @@ const Forum = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
     justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   headersContainer: {
     marginTop: 40,
     marginBottom: 40,
-  },
-  title: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: colors.primary,
   },
   subHeader: {
     fontSize: 25,

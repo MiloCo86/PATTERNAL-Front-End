@@ -1,44 +1,70 @@
 import React from 'react'
-import { View, SafeAreaView, Text, Image, StyleSheet } from 'react-native'
-//React Native Paper
-import { Divider } from 'react-native-paper'
-
+import { useState } from 'react'
+import { View, SafeAreaView, StyleSheet, FlatList } from 'react-native'
 import { router } from 'expo-router'
-//Config files
-import colors from '../config/colors'
+
+
 //Components
+import TopBar from '../layout/TopBar'
 import JournalMiniCard from '../components/JournalMiniCard'
 import ButtonList from '../components/ButtonList'
 
 
-
 const AllJournals = () => {
 
-    const handleFilterBy = (value) => {
-        console.log('Filter by pressed by:', value)
+    const [journals, setJournals] = useState([
+        {id: 1, mood: 1, note: 'Today was not a good day, financial issues are generating problems with Debi'},
+        {id: 2, mood: 3, note: 'It was a regular day, I was not able to see my daughter, but I call her in the morning'},
+        {id: 3, mood: 5, note: 'We had a great time at six flag today!!!'},
+        {id: 4, mood: 2, note: 'I am feeling a little bit down today, I am not sure why'},
+        {id: 5, mood: 4, note: 'I am feeling great today, I was able to finish my project at work'},
+        {id: 6, mood: 1, note: 'I am feeling a little bit down today, I am not sure why'},
+        {id: 7, mood: 4, note: 'I am feeling great today, I was able to finish my project at work'},
+        {id: 8, mood: 2, note: 'I am feeling a little bit down today, I am not sure why'},
+        {id: 9, mood: 5, note: 'I am feeling great today, I was able to finish my project at work'},
+        {id: 10, mood: 1, note: 'I am feeling a little bit down today, I am not sure why'},
+    ])
+
+    const handleSortBy = (value) => {
+        if (value === 'Mood') {
+            const sortedJournals = journals.sort((a, b) => a.mood - b.mood)
+            setJournals([...sortedJournals])
+        }else
+        if (value === 'Date') {
+            const sortedJournals = journals.sort((a, b) => a.id - b.id)
+            setJournals([...sortedJournals])
+        }
     }
-    const handleSelectNote = (value) => {
-        return router.push('/screens/JournalEntry')
+    const handleSelectNote = (id) => {
+        console.log('Selected journal:', id)
+        return router.push({
+            pathname: '/screens/JournalEntry',
+            params: { journalId: id }
+        })
     }
 
     return (
     
         <SafeAreaView style={styles.journalsContainer}>
-            {/* Headers and logo section */}
-            <View style={styles.headersContainer}>
-                <Image source={require('../assets/logo-full.png')} style={styles.logo} />
-                <Text style={styles.headerText}>All Journals</Text>
-            </View>
+            <TopBar title={'All Journals'} />
+            
             <View style={styles.buttonsContainer}>
-                <ButtonList handleSelect={handleFilterBy} />
+                <ButtonList handleSelect={handleSortBy} />
             </View>
-            <Divider />
-            <View style={styles.journalList}>
-                <JournalMiniCard mood={1} note={'Today was not a good day, financial issues are generating problems with Debi'} onPress={handleSelectNote}/>
-                <JournalMiniCard mood={3} note={'It was a regular day, I was not able to see my daughter, but I call her in the morning'}/>
-                <JournalMiniCard mood={5} note={'We had a great time at six flag today!!!'}/>
-                <JournalMiniCard mood={2} note={'I am feeling a little bit down today, I am not sure why'}/>
-            </View>
+
+            <FlatList 
+                style={styles.journalList}
+                contentContainerStyle={{alignItems: 'center'}}
+                data={journals}
+                keyExtractor={journal => journal.id.toString()}
+                renderItem={({item}) => (
+                    <JournalMiniCard 
+                        mood={item.mood}
+                        note={item.note}
+                        handleSelectNote={() => handleSelectNote(item.id)}
+                    />
+                )}
+            />
 
         </SafeAreaView>
     )
@@ -49,36 +75,19 @@ const styles = StyleSheet.create({
     journalsContainer: {
         flex: 1,
         width: '100%',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center'
-    },
-    headersContainer: {
-        width: '100%',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        marginTop: 50,
-    },
-    logo: {
-        width: 144,
-        height: 144
     },
     buttonsContainer: {
         width: '70%',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
         marginTop: 20,
-    },
-    headerText: {
-        fontSize: 18,
-        marginTop: 10,
-        fontWeight: 'bold',
-        color: colors.primary
+        marginBottom: 10,
     },
     journalList: {
-        width: '100%',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        marginTop: 20
+        width: '90%',
+        marginTop: 20,
     },
 })
 
