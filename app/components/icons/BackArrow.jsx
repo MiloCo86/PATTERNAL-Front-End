@@ -9,7 +9,7 @@ import colors from '../../config/colors'
 const BackArrow = ({onPress}) => {
   return (
     <Pressable onPress={onPress}>
-        <Ionicons name="arrow-back" size={24} color={colors.primary} />
+        <Ionicons name="arrow-back" size={44} color={colors.primary} />
     </Pressable> 
   )
 }

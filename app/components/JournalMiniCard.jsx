@@ -31,17 +31,14 @@ const JournalMiniCard = ({date, mood, note, onPress}) => {
         textNote = note.slice(0, 50) + '...'
     }
 
-
-
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={()=>{console.log(mood)}}>
         <View style={styles.container}>
             <View style={{...styles.moodColor, backgroundColor:moodColor}}/>
             <View style={styles.detailsContainer}>
                 <Text style={styles.date}>Sep 19th</Text>
                 <Text style={styles.note}>{textNote}</Text>
-            </View>
-            
+            </View>        
         </View>
     </Pressable>
     
