@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { View, Text, StyleSheet, SafeAreaView, TextInput} from 'react-native'
+import { View, Text, StyleSheet, TextInput} from 'react-native'
 
 // colors and helper functions
 import colors from '../../config/colors'
@@ -13,12 +13,11 @@ const UserForm = () => {
         username: '',
         password: '',
         verify_password: '',
-        child_amount: 0 // Default value
     });
 
   return (
     <View style={styles.container}>
-        <Text>First Name</Text>
+        <Text style={styles.labelText} >First Name</Text>
         <TextInput
             placeholder='First Name'
             style={styles.inputControl}
@@ -27,7 +26,7 @@ const UserForm = () => {
             autoCorrect={false}
             keyboardType='default'
         />
-        <Text>Last Name</Text>
+        <Text style={styles.labelText} >Last Name</Text>
         <TextInput
             placeholder='Last Name'
             style={styles.inputControl}
@@ -36,7 +35,7 @@ const UserForm = () => {
             autoCorrect={false}
             keyboardType='default'
         />
-        <Text>E-mail</Text>
+        <Text style={styles.labelText} >E-mail</Text>
         <TextInput
             placeholder='E-mail'
             style={styles.inputControl}
@@ -46,7 +45,7 @@ const UserForm = () => {
             autoCorrect={false}
             keyboardType='email-address'
         />
-        <Text>Username</Text>
+        <Text style={styles.labelText} >Username</Text>
         <TextInput
             placeholder='Username'
             style={styles.inputControl}
@@ -56,7 +55,7 @@ const UserForm = () => {
             autoCorrect={false}
             keyboardType='default'
         />
-        <Text>Password</Text>
+        <Text style={styles.labelText} >Password</Text>
         <TextInput
             placeholder='Password'
             style={styles.inputControl}
@@ -68,7 +67,7 @@ const UserForm = () => {
             secureTextEntry={true}
             textContentType="none" // Prevents strong password suggestions
         />
-        <Text>Verify Password</Text>
+        <Text style={styles.labelText} >Verify Password</Text>
         <TextInput
             placeholder='Verify Password'
             style={styles.inputControl}
@@ -86,19 +85,28 @@ const UserForm = () => {
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: colors.altSecondary,
-        width: '100%',
+        alignItems: 'flex-start',
+        width: '90%',
+        marginHorizontal: 16,
     },
     inputControl: {
-        width: '80%',
+        width: '100%',
+        minWidth: '90%',
         height: 40,
         borderWidth: 1,
-        borderColor: colors.secondary,
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 10,
+        borderColor: colors.altSecondary,
+        marginBottom: 5,
         backgroundColor: colors.white,
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        borderTopColor: 'transparent',
+
+    },
+    labelText: {
+        width: '80%',
+        color: 'darkgrey',
+        fontSize: 18,
+        fontWeight: 'bold',
     },
 })
 

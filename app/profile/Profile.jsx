@@ -56,17 +56,17 @@ const Profile = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                <ProfileHeader />
-                
-                <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>Edit Profile</Text>
-                </View>
+            
+            <ProfileHeader />
+            
+            <View style={styles.titleContainer}>
+                <Text style={styles.titleText}>Edit Profile</Text>
+            </View>
 
-                <UserForm />
+            <UserForm />
 
-                <FooterLogo />
-            </KeyboardAvoidingView>
+            <FooterLogo />
+            
         </SafeAreaView >
     );
 }
@@ -74,7 +74,7 @@ const Profile = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
         color: colors.primary,
         width: '100%',
@@ -89,20 +89,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         lineHeight: 48,
         color: 'black',
-    },
-    inputControl: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        paddingLeft: 5,
-        borderRadius: 5,
-        marginBottom: 10,
-        color: colors.primary,
-        borderLeftColor: 'transparent',
-        borderRightColor: 'transparent',
-        borderTopColor: 'transparent',
-        width: '100%',
-    },
+    }
 });
 
 export default Profile;
