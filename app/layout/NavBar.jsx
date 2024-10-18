@@ -7,6 +7,9 @@ import { useLocalSearchParams } from 'expo-router'
 import { router } from 'expo-router'
 
 import colors from '../config/colors';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 
 const NavBar = () => {
@@ -50,23 +53,28 @@ const NavBar = () => {
     <View style={styles.navBar}>
 
       <Pressable onPress={handleIAChat}>
-        <Image source={require('../assets/figma_icons/PATTERNAL_AIchat-icon.png')} style={styles.icon} />
+        {/* <Image source={require('../assets/figma_icons/PATTERNAL_AIchat-icon.png')} style={styles.icon} /> */}
+        <MaterialIcons name="add-comment" size={40} color={colors.secondary} style={styles.icon} />
       </Pressable>
 
       <Pressable onPress={handleMeditation}>
-        <Image source={require('../assets/figma_icons/PATTERNAL_Meditation-icon.png')} style={styles.icon} />
+        {/* <Image source={require('../assets/figma_icons/PATTERNAL_Meditation-icon.png')} style={styles.icon} /> */}
+        <MaterialIcons name="timelapse" size={42} color={colors.secondary}  style={styles.icon}/>
       </Pressable>
 
       <Pressable onPress={handleHome}>
-        <Image source={require('../assets/figma_icons/PATTERNAL_Home-icon.png')} style={styles.homeIcon} />
+        {/* <Image source={require('../assets/figma_icons/PATTERNAL_Home-icon.png')} style={styles.homeIcon} /> */}
+        <MaterialCommunityIcons name="home" size={50} color="white" style={styles.homeIcon} />
       </Pressable>
 
       <Pressable onPress={handleJounal}>
-        <Image source={require('../assets/figma_icons/PATTERNAL_Notes-icon.png')} style={styles.icon} />
+        {/* <Image source={require('../assets/figma_icons/PATTERNAL_Notes-icon.png')} style={styles.icon} /> */}
+        <MaterialCommunityIcons name="text-box" size={40} color={colors.secondary} style={styles.icon} />
       </Pressable >
 
       <Pressable onPress={handleResources}>
-        <Image source={require('../assets/figma_icons/PATTERNAL_Discover-icon.png')} style={styles.icon} /> 
+        {/* <Image source={require('../assets/figma_icons/PATTERNAL_Discover-icon.png')} style={styles.icon} /> */}
+        <MaterialIcons name="forum" size={44} color={colors.secondary} style={styles.icon}/> 
       </Pressable>
 
     </View>
@@ -82,17 +90,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.primary,
         width: '100%',
-        height: '10%'
+        height: '12%',
     },
     icon: {
       marginTop: -20,
-      width: 30,
-      height: 30
+      width: 44,
+      height: 44,
     },
     homeIcon: {
       marginTop: -20,
       width: 50,
-      height: 50
+      height: 50,
     },
     
 });
