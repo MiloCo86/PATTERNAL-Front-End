@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     logoAndTitle: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10,
     },
@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
         color: colors.primary,
         fontWeight: 'bold',
         alignSelf: 'center',
-        marginLeft: 20,
+        marginLeft: 30,
         textShadowColor: colors.secondary,
-        textShadowOffset: { width: 5, height: 5 },
-        textShadowRadius: 1,
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 2,
     },
     logo: {
-        width: 100,
-        height: 100,
+        width: 50,
+        height: 50,
         alignSelf: 'center',
     },
     divider: {

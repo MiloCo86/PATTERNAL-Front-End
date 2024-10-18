@@ -37,7 +37,6 @@ const Home = () => {
         
         <View style={styles.menu}>
           <Menu onPress={toggleMenuOverlay} />
-          {console.log('Menu Pressed:')}
 
         </View>
 

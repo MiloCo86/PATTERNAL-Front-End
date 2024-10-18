@@ -46,7 +46,7 @@ const AllJournals = () => {
     return (
     
         <SafeAreaView style={styles.journalsContainer}>
-            <TopBar title={'All Journals'} />
+            <TopBar title={'Notes'} />
             
             <View style={styles.buttonsContainer}>
                 <ButtonList handleSelect={handleSortBy} />
