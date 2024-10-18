@@ -8,7 +8,7 @@ const TopBar = ({title}) => {
     return (
         <View style={styles.topBarContainer}>
             <View style={styles.logoAndTitle}>
-                <Image source={require('../assets/images/logo-blue.png')} style={styles.logo} />
+                {/* <Image source={require('../assets/images/logo-blue.png')} style={styles.logo} /> */}
                 <Text style={styles.title}>{title}  </Text>
             </View>
             <Divider style={styles.divider} />
@@ -31,20 +31,22 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     title: {
-        fontSize: 35,
+        fontSize: 20,
         color: colors.primary,
         fontWeight: 'bold',
         alignSelf: 'center',
-        marginLeft: 30,
+        // marginLeft: 30,
         textShadowColor: colors.secondary,
         textShadowOffset: { width: 2, height: 2 },
         textShadowRadius: 2,
     },
-    logo: {
-        width: 50,
-        height: 50,
-        alignSelf: 'center',
-    },
+    // logo: {
+    //     position: 'absolute',
+    //     width: 30,
+    //     height: 30,
+    //     right: 70,
+    //     alignSelf: 'center',
+    // },
     divider: {
         width: '90%',
         height: 2,
