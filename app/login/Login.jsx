@@ -17,6 +17,8 @@ const Login = () => {
         password: ''
     });
 
+    const [currentDate, setCurrentDate] = useState(new Date());
+
     const [errorMessage, setErrorMessage] = useState('');
     
 
@@ -32,17 +34,32 @@ const Login = () => {
             setErrorMessage('');
             console.log('User logged in:', response.data.user.username);
 
+            // Get the user's journal data
             const getJournalData = await axios.get(`${API_URL}/users/${response.data.user.id}/journal-entries/`);
-
+            // Get the latest checkin date
             const latesCheckin = getJournalData.data[getJournalData.data.length - 1].created_at
 
+            console.log('Current Date:', currentDate);
             console.log('Latest Checkin:', latesCheckin);
+
+            if (latesCheckin.slice(0, 10) === currentDate.toISOString().slice(0, 10)) {
+                console.log('You have already checked in today');
+                // Navigate to the Home screen, passing userId in the params
+                router.push({
+                    pathname: '/screens/Home',
+                    params: { userId: response.data.user.id }
+                });
+            }else{
+                // Navigate to the DailyCheckInOne screen, passing userId in the params
+                router.push({
+                    pathname: '/checkin/DailyCheckInOne',
+                    params: { userId: response.data.user.id }
+                });
+            }
+
+                       
             
-            // Navigate to the DailyCheckInOne screen, passing userId in the params
-            router.push({
-                pathname: '/checkin/DailyCheckInOne',
-                params: { userId: response.data.user.id }
-            });
+            
         } catch (error) {
             setErrorMessage('Invalid email or password.');
             console.log('Error:', error);
