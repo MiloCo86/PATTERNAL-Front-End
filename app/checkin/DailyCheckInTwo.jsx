@@ -93,11 +93,11 @@ const DailyCheckInTwo = () => {
     };
 
     useEffect(() => {
-        console.log('Checkin Data:', checkinData);
+        
     }, [checkinData]);
 
     useEffect(() => {
-        console.log(tempData);
+        
     }, [tempData]);
 
     useEffect(() => {
