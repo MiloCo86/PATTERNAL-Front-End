@@ -4,7 +4,7 @@ import {router} from 'expo-router';
 
 
 //colors
-import colors from '../config/colors';
+import colors from '../../config/colors';
 
 //icons
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -12,6 +12,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 
 const MenuOverlay = ({userId}) => {
+
+  console.log('userId in menuOverlay:', userId);
 
   const handleUserProfile = () => {
     router.push({

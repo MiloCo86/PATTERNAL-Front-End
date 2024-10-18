@@ -1,25 +1,26 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
-import TipOfTheDay from '../components/TipOfTheDay';
+
+//colors and helper functions
 import colors from '../config/colors';
-import Menu from '../components/icons/Menu';
 
-import { router } from 'expo-router'
+//router
+import { router, useLocalSearchParams } from 'expo-router';
 
-import { Card } from 'react-native-paper';
-
-//Import the recommended content card component
+//components
+import TipOfTheDay from '../components/TipOfTheDay';
 import RecommendedContent from '../components/RecommendedContentCard';
+import MenuOverlay from '../components/home/MenuOverlay';
 
-//Import the menu overlay component
-import MenuOverlay from '../components/MenuOverlay';
-
-// Import the visual mood trends component
-// import MoodTrends from '../components/MoodTrends';
+//icon components
+import Menu from '../components/icons/Menu';
 
 
 const Home = () => {
+  const { userId } = useLocalSearchParams();
+
+
   //conditional rendering for the menu overlay
   const [isMenuVisible, setIsMenuVisible] = React.useState(false);
 
@@ -27,7 +28,6 @@ const Home = () => {
     setIsMenuVisible(!isMenuVisible);
   };
 
-  // const [moodsArray, setMoodsArray] = React.useState([5, 5, 3, 5, 3, 3, 2]); // sample data for the week's moods
 
     return (
     <PaperProvider>
@@ -40,7 +40,7 @@ const Home = () => {
 
         </View>
 
-        {isMenuVisible && <MenuOverlay/>}
+        {isMenuVisible && <MenuOverlay userId={userId}/>}
 
         <FlatList
             data={[{ key: '1' }]} // Need to pass in a key for the FlatList to work
@@ -56,9 +56,6 @@ const Home = () => {
                     <RecommendedContent />
                   </View>
                   
-                  {/* <View style={styles.componentSpacing}>
-                    <MoodTrends moodsArray={moodsArray} moodIntervalText={"Weekly Mood Report"} />
-                  </View> */}
               </>
             )}
             keyExtractor={(item) => item.key}

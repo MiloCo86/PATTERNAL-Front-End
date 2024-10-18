@@ -2,10 +2,13 @@ import * as React from 'react';
 import { Avatar, Button, Card, Text} from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
-import colors from '../config/colors'
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
-// const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+//colors and helper functions
+import colors from '../config/colors'
+
+//components
+
+
 
 const PrimaryCard = ({CardText,questionId, questionNum, getResponse}) => {
   const [response, setResponse] = React.useState('')

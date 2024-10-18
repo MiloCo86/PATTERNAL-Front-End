@@ -9,12 +9,14 @@ import colors from '../config/colors';
 
 //components
 import UserForm from '../components/forms/UserForm';
-import ProfileHeader from '../components/ProfileHeader';
-import FooterLogo from '../components/FooterLogo';
+import ProfileHeader from '../components/profile/ProfileHeader';
+import FooterLogo from '../components/profile/FooterLogo';
 
 const Profile = () => {
 
     const { userId } = useLocalSearchParams();
+
+    console.log('userId in Profile:', userId);
 
     const [form, setForm] = useState({
         first_name: 'John',
@@ -36,28 +38,11 @@ const Profile = () => {
         }
     };
 
-    const handleVerifyPasswordChange = (verify_password) => {
-        setForm({ ...form, verify_password });
-
-        // Update error message while typing
-        if (verify_password !== form.password) {
-            setErrorMessage("Passwords do not match!");
-        } else {
-            setErrorMessage(''); // Clear error if they match
-        }
-    };
-
-    const handleBackArrow = () => {
-        return router.push({
-            pathname: 'screens/Home',
-            params: { userId: userId }
-        });
-    };
 
     return (
         <SafeAreaView style={styles.container}>
             
-            <ProfileHeader />
+            <ProfileHeader userId={userId}/>
             
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Edit Profile</Text>
