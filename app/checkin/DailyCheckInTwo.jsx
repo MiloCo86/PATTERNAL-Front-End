@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, SafeAreaView, FlatList, Pressable } from 'react-native';
+
+//back-end functionality
+import axios from 'axios';
+import { API_URL } from '@env';
+
+//components
 import PrimarySubmitButton from '../components/PrimarySubmitButton';
 import PrimaryCard from '../components/PrimaryCard';
 import TextInputBox from '../components/TextInputBox';
+
+// colors and helper functions
 import colors from '../config/colors';
-import { router, useLocalSearchParams } from 'expo-router';
-import axios from 'axios';
-import { API_URL } from '@env';
-// Import helper functions
 import { getCheckInQuestions } from '../config/helperFunctions';
+
+//router
+import { router, useLocalSearchParams } from 'expo-router';
 
 const DailyCheckInTwo = () => {
     const { idAndMood } = useLocalSearchParams();
@@ -81,7 +88,6 @@ const DailyCheckInTwo = () => {
                 });
             }
 
-            console.log('Checkin Data:', checkinData);
             router.push({
                 pathname: 'screens/Home',
                 params: { userId: id }
