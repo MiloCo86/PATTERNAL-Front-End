@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { Link, router } from 'expo-router';
-import { Text, View, TextInput, StyleSheet, Image, ScrollView, TouchableOpacity, Pressable, Platform, KeyboardAvoidingView } from 'react-native';
+import { router } from 'expo-router';
+import { Text, View, StyleSheet, Pressable, Platform, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useLocalSearchParams } from 'expo-router'
+
+// colors and helper functions
+import colors from '../config/colors';
+
+//components
+import UserForm from '../components/forms/UserForm';
 import ProfileHeader from '../components/ProfileHeader';
 import FooterLogo from '../components/FooterLogo';
 
-import colors from '../config/colors';
-
 const Profile = () => {
+
+    const { userId } = useLocalSearchParams();
+
     const [form, setForm] = useState({
         first_name: 'John',
         last_name: 'Doe',
@@ -40,85 +48,23 @@ const Profile = () => {
     };
 
     const handleBackArrow = () => {
-        router.push('/login/Login');
+        return router.push({
+            pathname: 'screens/Home',
+            params: { userId: userId }
+        });
     };
 
     return (
         <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                 <ProfileHeader />
-                <ScrollView>
-                    <View >
-                        <View>
-                            <Text style={styles.title}>Edit Profile</Text>
-                        </View>
-                        <View style={styles.formContainer}>
-                            <Text>First Name</Text>
-                            <TextInput
-                                placeholder='First Name'
-                                style={styles.inputControl}
-                                value={form.first_name}
-                                onChangeText={(first_name) => setForm({ ...form, first_name })}
-                                autoCorrect={false}
-                                keyboardType='default'
-                            />
-                            <Text>Last Name</Text>
-                            <TextInput
-                                placeholder='Last Name'
-                                style={styles.inputControl}
-                                value={form.last_name}
-                                onChangeText={(last_name) => setForm({ ...form, last_name })}
-                                autoCorrect={false}
-                                keyboardType='default'
-                            />
-                            <Text>Email</Text>
-                            <TextInput
-                                placeholder='Email'
-                                style={styles.inputControl}
-                                value={form.email}
-                                onChangeText={(email) => setForm({ ...form, email })}
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                keyboardAppearance='email-address'
-                            />
-                            <Text>Username</Text>
-                            <TextInput
-                                placeholder='Username'
-                                style={styles.inputControl}
-                                value={form.username}
-                                onChangeText={(username) => setForm({ ...form, username })}
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                keyboardType='default'
-                            />
-                            <Text>Password</Text>
-                            <TextInput
-                                placeholder='Password'
-                                style={styles.inputControl}
-                                value={form.password}
-                                onChangeText={(password) => setForm({ ...form, password })}
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                keyboardType='default'
-                                secureTextEntry={true}
-                            />
-                            <Text>Verify Password</Text>
-                            <TextInput
-                                placeholder='Verify Password'
-                                style={styles.inputControl}
-                                value={form.verify_password}
-                                onChangeText={handleVerifyPasswordChange}
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                keyboardType='default'
-                                secureTextEntry={true}
-                            />
-                            {errorMessage ? (
-                                <Text style={styles.errorMessage}>{errorMessage}</Text>
-                            ) : null}
-                        </View>
-                    </View>
-                </ScrollView>
+                
+                <View style={styles.titleContainer}>
+                    <Text style={styles.titleText}>Edit Profile</Text>
+                </View>
+
+                <UserForm />
+
                 <FooterLogo />
             </KeyboardAvoidingView>
         </SafeAreaView >
@@ -133,11 +79,13 @@ const styles = StyleSheet.create({
         color: colors.primary,
         width: '100%',
     },
-    title: {
+    titleContainer: {
+        marginBottom: 20,
+    },
+    titleText: {
         fontSize: 20,
         fontFamily: 'Roboto',
         textAlign: 'center',
-        marginTop: 20,
         fontWeight: '700',
         lineHeight: 48,
         color: 'black',
@@ -155,15 +103,6 @@ const styles = StyleSheet.create({
         borderTopColor: 'transparent',
         width: '100%',
     },
-    formContainer: {
-        marginTop: 20
-    },
-    errorMessage: {
-        color: 'colors.tertiary',
-        textAlign: 'center',
-        marginTop: 10,
-    }
-
 });
 
 export default Profile;

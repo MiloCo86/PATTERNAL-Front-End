@@ -1,91 +1,64 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { router } from 'expo-router';
-import { useState } from 'react';
 
+// colors and helper functions
 import colors from '../config/colors';
 
-const ProfileHeader = () => {
+//icon components
+import BackArrow from '../components/icons/BackArrow';
+import ProfilePic from '../components/icons/ProfilePic';
+import Camera from '../components/icons/Camera';
 
-    const [form, setForm] = useState({
-        first_name: 'John',
-        last_name: 'Doe',
-        email: 'john_doe_uniqu@example.com',
-        username: 'johndoe',
-        password: '****************',
-        verify_password: '****************'
-    });
+const ProfileHeader = ({userId, saveBtn}) => {
 
-    const [errorMessage, setErrorMessage] = useState('');
-
-    const handleSave = () => {
-        if (form.password !== form.verify_password) {
-            setErrorMessage("Passwords do not match!");
-        } else {
-            setErrorMessage(''); // Clear any previous error
-            console.log('Save button pressed');
-        }
-    };
-
-    const handleVerifyPasswordChange = (verify_password) => {
-        setForm({ ...form, verify_password });
-
-        // Update error message while typing
-        if (verify_password !== form.password) {
-            setErrorMessage("Passwords do not match!");
-        } else {
-            setErrorMessage(''); // Clear error if they match
-        }
-    };
-
-
-    const handleBackArrow = () => {
-        router.push('/login/Login');
+   const handleBackArrow = () => {
+        router.push({
+            pathname: '/screens/Home',
+            params: { userId: userId }
+        });
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.navigation}>
-                <Pressable onPress={handleBackArrow}>
-                    <Image source={require('../assets/profile/profile-arrow_back.png')} />
-                </Pressable>
-                <Pressable onPress={handleSave}>
-                    <Text style={styles.headerText}>Save</Text>
-                </Pressable>
-            </View>
-            <View>
-                <Image source={require('../assets/profile-img.png')} style={styles.profile} />
-            </View>
+        <View style={styles.container}>   
+            <BackArrow onPress={handleBackArrow} color={colors.secondary} />
+
+            <View style={styles.ProfilePic}>
+                <ProfilePic color={"darkgrey"} size={100}/>
+                <View style={styles.cameraContainer}>
+                    <Camera size={25}/>
+                </View>
+            </View> 
+
+            <Pressable onPress={saveBtn} >
+                <Text style={styles.saveText}>Save</Text>
+            </Pressable>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        padding: 15,
+        paddingTop: 30,
         width: '100%',
-        height: '30%',
-        backgroundColor: colors.primary,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 0,
-    },
-    navigation: {
+        height: 230,
         flexDirection: 'row',
+        backgroundColor: colors.primary,
         justifyContent: 'space-between',
-        width: '90%',
-        alignItems: 'center',
     },
-    headerText: {
+    saveText: {
         color: colors.secondary,
-        textAlign: 'center',
-        fontFamily: 'Roboto',
-        fontSize: '20',
-        fontWeight: '700',
+        fontSize: 20,
+        fontWeight: 'bold',
     },
-    profile: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
+    ProfilePic: {
+        marginTop: 15,
+    },
+    cameraContainer: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
     },
 });
 
