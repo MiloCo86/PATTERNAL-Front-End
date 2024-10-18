@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { View, Text, StyleSheet, Pressable} from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 
 
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -10,11 +10,13 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
 import colors from '../config/colors'
 
+let durationArray = [60, 180, 300, 600];
+let currIndex = 0;
 
 const MeditationTimer = () => {
 
     const [key, setKey] = useState(0);
-    const [duration, setDuration] = useState(60);
+    const [duration, setDuration] = useState(durationArray[currIndex]);
     const [isPlaying, setIsPlaying] = useState(false);
 
     const handleStart = () => {
@@ -27,78 +29,82 @@ const MeditationTimer = () => {
     }
 
     const handleTimeChange = (time) => {
+
         if (time === '+') {
-            setDuration(duration + 15);
-        }else if (time === '-') {
-            if (duration <= 15) {
-                setDuration(15);
-            }else{
-                setDuration(duration - 15);
-            }
+            currIndex++;
+            setDuration(durationArray[Math.abs(currIndex) % 4]);
+        }
+        else if (time === '-') {
+            currIndex--;
+            setDuration(durationArray[Math.abs(currIndex) % 4]);
         }
     }
 
+    console.log(duration, currIndex);
 
-    const renderTime = ({ remainingTime }) => {
+    remainingTime = duration;
+
+    const renderTime = ({ remainingTime }) => { // remainingTime
         if (remainingTime === 0) {
-          return <Text style={styles.wellDoneText}>Well done!</Text>;
+            return <Text style={styles.wellDoneText}>Well done!</Text>;
         }
-      
+
         return (
             <View style={styles.insideTextContainer}>
-                <Text style={styles.insideText} >Remaining</Text>
-                
-                <Text style={styles.timeNumber} >{remainingTime}</Text>
-                <Text style={styles.insideText}>seconds</Text>
+                <Text style={styles.insideText} >{remainingTime > 120 ? "Minutes" : (remainingTime < 120 && remainingTime >= 60) ? "Minute" : "Seconds"}</Text>
+
+                <Text style={styles.timeNumber} >{Math.floor(remainingTime / 60)}:{(
+                    remainingTime % 60) < 10 ? "0" + String(remainingTime % 60) : remainingTime % 60}</Text>
+                <Text style={styles.insideText}>Remaining</Text>
             </View>
-    
+
         );
     };
 
 
-  return (
-    <View style={styles.container}>
+    return (
+        <View style={styles.container}>
 
-        <Text style={styles.insideText}>Set meditation time:</Text>
+            <Text style={styles.insideText}>Set meditation time:</Text>
 
-        <View style={styles.timerControllers}>
-            <Pressable onPress={()=> {handleTimeChange('-')}} >
-                <MaterialCommunityIcons name="minus-circle-outline" size={40} color={colors.secondary} />
-            </Pressable>
-            <Text style={styles.currentTime}>{duration}</Text>
-            <Pressable onPress={()=> {handleTimeChange('+')}} >
-                <MaterialIcons name="add-circle-outline" size={40} color= {colors.secondary} />
-            </Pressable>
-        </View>     
+            <View style={styles.timerControllers}>
+                <Pressable onPress={() => { handleTimeChange('-') }} >
+                    <MaterialCommunityIcons name="minus-circle-outline" size={40} color="black" />
+                </Pressable>
+                <Text style={styles.currentTime}>{Math.floor(remainingTime / 60)}:{"0" + remainingTime % 60}</Text>
+                <Pressable onPress={() => { handleTimeChange('+') }} >
+                    <MaterialIcons name="add-circle-outline" size={40} color="black" />
+                </Pressable>
+            </View>
 
-        <CountdownCircleTimer
-            isPlaying = {isPlaying}
-            key={key}
-            duration={duration}
-            colors={[ '#1685DF', '#7EC963', '#57B098' ]}
-            colorsTime={[duration, duration / 2, 0]}
-            onComplete={() => [true, 1000]}
-            size={250}
-            strokeWidth={25}
-            trailColor={colors.secondary}
-        >
-            {renderTime}
+            <CountdownCircleTimer
+                isPlaying={isPlaying}
+                key={key}
+                duration={durationArray[Math.abs(currIndex) % 4]}
+                colors={[colors.tertiery, colors.primary, colors.primary]}
+                colorsTime={[durationArray[Math.abs(currIndex) % 4], durationArray[Math.abs(currIndex) % 6] - 10 /*- durationArray[Math.abs(currIndex) % 3] / 4*/, 0]}
+                onComplete={() => [true, 1000]}
+                size={250}
+                strokeWidth={25}
+                trailColor={colors.secondary}
+            >
+                {renderTime}
 
-        </CountdownCircleTimer>
+            </CountdownCircleTimer>
 
-        <View style={styles.controllerContainer}>
-            <Pressable onPress={handleStart} >
-               {isPlaying ? <MaterialCommunityIcons name="pause-circle-outline" size={70} color={colors.secondary}/> : <MaterialIcons name="play-circle-outline" size={70} color={colors.secondary} />}
-            </Pressable>
+            <View style={styles.controllerContainer}>
+                <Pressable onPress={handleStart} >
+                    {isPlaying ? <MaterialCommunityIcons name="pause-circle-outline" size={44} color="black" /> : <MaterialIcons name="play-circle-outline" size={44} color="black" />}
+                </Pressable>
 
-            <Pressable onPress={handleReset}>
-                <MaterialCommunityIcons name="reload" size={70} color={colors.secondary} />
-            </Pressable>
+                <Pressable onPress={handleReset}>
+                    <MaterialCommunityIcons name="reload" size={44} color="black" />
+                </Pressable>
+            </View>
+
         </View>
-    
-    </View>
-    
-  )
+
+    )
 }
 
 const styles = StyleSheet.create({
@@ -140,7 +146,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     controllerContainer: {
-        marginTop : -45,
+        marginTop: -45,
         paddingLeft: 45,
         paddingRight: 45,
         paddingBottom: 10,
