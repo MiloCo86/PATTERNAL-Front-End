@@ -27,9 +27,16 @@ const Login = () => {
         }
 
         try {
+            // Make a POST request to the API to log in the user
             const response = await axios.post(`${API_URL}/users/login`, form);
             setErrorMessage('');
-            console.log('User object:', response.data.user);
+            console.log('User logged in:', response.data.user.username);
+
+            const getJournalData = await axios.get(`${API_URL}/users/${response.data.user.id}/journal-entries/`);
+
+            const latesCheckin = getJournalData.data[getJournalData.data.length - 1].created_at
+
+            console.log('Latest Checkin:', latesCheckin);
             
             // Navigate to the DailyCheckInOne screen, passing userId in the params
             router.push({
