@@ -1,21 +1,21 @@
 import React from 'react'
+import { View, StyleSheet, Pressable } from 'react-native'
 
-import { View, StyleSheet, Image, Pressable } from 'react-native'
+//router
+import { router, useLocalSearchParams } from 'expo-router'
 
-import { useLocalSearchParams } from 'expo-router'
-
-import { router } from 'expo-router'
-
+//colors and helper functions
 import colors from '../config/colors';
+
+// icon libraries
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 
 const NavBar = () => {
 
   const { userId } = useLocalSearchParams();
-  console.log('Received userId:', userId);
+  console.log('Received userId in navBar', userId);
 
 
   const handleIAChat = () => {

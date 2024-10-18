@@ -3,12 +3,12 @@ import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { router } from 'expo-router';
 
 // colors and helper functions
-import colors from '../config/colors';
+import colors from '../../config/colors';
 
 //icon components
-import BackArrow from '../components/icons/BackArrow';
-import ProfilePic from '../components/icons/ProfilePic';
-import Camera from '../components/icons/Camera';
+import BackArrow from '../../components/icons/BackArrow';
+import ProfilePic from '../../components/icons/ProfilePic';
+import Camera from '../../components/icons/Camera';
 
 const ProfileHeader = ({userId, saveBtn}) => {
 
