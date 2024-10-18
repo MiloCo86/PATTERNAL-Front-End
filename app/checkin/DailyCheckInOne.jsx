@@ -1,12 +1,20 @@
-// app/screens/DailyCheckInOne.jsx
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
-import MainButton from '../components/MainButton';
-import PrimarySubmitButton from '../components/PrimarySubmitButton';
+
+// import MainButton from '../components/MainButton';
+
+
+//router
 import { router, useLocalSearchParams } from 'expo-router';
 import { API_URL } from '@env';
-import colors from '../config/colors';
 import axios from 'axios';
+
+//colors
+import colors from '../config/colors';
+
+//components
+import PrimarySubmitButton from '../components/PrimarySubmitButton';
+import MoodButton from '../components/buttons/MoodButton';
 
 
 const DailyCheckInOne = () => {
@@ -15,21 +23,18 @@ const DailyCheckInOne = () => {
 
   console.log('Received userId:', userId); 
 
-
-
-  const [moodColor, setMoodColor] = useState(0)
   const [mood, setMood] = useState(0)
+ 
 
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleMood = (mood) => {
     setErrorMessage('')
-    setMoodColor(mood);
     setMood(mood)
   }
 
   const handleContinue = async () => {
-    if (moodColor === 0) {
+    if (mood === 0) {
       setErrorMessage('Please select a mood.');
       return;
     }
@@ -54,6 +59,8 @@ const DailyCheckInOne = () => {
     }
   };
 
+  
+
   return (
     <SafeAreaView style={styles.container}>
 
@@ -64,11 +71,11 @@ const DailyCheckInOne = () => {
 
         <View style={styles.buttonContainer}>
 
-            <MainButton buttonText="1. Overwhelmed" borderColor={moodColor === 1 ? colors.mood.one : ''} onPress={() => handleMood(1)}/>
-            <MainButton buttonText="2. Stressed" borderColor={moodColor === 2 ? colors.mood.two : ''} onPress={() => handleMood(2)}/>
-            <MainButton buttonText="3. Neutral" borderColor={moodColor === 3 ? colors.mood.three : ''}  onPress={() => handleMood(3)}/>
-            <MainButton buttonText="4. Content" borderColor={moodColor === 4 ? colors.mood.four : ''}  onPress={() => handleMood(4)}/>
-            <MainButton buttonText="5. Peaceful" borderColor={moodColor === 5 ? colors.mood.five : ''} onPress={() => handleMood(5)}/>
+            <MoodButton mood={1} onPress={()=> handleMood(1)} active={mood === 1} />
+            <MoodButton mood={2} onPress={()=> handleMood(2)} active={mood === 2} />
+            <MoodButton mood={3} onPress={()=> handleMood(3)} active={mood === 3} />
+            <MoodButton mood={4} onPress={()=> handleMood(4)} active={mood === 4} />
+            <MoodButton mood={5} onPress={()=> handleMood(5)} active={mood === 5} />
        
         </View>
 
@@ -98,12 +105,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
   title: {
-    fontSize: 40,
+    fontSize: 44,
+    fontWeight: 'bold',
+    color: colors.primary,
    
   },
     subHeader: {
         fontSize: 20,
-        marginTop: 16,
+        marginTop: 10,
     },
     buttonContainer: {
         flexGrow: 1,

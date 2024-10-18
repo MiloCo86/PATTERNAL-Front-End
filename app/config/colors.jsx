@@ -4,10 +4,10 @@ export default {
     tertiery: '#E77728',
     altSecondary: '#DDDDDD',
     mood: {
-        one: '#ff0000',
-        two: 'orange',
-        three: 'yellow',
-        four: 'blue',
-        five: 'green',
+        one: '#E86D7C',
+        two: '#E8976A',
+        three: '#CEB76D',
+        four: '#8AC7B0',
+        five: '#A3B8DB',
     }
 }
