@@ -51,7 +51,7 @@ const MeditationTimer = () => {
 
         return (
             <View style={styles.insideTextContainer}>
-                <Text style={styles.insideText} >{remainingTime >= 120 ? "Minutes" : (remainingTime < 120 && remainingTime >= 60) ? "Minute" : "Seconds"}</Text>
+                <Text style={styles.insideText} >{remainingTime >= 120 ? "Minutes" : (remainingTime < 120 && remainingTime >= 60) ? "Minute" : remainingTime === 1 ? "Second" : "Seconds"}</Text>
 
                 <Text style={styles.timeNumber} >{Math.floor(remainingTime / 60)}:{(
                     remainingTime % 60) < 10 ? "0" + String(remainingTime % 60) : remainingTime % 60}</Text>
