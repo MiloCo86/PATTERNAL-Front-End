@@ -23,7 +23,7 @@ const JournalMiniCard = ({journalId, userId}) => {
     console.log('userId in JournalMiniCard:', userId);
     console.log('journalId in JournalMiniCard:', journalId);
 
-    // http://localhost:3002/users/${userID}/journal-entries/${journalId}
+    // http://${API_URL}/users/${userID}/journal-entries/${journalId}
     // type: object
     const [journal, setJournal] = useState({})
     // {
@@ -33,7 +33,7 @@ const JournalMiniCard = ({journalId, userId}) => {
     //     "created_at": "2024-10-18T16:07:46.453Z"
     // }
 
-    // http://localhost:3002/users/${userID}/journal-entries/${journalId}/notes
+    // http://${API_URL}/users/${userID}/journal-entries/${journalId}/notes
     // type: array
     const [notes, setNotes] = useState([])
     // [
@@ -96,11 +96,18 @@ const JournalMiniCard = ({journalId, userId}) => {
     }
 
     if (textNote.length > 50) {
-        textNote = textNote.slice(0, 50) + '...'
+        setTextNote(textNote.slice(0, 50) + '...')
+    }
+    const handleSelectNote = () => {
+        console.log('Selected journal:', journalId)
+        return router.push({
+            pathname: '/screens/JournalDailyView',
+            params: { userAndJournaliD: [userId, journalId] }
+        })
     }
 
   return (
-    <Pressable onPress={()=>{console.log('yes')}}>
+    <Pressable onPress={handleSelectNote}>
         <View style={styles.container}>
             <View style={{...styles.moodColor, backgroundColor:moodColor}}/>
             <View style={styles.detailsContainer}>

@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
         width: '70%',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
-        marginTop: 20,
         marginBottom: 10,
     },
     journalList: {
