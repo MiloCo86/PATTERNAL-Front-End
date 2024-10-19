@@ -20,9 +20,6 @@ import Notes from '../../components/icons/Notes'
 
 const JournalMiniCard = ({journalId, userId}) => {
 
-    console.log('userId in JournalMiniCard:', userId);
-    console.log('journalId in JournalMiniCard:', journalId);
-
     // http://${API_URL}/users/${userID}/journal-entries/${journalId}
     // type: object
     const [journal, setJournal] = useState({})
@@ -64,7 +61,7 @@ const JournalMiniCard = ({journalId, userId}) => {
                 setTextNote(getNotesData.data[0].note)
                 if (getNotesData.data.length > 1) {
                     setShowIcon(true)
-                    setNumNotes(getNotesData.data.length)
+                    setNumNotes(getNotesData.data.length)             
                 }
             } catch (error) {
                 console.log('Error fetching notes data:', error);

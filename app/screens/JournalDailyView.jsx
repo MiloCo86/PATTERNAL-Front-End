@@ -15,6 +15,7 @@ import { convertDateToMonthDayFormat } from '../config/helperFunctions';
 
 //components
 import TopBar from '../layout/TopBar'
+import DailyQuestionsJournalCard from '../components/journal/DailyQuestionsJournalCard';
 
 const JournalDailyView = () => {
     const { userAndJournaliD } = useLocalSearchParams();
@@ -43,35 +44,7 @@ const JournalDailyView = () => {
     //     }
     // ]
 
-    // http://${API_URL}/users/${userID}/journal-entries/${journalId}/questions
-    // type: array
-    const [daileyQuestions, setDaileyQuestions] = useState([])
-    // [
-    //     {
-    //         "id": 34,
-    //         "entry_id": 12,
-    //         "question_text": "Are you able to take breaks when you need them?",
-    //         "mood_level": "2",
-    //         "answer": true,
-    //         "content_section": "Daily Check-in"
-    //     },
-    //     {
-    //         "id": 35,
-    //         "entry_id": 12,
-    //         "question_text": "Do you need to adjust your at home expectations for today?",
-    //         "mood_level": "2",
-    //         "answer": true,
-    //         "content_section": "Daily Check-in"
-    //     },
-    //     {
-    //         "id": 36,
-    //         "entry_id": 12,
-    //         "question_text": "Have you effectively communicated your needs to your family today?",
-    //         "mood_level": "2",
-    //         "answer": true,
-    //         "content_section": "Daily Check-in"
-    //     }
-    // ]
+    
 
     const [date, setDate] = useState('')
 
@@ -92,12 +65,6 @@ const JournalDailyView = () => {
                 console.log('Error fetching notes data:', error);
             }
 
-            try {
-                const getQuestionsData = await axios.get(`${API_URL}/users/${userId}/journal-entries/${journalId}/questions`);
-                setDaileyQuestions(getQuestionsData.data);
-            } catch (error) {
-                console.log('Error fetching questions data:', error);
-            }
         };
         
         fetchJournalData();
@@ -114,7 +81,7 @@ const JournalDailyView = () => {
     <SafeAreaView style={styles.container}>
         <TopBar title={'Journal Daily View'} />
         <Text style={styles.dateText}>{date}</Text>
-        {/* daily questions component here */}
+        <DailyQuestionsJournalCard userId={userId} JournalId={journalId} />
         {/* note card component here */}
     </SafeAreaView>
   )
@@ -128,7 +95,8 @@ const styles = StyleSheet.create({
         backgroundColor: colors.altSecondary,
     },
     dateText: {
-        fontSize: 20,
+        fontSize: 30,
+        fontFamily: 'HelveticaNeue-Italic',
         fontWeight: 'bold',
     },
 })
