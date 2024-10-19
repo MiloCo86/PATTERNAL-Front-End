@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, SafeAreaView, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native';
+import {  SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import { router } from 'expo-router';
 
 //Color
 import colors from '../config/colors'
 //Components
 import TopBar from '../layout/TopBar';
-import JournalMiniCard from '../components/JournalMiniCard';
+import JournalMiniCard from '../components/journal/JournalMiniCard';
 import OwnYourFatherHood from '../components/OwnYourFatherHood';
 import TextInputBox from '../components/TextInputBox';
 

@@ -85,5 +85,89 @@ const getQuestionById = (questionId) => {
     }
 }
 
-export {getCheckInQuestions, getMoodValueWeekly, getQuestionById};
+const convertDateToMonthDayFormat = (date) => {
+  //date is in the format yyyy-mm-dd
+  //return date will be in format Month dd
+  const dateArray = date.split("-");
+  const month = dateArray[1];
+  const day = dateArray[2];
+  let monthStr = "";
+  let dayStr = "";
+
+  switch (month) { 
+    case "01":
+      monthStr = "Jan";
+      break;
+    case "02":
+      monthStr = "Feb";
+      break;
+    case "03":
+      monthStr = "Mar";
+      break;
+    case "04":
+      monthStr = "Apr";
+      break;
+    case "05":
+      monthStr = "May";
+      break;
+    case "06":
+      monthStr = "Jun";
+      break;
+    case "07":
+      monthStr = "Jul";
+      break;
+    case "08":
+      monthStr = "Aug";
+      break;
+    case "09":
+      monthStr = "Sep";
+      break;
+    case "10":
+      monthStr = "Oct";
+      break;
+    case "11":
+      monthStr = "Nov";
+      break;
+    case "12":
+      monthStr = "Dec";
+      break;
+  }
+
+  switch (dayStr) {
+    case "01":
+      dayStr = "1st";
+      break;
+    case "02":
+      dayStr = "2nd";
+      break;
+    case "03":
+      dayStr = "3rd";
+      break;
+    case "21":
+      dayStr = "21st";
+      break;
+    case "22":
+      dayStr = "22nd";
+      break;
+    case "23":
+      dayStr = "23rd";
+      break;
+    case "31":
+      dayStr = "31st";
+      break;
+    default:
+      dayStr = `${day}th`;
+  }
+
+  return `${monthStr} ${dayStr}`;
+
+}
+      
+
+
+
+
+
+
+export {getCheckInQuestions, getMoodValueWeekly, getQuestionById, convertDateToMonthDayFormat};
 

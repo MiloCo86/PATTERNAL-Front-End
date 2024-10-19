@@ -1,29 +1,39 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { View, SafeAreaView, StyleSheet, FlatList } from 'react-native'
-import { router } from 'expo-router'
 
+//router
+import { router, useLocalSearchParams } from 'expo-router'
+
+//backend connection
+import { API_URL } from '@env';
+import axios from 'axios';
 
 //Components
 import TopBar from '../layout/TopBar'
-import JournalMiniCard from '../components/JournalMiniCard'
-import ButtonList from '../components/ButtonList'
+import JournalMiniCard from '../components/journal/JournalMiniCard'
+import ButtonList from '../components/buttons/ButtonList'
 
 
-const AllJournals = () => {
+const AllNotes = () => {
 
-    const [journals, setJournals] = useState([
-        {id: 1, mood: 1, note: 'Today was not a good day, financial issues are generating problems with Debi'},
-        {id: 2, mood: 3, note: 'It was a regular day, I was not able to see my daughter, but I call her in the morning'},
-        {id: 3, mood: 5, note: 'We had a great time at six flag today!!!'},
-        {id: 4, mood: 2, note: 'I am feeling a little bit down today, I am not sure why'},
-        {id: 5, mood: 4, note: 'I am feeling great today, I was able to finish my project at work'},
-        {id: 6, mood: 1, note: 'I am feeling a little bit down today, I am not sure why'},
-        {id: 7, mood: 4, note: 'I am feeling great today, I was able to finish my project at work'},
-        {id: 8, mood: 2, note: 'I am feeling a little bit down today, I am not sure why'},
-        {id: 9, mood: 5, note: 'I am feeling great today, I was able to finish my project at work'},
-        {id: 10, mood: 1, note: 'I am feeling a little bit down today, I am not sure why'},
-    ])
+    const { userId } = useLocalSearchParams();
+    const [journals, setJournals] = useState([])
+
+    useEffect(() => {
+        const fetchJournalData = async () => {
+            try {
+                const getJournalData = await axios.get(`${API_URL}/users/${userId}/journal-entries/`);
+                setJournals(getJournalData.data.reverse());
+            } catch (error) {
+                console.log('Error fetching journal data:', error);
+            }
+        };
+
+        fetchJournalData();
+    }, [userId]);
+
+    
 
     const handleSortBy = (value) => {
         if (value === 'Mood') {
@@ -31,7 +41,7 @@ const AllJournals = () => {
             setJournals([...sortedJournals])
         }else
         if (value === 'Date') {
-            const sortedJournals = journals.sort((a, b) => a.id - b.id)
+            const sortedJournals = journals.sort((a, b) => b.id - a.id)
             setJournals([...sortedJournals])
         }
     }
@@ -58,11 +68,7 @@ const AllJournals = () => {
                 data={journals}
                 keyExtractor={journal => journal.id.toString()}
                 renderItem={({item}) => (
-                    <JournalMiniCard 
-                        mood={item.mood}
-                        note={item.note}
-                        handleSelectNote={() => handleSelectNote(item.id)}
-                    />
+                    <JournalMiniCard journalId={item.id} userId={userId}/>
                 )}
             />
 
@@ -91,4 +97,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default AllJournals;
+export default AllNotes;
