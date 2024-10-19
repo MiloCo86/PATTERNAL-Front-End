@@ -14,7 +14,7 @@ const Notes = ({amount, size, color}) => {
     }
 
   return (
-    <MaterialCommunityIcons name="numeric-2-box-multiple-outline" size={size} color={color} />
+    <MaterialCommunityIcons name={iconName} size={size} color={color} />
   )
 }
 
