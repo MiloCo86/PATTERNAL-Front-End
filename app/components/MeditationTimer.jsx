@@ -51,7 +51,7 @@ const MeditationTimer = () => {
 
         return (
             <View style={styles.insideTextContainer}>
-                <Text style={styles.insideText} >{remainingTime > 120 ? "Minutes" : (remainingTime < 120 && remainingTime >= 60) ? "Minute" : "Seconds"}</Text>
+                <Text style={styles.insideText} >{remainingTime >= 120 ? "Minutes" : (remainingTime < 120 && remainingTime >= 60) ? "Minute" : "Seconds"}</Text>
 
                 <Text style={styles.timeNumber} >{Math.floor(remainingTime / 60)}:{(
                     remainingTime % 60) < 10 ? "0" + String(remainingTime % 60) : remainingTime % 60}</Text>
@@ -67,26 +67,26 @@ const MeditationTimer = () => {
 
             <Text style={styles.insideText}>Set meditation time:</Text>
 
-           { 
+            {
                 currIndex > 0 ?
-            <View style={styles.timerControllers}>
-                <Pressable onPress={() => { handleTimeChange('-') }} >
-                    <MaterialCommunityIcons name="minus-circle-outline" size={40} color="black" />
-                </Pressable>
-                <Text style={styles.currentTime}>{Math.floor(remainingTime / 60)}:{"0" + remainingTime % 60}</Text>
-                <Pressable onPress={() => { handleTimeChange('+') }} >
-                    <MaterialIcons name="add-circle-outline" size={40} color="black" />
-                </Pressable>
-            </View> 
-            :
-            <View style={styles.timerControllers}>
-                <MaterialCommunityIcons name="minus-circle-outline" size={40} color="gray" />
-            <Text style={styles.currentTime}>{Math.floor(remainingTime / 60)}:{"0" + remainingTime % 60}</Text>
-            <Pressable onPress={() => { handleTimeChange('+') }} >
-                <MaterialIcons name="add-circle-outline" size={40} color="black" />
-            </Pressable>
-        </View> 
-        }
+                    <View style={styles.timerControllers}>
+                        <Pressable onPress={() => { handleTimeChange('-') }} >
+                            <MaterialCommunityIcons name="minus-circle-outline" size={40} color="black" />
+                        </Pressable>
+                        <Text style={styles.currentTime}>{Math.floor(remainingTime / 60)}:{"0" + remainingTime % 60}</Text>
+                        <Pressable onPress={() => { handleTimeChange('+') }} >
+                            <MaterialIcons name="add-circle-outline" size={40} color="black" />
+                        </Pressable>
+                    </View>
+                    :
+                    <View style={styles.timerControllers}>
+                        <MaterialCommunityIcons name="minus-circle-outline" size={40} color="gray" />
+                        <Text style={styles.currentTime}>{Math.floor(remainingTime / 60)}:{"0" + remainingTime % 60}</Text>
+                        <Pressable onPress={() => { handleTimeChange('+') }} >
+                            <MaterialIcons name="add-circle-outline" size={40} color="black" />
+                        </Pressable>
+                    </View>
+            }
 
             <CountdownCircleTimer
                 isPlaying={isPlaying}
