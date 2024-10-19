@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, SafeAreaView, TextInput, Button, ScrollView } f
 import axios from 'axios';
 import colors from '../config/colors';
 
+//components
+import TopBar from '../layout/TopBar';
+
 const IAChat = () => {
   const [userMessage, setUserMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
@@ -42,11 +45,7 @@ const IAChat = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headersContainer}>
-        <Text style={styles.title}>IA Chat</Text>
-        <Text style={styles.subHeader}>Chat with our AI</Text>
-      </View>
-
+      <TopBar title="AI Chat" />
       <ScrollView contentContainerStyle={styles.chatContainer}>
         {chatHistory.map((item, index) => (
           <View key={index} style={item.type === 'user' ? styles.userMessage : item.type === 'ai' ? styles.aiMessage : styles.errorMessage}>
@@ -75,19 +74,6 @@ const styles = StyleSheet.create({
     padding: 10,
     width:"90%"
     
-  },
-  headersContainer: {
-    marginTop: 40,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: colors.primary,
-  },
-  subHeader: {
-    fontSize: 25,
-    color: colors.secondary,
   },
   chatContainer: {
     flexGrow: 1, // Allow ScrollView to expand

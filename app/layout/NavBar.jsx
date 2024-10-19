@@ -36,13 +36,13 @@ const NavBar = () => {
       params: { userId: userId }
     })
   }
-  const handleJounal = () => {
+  const handleNotes = () => {
     return router.push({
-      pathname: '/screens/AllJournals',
+      pathname: '/screens/AllNotes',
       params: { userId: userId }
     })
   }
-  const handleResources = () => {
+  const handleForum = () => {
     return router.push({
       pathname: '/screens/Forum',
       params: { userId: userId }
@@ -67,12 +67,12 @@ const NavBar = () => {
         <MaterialCommunityIcons name="home" size={50} color="white" style={styles.homeIcon} />
       </Pressable>
 
-      <Pressable onPress={handleJounal}>
+      <Pressable onPress={handleNotes}>
         {/* <Image source={require('../assets/figma_icons/PATTERNAL_Notes-icon.png')} style={styles.icon} /> */}
         <MaterialCommunityIcons name="text-box" size={40} color={colors.secondary} style={styles.icon} />
       </Pressable >
 
-      <Pressable onPress={handleResources}>
+      <Pressable onPress={handleForum}>
         {/* <Image source={require('../assets/figma_icons/PATTERNAL_Discover-icon.png')} style={styles.icon} /> */}
         <MaterialIcons name="forum" size={44} color={colors.secondary} style={styles.icon}/> 
       </Pressable>

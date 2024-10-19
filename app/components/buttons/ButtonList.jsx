@@ -4,7 +4,7 @@ import { useState } from 'react'
 //React Native Paper
 import { SelectList } from 'react-native-dropdown-select-list'
 //Config files
-import colors from '../config/colors'
+import colors from '../../config/colors'
 
 
 const ButtonList = ({handleSelect}) => {
