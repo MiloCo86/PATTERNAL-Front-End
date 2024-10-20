@@ -59,9 +59,13 @@ const JournalMiniCard = ({journalId, userId}) => {
                 const getNotesData = await axios.get(`${API_URL}/users/${userId}/journal-entries/${journalId}/notes`);
                 setNotes(getNotesData.data);
                 setTextNote(getNotesData.data[0].note)
+                if (textNote.length > 50) {
+                    setTextNote(textNote.slice(0, 50) + '...')
+                }
                 if (getNotesData.data.length > 1) {
                     setShowIcon(true)
-                    setNumNotes(getNotesData.data.length)             
+                    setNumNotes(getNotesData.data.length)  
+                               
                 }
             } catch (error) {
                 console.log('Error fetching notes data:', error);
@@ -92,9 +96,6 @@ const JournalMiniCard = ({journalId, userId}) => {
             break
     }
 
-    if (textNote.length > 50) {
-        setTextNote(textNote.slice(0, 50) + '...')
-    }
     const handleSelectNote = () => {
         console.log('Selected journal:', journalId)
         return router.push({
