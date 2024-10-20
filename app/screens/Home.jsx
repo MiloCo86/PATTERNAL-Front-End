@@ -58,7 +58,7 @@ const Home = () => {
                   </View>
 
                   <View>
-                    <MoodTrends />
+                    <MoodTrends moodIntervalText='Weekly Trends' />
                   </View>
                   
               </>
