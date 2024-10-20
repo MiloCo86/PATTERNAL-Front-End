@@ -22,9 +22,6 @@ const JournalDailyView = () => {
     const userId = userAndJournaliD.split(',')[0];
     const journalId = userAndJournaliD.split(',')[1];
 
-    console.log('userId in JournalDailyView:', userId);
-    console.log('journalId in JournalDailyView:', journalId);
-
     const [journal, setJournal] = useState({})
     // {
     //     "id": 12,
@@ -43,8 +40,6 @@ const JournalDailyView = () => {
     //         "note": "1112"
     //     }
     // ]
-
-    
 
     const [date, setDate] = useState('')
 
