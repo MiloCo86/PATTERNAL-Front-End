@@ -2,7 +2,7 @@ import react from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import {Card} from 'react-native-paper';
 
-import colors from '../config/colors';
+import colors from '../../config/colors';
 
 const TipOfTheDay = () => {
     return (
@@ -10,7 +10,7 @@ const TipOfTheDay = () => {
             {/* // The main visual component of the home screen */}
             <Card style={styles.imageCard}> 
                 {/* placeholder images - maybe use stock images API to get images */}
-                <Card.Cover source={require('../assets/stock images/pexels-gustavo-fring-4894882.jpg')}  style={styles.cardCover}/>
+                <Card.Cover source={require('../../assets/stock images/pexels-gustavo-fring-4894882.jpg')}  style={styles.cardCover}/>
                 <Card style={styles.tipCard}>
                     <Card.Content>
                         <Text style={styles.tipHeader}>Tip Of The Day</Text>

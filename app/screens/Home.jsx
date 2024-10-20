@@ -9,9 +9,10 @@ import colors from '../config/colors';
 import { router, useLocalSearchParams } from 'expo-router';
 
 //components
-import TipOfTheDay from '../components/TipOfTheDay';
-import RecommendedContent from '../components/RecommendedContentCard';
+import TipOfTheDay from '../components/home/TipOfTheDay';
+import RecommendedContent from '../components/home/RecommendedContentCard';
 import MenuOverlay from '../components/home/MenuOverlay';
+import MoodTrends from '../components/home/MoodTrends';
 
 //icon components
 import Menu from '../components/icons/Menu';
@@ -54,6 +55,10 @@ const Home = () => {
 
                   <View style={styles.componentSpacing} >
                     <RecommendedContent />
+                  </View>
+
+                  <View>
+                    <MoodTrends />
                   </View>
                   
               </>
