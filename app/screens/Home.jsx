@@ -47,9 +47,9 @@ const Home = () => {
             data={[{ key: '1' }]} // Need to pass in a key for the FlatList to work
             renderItem={() => (
               < >
-                  <Text style={styles.placeholder}>Welcome, User!</Text>
+                  {/* <Text style={styles.placeholder}>Welcome, User!</Text> */}
 
-                  <View style={styles.componentSpacing}>
+                  <View style={styles.tipOfTheDaySpacing}>
                     <TipOfTheDay style={styles.tipOfTheDay}/>
                   </View>
 
@@ -58,7 +58,7 @@ const Home = () => {
                   </View>
 
                   <View>
-                    <MoodTrends />
+                    <MoodTrends moodIntervalText='Weekly Trends' />
                   </View>
                   
               </>
@@ -110,6 +110,10 @@ const styles = StyleSheet.create({
   flatlist: {
     margin: 0,
     padding: 0,
+  },
+
+  tipOfTheDaySpacing: {
+    marginBottom: 32, // Add some space between the content cards
   },
 
   componentSpacing: {
