@@ -8,12 +8,31 @@ import colors from '../../config/colors';
 
 
 
-const CheckinBtn = () => {
+const CheckinBtn = ({state, onPress}) => {
+    
+    const btnText = state ? 'Yes' : 'No'
+
   return (
-    <Pressable style={styles.container}>
-        <Text style={styles.text}>Check-in</Text>
+    <Pressable onPress={onPress} style={styles.container}>
+        <Text style={state ? styles.text : {...styles.text, color: "orange"}}>{btnText}</Text>
     </Pressable>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: 80,
+    height: 40,
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+  },
+  text: {
+    color: colors.primary,
+    fontSize: 20,
+    fontWeight: 'bold',
+  }
+})
 
 export default CheckinBtn

@@ -1,6 +1,7 @@
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { View, SafeAreaView, StyleSheet, FlatList } from 'react-native'
+import {  View, SafeAreaView, StyleSheet, FlatList } from 'react-native'
 
 //router
 import { router, useLocalSearchParams } from 'expo-router'
@@ -54,7 +55,7 @@ const AllNotes = () => {
     }
 
     return (
-    
+        <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
         <SafeAreaView style={styles.journalsContainer}>
             <TopBar title={'Notes'} />
             
@@ -73,6 +74,7 @@ const AllNotes = () => {
             />
 
         </SafeAreaView>
+        </GestureHandlerRootView>
     )
 }
 
@@ -85,9 +87,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonsContainer: {
+        marginTop: -20,
         width: '70%',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-end',
+        justifyContent: 'center',
+        alignItems: 'center',
         marginBottom: 10,
     },
     journalList: {

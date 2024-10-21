@@ -59,9 +59,7 @@ const JournalMiniCard = ({journalId, userId}) => {
                 const getNotesData = await axios.get(`${API_URL}/users/${userId}/journal-entries/${journalId}/notes`);
                 setNotes(getNotesData.data);
                 setTextNote(getNotesData.data[0].note)
-                if (textNote.length > 50) {
-                    setTextNote(textNote.slice(0, 50) + '...')
-                }
+                
                 if (getNotesData.data.length > 1) {
                     setShowIcon(true)
                     setNumNotes(getNotesData.data.length)  
@@ -74,6 +72,13 @@ const JournalMiniCard = ({journalId, userId}) => {
         
         fetchJournalData();
     }, [journalId]);
+
+    useEffect(() => {
+        if (textNote.length > 50) {
+            setTextNote(textNote.slice(0, 50) + '...')
+        }
+    }, [textNote])
+
 
 
     let moodColor = colors.primary
@@ -146,16 +151,19 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start'
     },
     date: {
-        marginRight: 15,
-        marginTop: -15,
+        position: 'absolute',
+        top: 10,
+        right: 20,
         fontSize: 12,
         fontWeight: 'bold',
         color: "black",
         alignSelf: 'flex-end'
     },
     note: {
+        marginTop: 10,
         fontSize: 16,
         width: '90%',
+        
         color: colors.primary,
     },
     amountIcon: {

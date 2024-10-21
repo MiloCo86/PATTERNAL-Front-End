@@ -1,3 +1,4 @@
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { View, SafeAreaView, Text, StyleSheet, Pressable } from 'react-native'
@@ -16,11 +17,16 @@ import { convertDateToMonthDayFormat } from '../config/helperFunctions';
 //components
 import TopBar from '../layout/TopBar'
 import DailyQuestionsJournalCard from '../components/journal/DailyQuestionsJournalCard';
+import NoteMiniCard from '../components/journal/NoteMiniCard';
+import { FlatList } from 'react-native-gesture-handler';
 
 const JournalDailyView = () => {
     const { userAndJournaliD } = useLocalSearchParams();
     const userId = userAndJournaliD.split(',')[0];
     const journalId = userAndJournaliD.split(',')[1];
+
+    console.log('userId:', userId)
+    console.log('journalId:', journalId)
 
     const [journal, setJournal] = useState({})
     // {
@@ -73,12 +79,22 @@ const JournalDailyView = () => {
     }
 
   return (
+    <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
     <SafeAreaView style={styles.container}>
         <TopBar title={'Journal Daily View'} />
         <Text style={styles.dateText}>{date}</Text>
         <DailyQuestionsJournalCard userId={userId} JournalId={journalId} />
-        {/* note card component here */}
+        <FlatList
+            style={styles.noteList}
+            contentContainerStyle={{alignItems: 'center'}}
+            data={notes}
+            keyExtractor={note => note.id.toString()}
+            renderItem={({item}) => (
+                <NoteMiniCard note={item.note}/>
+            )}
+        />
     </SafeAreaView>
+    </GestureHandlerRootView>
   )
 }
 const styles = StyleSheet.create({
@@ -94,6 +110,10 @@ const styles = StyleSheet.create({
         fontFamily: 'HelveticaNeue-Italic',
         fontWeight: 'bold',
     },
+    noteList: {
+        flex: 1,
+        width: '100%',
+    }
 })
 
 export default JournalDailyView
