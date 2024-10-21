@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     padding: 16,
     marginTop: 24,
     borderRadius: 15,
-    overflow: 'hidden',
     backgroundColor: colors.altSecondary,
   },
 
