@@ -1,20 +1,28 @@
 import react from 'react';
+import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import {Card} from 'react-native-paper';
 
+//import colors
 import colors from '../../config/colors';
 
+//array with stock images
+import StockImagesArray from '../../assets/stock_images_data/StockImagesArray';
+
 const TipOfTheDay = () => {
+    const photoIdx = Math.floor(Math.random() * StockImagesArray.length);
+    // console.log('StockImagesArray:', StockImagesArray);
+
     return (
         <SafeAreaView style={styles.container}>
             {/* // The main visual component of the home screen */}
             <Card style={styles.imageCard}> 
                 {/* placeholder images - maybe use stock images API to get images */}
-                <Card.Cover source={require('../../assets/stock images/pexels-gustavo-fring-4894882.jpg')}  style={styles.cardCover}/>
+                <Card.Cover source={{uri: StockImagesArray[photoIdx]}}  style={styles.cardCover}/>
                 <Card style={styles.tipCard}>
                     <Card.Content>
                         <Text style={styles.tipHeader}>Tip Of The Day</Text>
-                        <Text style={styles.tipContent}>Remember to stay hydrated and take breaks!</Text>
+                        <Text style={styles.tipContent}>Make eye contact when they speak. Little moments build big connections.</Text>
                     </Card.Content>
                 </Card>
             </Card>
@@ -27,7 +35,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 16,
     },
     imageCard: {
         borderRadius: 30,
@@ -43,15 +50,17 @@ const styles = StyleSheet.create({
 
     tipCard: {
         borderRadius: 10,
-        width: 275,
-        height: 100,
+        width: 280,
+        height: 110,
+        flex: 1,
         // justifyContent: 'center',
         alignSelf: 'center',
-        backgroundColor: colors.altSecondary,
+        backgroundColor: colors.primary,
         position: 'absolute',
         top: 175,
-        shadowColor: colors.secondary,
-        shadowOffset: {width: 3, height: 4},
+        shadowColor: colors.altSecondaryecondary,
+        shadowOffset: {width: 1, height: 2},
+        // opacity: 0.9,
 
     },
 
@@ -59,13 +68,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         alignself: 'center',
-        color: colors.primary,
+        color: colors.secondary,
     },
 
     tipContent: {
         fontSize: 14,
-        color: colors.primary,
+        color: 'white',
         marginTop: 8,
+        alignSelf: 'center',
     },
 
 });

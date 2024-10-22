@@ -7,10 +7,19 @@ import colors from '../config/colors';
 const TopBar = ({title}) => {
     return (
         <View style={styles.topBarContainer}>
-            <View style={styles.logoAndTitle}>
-                {/* <Image source={require('../assets/images/logo-blue.png')} style={styles.logo} /> */}
+
+            <View style={styles.topbarNavigation}>
+                <Image source={require('../assets/back-arrow.png')} style={styles.backArrow} />
+                
                 <Text style={styles.title}>{title}  </Text>
+                
+                <Image source={require('../assets/add-circle.png')} style={styles.addButton} />
             </View>
+
+            <View>
+
+            </View>
+
             <Divider style={styles.divider} />
             
         </View>
@@ -24,29 +33,28 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 130,
     },
-    logoAndTitle: {
+    topbarNavigation: {
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 10,
+        width: '90%',
+    },
+    backArrow: {
+        width: 25,
+        height: 25,
+    },
+    addButton: {
+        width: 25,
+        height: 25,
     },
     title: {
         fontSize: 20,
-        color: colors.primary,
+        color: 'black',
         fontWeight: 'bold',
         alignSelf: 'center',
-        // marginLeft: 30,
-        textShadowColor: colors.secondary,
-        textShadowOffset: { width: 2, height: 2 },
-        textShadowRadius: 2,
     },
-    // logo: {
-    //     position: 'absolute',
-    //     width: 30,
-    //     height: 30,
-    //     right: 70,
-    //     alignSelf: 'center',
-    // },
+  
     divider: {
         width: '90%',
         height: 2,
