@@ -6,7 +6,9 @@ import { View, Text, StyleSheet, Pressable } from 'react-native'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+
+import { timeSelector, countDownTimerHeader, countDownTimerDisplay } from '../config/helperFunctions';
 
 import colors from '../config/colors'
 
@@ -32,15 +34,13 @@ const MeditationTimer = () => {
 
         if (time === '+') {
             currIndex++;
-            setDuration(durationArray[Math.abs(currIndex) % 4]);
+            setDuration(timeSelector(durationArray, currIndex));
         }
         else if (time === '-') {
             currIndex--;
-            setDuration(durationArray[Math.abs(currIndex) % 4]);
+            setDuration(timeSelector(durationArray, currIndex));
         }
     }
-
-    console.log(duration, currIndex);
 
     remainingTime = duration;
 
@@ -51,10 +51,9 @@ const MeditationTimer = () => {
 
         return (
             <View style={styles.insideTextContainer}>
-                <Text style={styles.insideText} >{remainingTime >= 120 ? "Minutes" : (remainingTime < 120 && remainingTime >= 60) ? "Minute" : remainingTime === 1 ? "Second" : "Seconds"}</Text>
+                <Text style={styles.insideText} >{countDownTimerHeader(remainingTime)}</Text>
 
-                <Text style={styles.timeNumber} >{Math.floor(remainingTime / 60)}:{(
-                    remainingTime % 60) < 10 ? "0" + String(remainingTime % 60) : remainingTime % 60}</Text>
+                <Text style={styles.timeNumber} >{countDownTimerDisplay(remainingTime)}</Text>
                 <Text style={styles.insideText}>Remaining</Text>
             </View>
 
@@ -68,7 +67,7 @@ const MeditationTimer = () => {
             <Text style={styles.insideText}>Set meditation time:</Text>
 
             {
-                currIndex > 0 ?
+                currIndex > 0 && currIndex <= 2 ?
                     <View style={styles.timerControllers}>
                         <Pressable onPress={() => { handleTimeChange('-') }} >
                             <MaterialCommunityIcons name="minus-circle-outline" size={40} color="black" />
@@ -79,13 +78,22 @@ const MeditationTimer = () => {
                         </Pressable>
                     </View>
                     :
-                    <View style={styles.timerControllers}>
-                        <MaterialCommunityIcons name="minus-circle-outline" size={40} color="gray" />
-                        <Text style={styles.currentTime}>{Math.floor(remainingTime / 60)}:{"0" + remainingTime % 60}</Text>
-                        <Pressable onPress={() => { handleTimeChange('+') }} >
-                            <MaterialIcons name="add-circle-outline" size={40} color="black" />
-                        </Pressable>
-                    </View>
+                    currIndex > 2 ?
+                        <View style={styles.timerControllers}>
+                            <Pressable onPress={() => { handleTimeChange('-') }} >
+                                <MaterialCommunityIcons name="minus-circle-outline" size={40} color="black" />
+                            </Pressable>
+                            <Text style={styles.currentTime}>{Math.floor(remainingTime / 60)}:{"0" + remainingTime % 60}</Text>
+                            <MaterialIcons name="add-circle-outline" size={40} color="gray" />
+                        </View>
+                        :
+                        <View style={styles.timerControllers}>
+                            <MaterialCommunityIcons name="minus-circle-outline" size={40} color="gray" />
+                            <Text style={styles.currentTime}>{Math.floor(remainingTime / 60)}:{"0" + remainingTime % 60}</Text>
+                            <Pressable onPress={() => { handleTimeChange('+') }} >
+                                <MaterialIcons name="add-circle-outline" size={40} color="black" />
+                            </Pressable>
+                        </View>
             }
 
             <CountdownCircleTimer
@@ -93,7 +101,7 @@ const MeditationTimer = () => {
                 key={key}
                 duration={durationArray[Math.abs(currIndex) % 4]}
                 colors={[colors.tertiery, colors.primary, colors.primary]}
-                colorsTime={[durationArray[Math.abs(currIndex) % 4], durationArray[Math.abs(currIndex) % 6] - 10 /*- durationArray[Math.abs(currIndex) % 3] / 4*/, 0]}
+                colorsTime={[durationArray[Math.abs(currIndex) % 4], durationArray[Math.abs(currIndex) % 6] - 10, 0]}
                 onComplete={() => [true, 1000]}
                 size={250}
                 strokeWidth={25}
@@ -122,6 +130,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: colors.background,
     },
     insideTextContainer: {
         justifyContent: 'center',

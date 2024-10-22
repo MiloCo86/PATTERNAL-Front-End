@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { View, Text, StyleSheet, SafeAreaView} from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
 
 
 
@@ -16,21 +16,21 @@ import MeditationTimer from '../components/MeditationTimer'
 const Meditation = () => {
 
     const [streak, setStreak] = useState(0);
-    
 
-  return (
-    <SafeAreaView style={styles.container}>
 
-        <TopBar title="Meditation" />
+    return (
+        <SafeAreaView style={styles.container}>
 
-        <MeditationTimer />
+            <TopBar title="Meditation" />
 
-        <View style={styles.streakContainer}>
-            <Text style={styles.streakText}>Current Streak: {streak}</Text>
-        </View>
-      
-    </SafeAreaView>
-  )
+            <MeditationTimer />
+
+            <View style={styles.streakContainer}>
+                <Text style={styles.streakText}>Current Streak: {streak}</Text>
+            </View>
+
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-between',
         alignItems: 'center',
+        backgroundColor: colors.background,
     },
     streakContainer: {
         height: 100,
