@@ -43,35 +43,39 @@ const Home = () => {
 
         {isMenuVisible && <MenuOverlay userId={userId}/>}
 
-        <FlatList
-            data={[{ key: '1' }]} // Need to pass in a key for the FlatList to work
-            renderItem={() => (
-              < >
-                  {/* <Text style={styles.placeholder}>Welcome, User!</Text> */}
+      <FlatList
+          data={[{ key: '1' }]} // Need to pass in a key for the FlatList to work
+          renderItem={() => (
+            <>
+              <View style={styles.tipOfTheDaySpacing}>
+                <TipOfTheDay style={styles.tipOfTheDay} />
+              </View>
 
-                  <View style={styles.tipOfTheDaySpacing}>
-                    <TipOfTheDay style={styles.tipOfTheDay}/>
-                  </View>
-
-                  <View style={styles.componentSpacing} >
+              <FlatList
+                data={[{ key: '1' }, { key: '2' }, { key: '3' }]} // Example data for the carousel
+                horizontal
+                renderItem={() => (
+                  <View style={[styles.carouselSpacing,styles.componentSpacing]}>
                     <RecommendedContent />
-                  </View>
 
-                  <View>
-                    <MoodTrends moodIntervalText='Weekly Trends' />
                   </View>
-                  
-              </>
-            )}
-            keyExtractor={(item) => item.key}
-            showsVerticalScrollIndicator={false} // Hide the vertical scroll bar
-            
-            >
-        </FlatList>
+                )}
+                keyExtractor={(item) => item.key}
+                showsHorizontalScrollIndicator={false} // Hide the horizontal scroll bar
+                contentContainerStyle={styles.carouselSpacing}
+              />
 
-      </View>
-    </PaperProvider>
-    );
+              <View>
+                <MoodTrends moodIntervalText='Weekly Trends' />
+              </View>
+            </>
+          )}
+          keyExtractor={(item) => item.key}
+          showsVerticalScrollIndicator={false} // Hide the vertical scroll bar
+      />
+    </View>
+  </PaperProvider>
+  );
 }
 
 
@@ -118,6 +122,12 @@ const styles = StyleSheet.create({
 
   componentSpacing: {
     marginBottom: 24, // Add some space between the content cards
+  },
+
+  carouselSpacing: {
+    justifyContent  : 'center',
+    alignItems: 'space-between',
+    paddingHorizontal: 12, // Add some padding to the content card
   },
 });
 
