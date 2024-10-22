@@ -8,6 +8,7 @@ import colors from '../config/colors'
 
 //Components
 import TopBar from '../layout/TopBar'
+import EntryCard from '../components/forum/EntryCard'
 
 
 
@@ -22,7 +23,7 @@ const Forum = () => {
     <SafeAreaView style={styles.container}>
       <TopBar title={title} />
 
-      {/* entry elements here */}
+      <EntryCard />
       
     </SafeAreaView>
   )
