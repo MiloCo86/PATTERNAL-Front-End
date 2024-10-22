@@ -10,13 +10,15 @@ import { router, useLocalSearchParams } from 'expo-router';
 
 //components
 import TipOfTheDay from '../components/home/TipOfTheDay';
-import RecommendedContent from '../components/home/RecommendedContentCard';
+import RecommendedContentCard from '../components/home/RecommendedContentCard';
 import MenuOverlay from '../components/home/MenuOverlay';
 import MoodTrends from '../components/home/MoodTrends';
 
 //icon components
 import Menu from '../components/icons/Menu';
 
+//import recommended content data
+import {RecommendedContentData} from '../assets/recommended_content_data/RecommendedContentData';
 
 const Home = () => {
   const { userId } = useLocalSearchParams();
@@ -31,7 +33,7 @@ const Home = () => {
 
 
     return (
-    <PaperProvider>
+    <PaperProvider >
       <View style={styles.container}>
 
         <Image source={require('../assets/logos/Artboard-1.png')} style={styles.logo} />
@@ -44,23 +46,29 @@ const Home = () => {
         {isMenuVisible && <MenuOverlay userId={userId}/>}
 
       <FlatList
-          data={[{ key: '1' }]} // Need to pass in a key for the FlatList to work
+          data={[{ key: '1' }]} // these are nested flatlists - this is the parent flatlist, it has the content for the home screen
           renderItem={() => (
             <>
               <View style={styles.tipOfTheDaySpacing}>
                 <TipOfTheDay style={styles.tipOfTheDay} />
               </View>
 
+              <Text variant="bodyMedium" style={styles.recommendedContentHeader}>Recommended Content</Text>
+
               <FlatList
-                data={[{ key: '1' }, { key: '2' }, { key: '3' }]} // Example data for the carousel
+                data={RecommendedContentData} // Example data for the carousel
                 horizontal
-                renderItem={() => (
+                renderItem={({item}) => (
                   <View style={[styles.carouselSpacing,styles.componentSpacing]}>
-                    <RecommendedContent />
+                    <RecommendedContentCard 
+                    title={item.contentTitle}
+                    description={item.contentDescription}
+                    label={item.contentLabel}
+                    image={item.contentImage}/>
 
                   </View>
                 )}
-                keyExtractor={(item) => item.key}
+                keyExtractor={(item) => item.id.toString()}
                 showsHorizontalScrollIndicator={false} // Hide the horizontal scroll bar
                 contentContainerStyle={styles.carouselSpacing}
               />
@@ -72,6 +80,7 @@ const Home = () => {
           )}
           keyExtractor={(item) => item.key}
           showsVerticalScrollIndicator={false} // Hide the vertical scroll bar
+
       />
     </View>
   </PaperProvider>
@@ -111,7 +120,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 
-  flatlist: {
+  recommendedContentHeader: {
+    fontSize: 20,
+    color: 'black',
+    marginTop: 44, // Add some space between the placeholder and the
+    marginBottom: -75, // Add some space between the placeholder and the content card
+    fontWeight: 'bold',
+    alignSelf: 'center',
     margin: 0,
     padding: 0,
   },
