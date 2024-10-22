@@ -3,6 +3,8 @@ export default {
     secondary: '#C0E8F9',
     tertiery: '#E77728',
     altSecondary: '#DDDDDD',
+    background: '#DDDDDD',
+    altBackground: '#C3C3C3',
     mood: {
         one: '#E86D7C',
         two: '#E8976A',

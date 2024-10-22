@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: colors.background,
   },
   headersContainer: {
     marginTop: 40,

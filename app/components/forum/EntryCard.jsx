@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Image, Pressable} from 'react-native'
 
 // router
@@ -15,6 +16,9 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 
 const EntryCard = () => {
+
+    
+
   return (
     <View style={styles.container}>
         <View style={styles.userContainer} >
@@ -35,9 +39,10 @@ const styles = StyleSheet.create({
     container: {
         width: '80%',
         height: 220,
-        justifyContent: 'space-between',
         backgroundColor: colors.secondary,
+        justifyContent: 'space-between',
         borderRadius: 15,
+        marginBottom: 20,
         //shadow
         shadowColor: colors.primary,
         shadowOffset: {
@@ -65,7 +70,6 @@ const styles = StyleSheet.create({
     },
     entryText: {
         fontSize: 20,
-        marginTop: 10,
         marginLeft: 25,
         marginBottom: 10,
         marginRight: 25,
