@@ -1,36 +1,53 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 import { Avatar, Button, Card, Text} from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View,  Image } from 'react-native';
 
 //import colors
 import colors from '../../config/colors'
 
-const RecommendedContent = () => {
+//import recommended content dummy data
+import RecommendedContentData from '../../assets/recommended_content_data/RecommendedContentData'
+
+
+
+const RecommendedContentCard = (
+  {
+    title,
+    description,
+    label, 
+    image,
+}
+) => {
+  
+  // const [imgURL, setImgURL] = useState(image)
+  
+  // useEffect(() => {
+  //   setImgURL(image)
+  // }, [image])
+  
+
   return (
-    <View>
-          
-      <Text variant="bodyMedium" style={styles.contentHeader}>Recommended Content</Text>
+    <View style={styles.cardContainer}>
 
-      <Card style={styles.cardContainer}>
-
-        <Card.Content style={styles.cardContent}>
+      
           
-          <View style={styles.imageContainer}/>
+          <View style={styles.imageContainer}>
+             <Image source={{uri:image}} style={styles.image}/> 
+          </View>
           
           <View style={styles.contentDescriptionContainer}> 
             
-            <Text variant="bodyMedium" style={styles.contentTitle}>Video </Text>
-            <Text variant="bodyMedium" style={styles.contentDescription}>Check out this video - rise to the occasion daily.</Text>
+            <Text variant="bodyMedium" style={styles.contentTitle}>{title} </Text>
+            <Text variant="bodyMedium" style={styles.contentDescription}>{description}</Text>
 
             <View style={styles.labelContainer}>
-              <Text variant="bodyMedium" style={styles.labelContent}>Youtube Short</Text>
+              <Text variant="bodyMedium" style={styles.labelContent}>{label}</Text>
             </View>
 
 
           </View>
 
-        </Card.Content>
-      </Card>
 
     </View>
   )
@@ -44,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     padding: 16,
-    marginTop: 24,
+    marginTop: 85,
     borderRadius: 15,
     backgroundColor: colors.altSecondary,
   },
@@ -74,6 +91,11 @@ const styles = StyleSheet.create({
       width: 80,
       height: 120,
       backgroundColor: colors.secondary,
+  },
+
+  image: {
+      width: 80,
+      height: 120,
   },
 
   contentDescriptionContainer: {
@@ -106,4 +128,4 @@ const styles = StyleSheet.create({
     
 });
 
-export default RecommendedContent;
+export default RecommendedContentCard;
