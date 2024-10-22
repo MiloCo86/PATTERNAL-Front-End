@@ -71,9 +71,14 @@ const JournalDailyView = () => {
         fetchJournalData();
     }, [journalId]);
 
-    const handleBackArrow = () => {
-        //tbd
+    const handleBackArrow = (   ) => {
+        return router.push({
+            pathname: '/screens/AllNotes',
+            params: { userId }
+        })
     }
+
+    
     const handleAddNote = () => {
         //tbd
     }
@@ -81,7 +86,7 @@ const JournalDailyView = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
     <SafeAreaView style={styles.container}>
-        <TopBar title={'Journal Daily View'} />
+        <TopBar title={'Daily Overview'} showBackButton={true} showAddButton={true} onBackPress={handleBackArrow} />
         <Text style={styles.dateText}>{date}</Text>
         <DailyQuestionsJournalCard userId={userId} JournalId={journalId} />
         <FlatList
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: colors.altSecondary,
+        // backgroundColor: colors.altSecondary,
     },
     dateText: {
         fontSize: 30,
