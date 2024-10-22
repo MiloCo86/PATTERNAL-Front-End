@@ -9,7 +9,7 @@ import colors from '../../config/colors'
 const ProfilePic = ({onPress, color, size}) => {
   return (
     <Pressable onPress={onPress} style={styles.container}>
-      <SimpleLineIcons name="user" size={size} color={color ? color : colors.altSecondary} />
+      <SimpleLineIcons name="user" size={size} color={color ? color : 'black'} />
     </Pressable>
   )
 }
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 5,
     borderColor: colors.secondary,
-    padding: 25,
+    padding: 15,
     borderRadius: 100,
     backgroundColor: colors.altSecondary,
   },
