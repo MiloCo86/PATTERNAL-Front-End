@@ -14,7 +14,7 @@ const TopBar = ({
     return (
         <View style={styles.topBarContainer}>
             <View style={styles.topbarNavigation}>
-                {showBackButton ? (
+                {onBackPress ? (
                     <Pressable //back button
                         onPress={onBackPress}
                         style={({ pressed }) => [
@@ -41,7 +41,7 @@ const TopBar = ({
                 <Text style={styles.title}>{title}</Text>
                 
 
-                {showAddButton ? (
+                {onAddPress ? (
                     <Pressable //add button 
                         onPress={onAddPress}
                         style={({ pressed }) => [

@@ -17,11 +17,14 @@ const Forum = () => {
     const userId = userAndTitle.split(',')[0];
     const title = userAndTitle.split(',')[1];
 
-    
+    const handleBackArrow = () => {
+        router.pop();
+    }
 
+    
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar title={title} />
+      <TopBar title={title} onBackPress={handleBackArrow}/>
 
       <EntryCard />
       
