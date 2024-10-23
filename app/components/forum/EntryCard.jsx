@@ -14,6 +14,7 @@ import axios from 'axios';
 
 // colors and helper functions
 import colors from '../../config/colors'
+import { convertDateToMonthDayFormat } from '../../config/helperFunctions';
 
 //icon components
 import ProfilePic from '../icons/ProfilePic'
@@ -36,7 +37,7 @@ const EntryCard = ({entryId, forumId}) => {
     const [showComments, setShowComments] = useState(false);
 
     const [heartIcon, setHeartIcon] = useState('cards-heart-outline');
-    const [heartColor, setHeartColor] = useState('black');
+    const [heartColor, setHeartColor] = useState(colors.primary);
 
     const [entry, setEntry] = useState({  
         id: '',
@@ -44,6 +45,7 @@ const EntryCard = ({entryId, forumId}) => {
         category_id: '',
         user_id: '',
         likes_count: '',
+        created_at: '',
     });
     const [user, setUser] = useState({
         id: '',
@@ -57,6 +59,8 @@ const EntryCard = ({entryId, forumId}) => {
         updated_at: ""
     })
 
+    const [date, setDate] = useState('');
+
     const [comments, setComments] = useState([]);
 
 
@@ -65,7 +69,7 @@ const EntryCard = ({entryId, forumId}) => {
             try {
                 const getEntryData = await axios.get(`${API_URL}/forums/${forumId}/forum-entry/${entryId}`);
                 setEntry(getEntryData.data);
-                console.log('Entry data:', getEntryData.data);
+                setDate(convertDateToMonthDayFormat(getEntryData.data.created_at.slice(0, 10)));
             } catch (error) {
                 console.log('Error fetching entry data:', error);
             }
@@ -95,7 +99,7 @@ const EntryCard = ({entryId, forumId}) => {
             try {
                 const getCommentData = await axios.get(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/comments`);
                 setComments(getCommentData.data);
-                console.log('Comment data:', getCommentData.data.length);
+                
             } catch (error) {
                 console.log('Error fetching comment data:', error);
             }
@@ -125,18 +129,18 @@ const EntryCard = ({entryId, forumId}) => {
         
         <View style={styles.cardContainer}>
             <LinearGradient colors={['#C0E8F9', '#F7F7F7']} style={styles.background} />
-            <MaterialCommunityIcons style={styles.optionIcon} name="dots-horizontal" size={24} color="black" />
+            <Text style={styles.dateText}>{date}</Text>
             <View style={styles.userContainer} >
-                <ProfilePic size={26}/>
+                <ProfilePic size={22}/>
                 <Text style={styles.username}>{user.username}</Text>
             </View>
             <Text style={styles.entryText}>{entry.entry}</Text>
             <View style={styles.reactionContainer}>
                 <Pressable style={styles.heartIcon} onPress={handleHeartPress}>
-                    <MaterialCommunityIcons name={heartIcon} size={34} color={heartColor}/>
+                    <MaterialCommunityIcons name={heartIcon} size={30} color={heartColor}/>
                 </Pressable>
                 <Pressable onPress={handleShowComments}>
-                    <MaterialCommunityIcons name="comment-account-outline" size={34} color="black" />
+                    <MaterialCommunityIcons name="comment-account-outline" size={30} color={colors.primary} />
                 </Pressable>
             </View>   
         </View>
@@ -165,12 +169,12 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     cardContainer: {
-        width: '80%',
-        height: 200,
+        width: '76%',
+        minHeight: 180,
         justifyContent: 'space-between',
         borderRadius: 15,
         marginBottom: 10,
-        marginRight: 30,
+        marginRight: 20,
         //shadow
         shadowColor: colors.primary,
         shadowOffset: {
@@ -187,15 +191,16 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     username: {
-        fontSize: 24,
+        fontSize: 20,
         marginLeft: 10,
-        fontWeight: 'semibold',
+        fontWeight: 'bold',
     },
     entryText: {
-        fontSize: 20,
-        marginLeft: 25,
+        fontSize: 16,
+        marginLeft: 40,
         marginBottom: 10,
         marginRight: 25,
+        alignSelf: 'flex-start',
     },
     reactionContainer: {
         width: 70,
@@ -220,10 +225,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 4,
     },
-    optionIcon: {
+    dateText: {
         position: 'absolute',
-        right: 10,
-        top: 10,
+        right: 15,
+        top: 15,
     }
 })
 

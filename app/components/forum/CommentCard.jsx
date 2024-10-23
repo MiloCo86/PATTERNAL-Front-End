@@ -12,6 +12,7 @@ import axios from 'axios';
 
 // colors and helper functions
 import colors from '../../config/colors'
+import { convertDateToMonthDayFormat } from '../../config/helperFunctions';
 
 //icon components
 import ProfilePic from '../icons/ProfilePic'
@@ -31,6 +32,7 @@ const CommentCard = ({entryId, forumId,commentId}) => {
         created_at: ''
     });
 
+    const [date, setDate] = useState('');
     const [user, setUser] = useState({
         id: '',
         username: "",
@@ -48,6 +50,8 @@ const CommentCard = ({entryId, forumId,commentId}) => {
             try {
                 const getCommentData = await axios.get(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/comments/${commentId}`);
                 setComment(getCommentData.data);
+                
+                setDate(convertDateToMonthDayFormat(getCommentData.data.created_at.slice(0, 10)));   
             } catch (error) {
                 console.log('Error fetching comment data:', error);
             }
@@ -78,9 +82,9 @@ const CommentCard = ({entryId, forumId,commentId}) => {
   return (
     <View style={styles.container}>
         <LinearGradient colors={['#C3C3C3', '#F7F7F7']} style={styles.background} />
-        <MaterialCommunityIcons style={styles.optionIcon} name="dots-horizontal" size={24} color="black" />
+        <Text style={styles.dateText}>{date}</Text>
         <View style={styles.userContainer} >
-            <ProfilePic size={26}/>
+            <ProfilePic size={20}/>
             <Text style={styles.username}>{user.username}</Text>
         </View>
         <Text style={styles.entryText}>{comment.comment}</Text>
@@ -88,8 +92,7 @@ const CommentCard = ({entryId, forumId,commentId}) => {
             <Pressable style={styles.likeIcon} onPress={() => console.log('pressed')}>
                 <FontAwesome6 name="thumbs-up" size={26} color="black" />
             </Pressable>
-        </View>
-        
+        </View>     
     </View>
 
   )
@@ -98,10 +101,10 @@ const CommentCard = ({entryId, forumId,commentId}) => {
 const styles = StyleSheet.create({
     container: {
         width: '80%',
-        height: 200,
+        minHeight: 180,
         justifyContent: 'space-between',
         borderRadius: 15,
-        marginBottom: 20,
+        marginBottom: 10,
         marginRight: 25,
         marginLeft: 55,
         //shadow
@@ -128,11 +131,11 @@ const styles = StyleSheet.create({
     username: {
         fontSize: 20,
         marginLeft: 10,
-        fontWeight: 'semibold',
+        fontWeight: 'bold',
     },
     entryText: {
-        fontSize: 18,
-        marginLeft: 25,
+        fontSize: 16,
+        marginLeft: 45,
         marginBottom: 10,
         marginRight: 25,
     },
@@ -152,10 +155,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 4,
     },
-    optionIcon: {
+    dateText: {
         position: 'absolute',
-        right: 10,
         top: 10,
+        right: 10,
     }
 })
 
