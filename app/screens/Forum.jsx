@@ -52,12 +52,14 @@ const Forum = () => {
         })
     }
 
-    
-  return (
+    const handleAddEntry = () => {
+    }
 
     
+  return (
+    
     <SafeAreaView style={styles.container}>
-      <TopBar title={title} onBackPress={handleBackArrow}/>
+      <TopBar title={title} onBackPress={handleBackArrow} onAddPress={handleAddEntry}/>
 
         {showEntries ? (
             <FlatList

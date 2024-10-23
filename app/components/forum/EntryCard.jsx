@@ -37,7 +37,6 @@ const EntryCard = ({entryId, forumId}) => {
     const [showComments, setShowComments] = useState(false);
 
     const [heartIcon, setHeartIcon] = useState('cards-heart-outline');
-    const [heartColor, setHeartColor] = useState(colors.primary);
 
     const [entry, setEntry] = useState({  
         id: '',
@@ -115,10 +114,8 @@ const EntryCard = ({entryId, forumId}) => {
     const handleHeartPress = () => {
         if (heartIcon === 'cards-heart-outline') {
             setHeartIcon('cards-heart');
-            setHeartColor('#2232e5');
         } else {
             setHeartIcon('cards-heart-outline');
-            setHeartColor('black');
         }
         
     }
@@ -137,12 +134,12 @@ const EntryCard = ({entryId, forumId}) => {
             <Text style={styles.entryText}>{entry.entry}</Text>
             <View style={styles.reactionContainer}>
                 <Pressable style={styles.heartIcon} onPress={handleHeartPress}>
-                    <MaterialCommunityIcons name={heartIcon} size={30} color={heartColor}/>
+                    <MaterialCommunityIcons name={heartIcon} size={30} color={colors.primary}/>
                 </Pressable>
                 <Pressable onPress={handleShowComments}>
                     <MaterialCommunityIcons name="comment-account-outline" size={30} color={colors.primary} />
                 </Pressable>
-            </View>   
+            </View>
         </View>
 
         {showComments && 
@@ -166,7 +163,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 20,
+        marginBottom: 10,
     },
     cardContainer: {
         width: '76%',
