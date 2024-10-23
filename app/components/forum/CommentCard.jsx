@@ -21,6 +21,7 @@ import ProfilePic from '../icons/ProfilePic'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
+
 const CommentCard = ({entryId, forumId,commentId}) => {
 
     const [comment, setComment] = useState({
@@ -44,6 +45,9 @@ const CommentCard = ({entryId, forumId,commentId}) => {
         created_at: "",
         updated_at: ""
     })
+
+    const [likeIcon, setLikeIcon] = useState('thumb-up-outline');
+ 
 
     useEffect(() => {
         const fetchCommentData = async () => {
@@ -77,6 +81,13 @@ const CommentCard = ({entryId, forumId,commentId}) => {
     , [comment.user_id]);
 
 
+    const handleLike = () => {
+        if (likeIcon === 'thumb-up-outline') {
+            setLikeIcon('thumb-up');    
+        } else {
+            setLikeIcon('thumb-up-outline');
+        }
+    }
 
 
   return (
@@ -89,8 +100,8 @@ const CommentCard = ({entryId, forumId,commentId}) => {
         </View>
         <Text style={styles.entryText}>{comment.comment}</Text>
         <View style={styles.reactionContainer}>
-            <Pressable style={styles.likeIcon} onPress={() => console.log('pressed')}>
-                <FontAwesome6 name="thumbs-up" size={26} color="black" />
+            <Pressable style={styles.likeIcon} onPress={handleLike}>
+                <MaterialCommunityIcons name={likeIcon} size={24} color={colors.primary} />
             </Pressable>
         </View>     
     </View>
