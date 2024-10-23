@@ -26,13 +26,18 @@ const Forum = () => {
 
     const [entries, setEntries] = useState([]);
 
+    const [showEntries, setShowEntries] = useState(false);
+
     useEffect(() => {
         const fetchForumData = async () => {
             try {
                 const getForumData = await axios.get(`${API_URL}/forums/${forumId}/forum-entry`);
                 setEntries(getForumData.data);
+                
             } catch (error) {
                 console.log('Error fetching forum data:', error);
+            } finally {
+                setShowEntries(true);
             }
         };
 
@@ -41,24 +46,30 @@ const Forum = () => {
 
 
     const handleBackArrow = () => {
-        //tbd
+        return router.push({
+            pathname: '/screens/AllForums',
+            params: { userId: userId }
+        })
     }
 
     
   return (
+
+    
     <SafeAreaView style={styles.container}>
       <TopBar title={title} onBackPress={handleBackArrow}/>
 
-        <FlatList
+        {showEntries ? (
+            <FlatList
             style={{ width: '100%' }}
             data={entries}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
                 <EntryCard entryId={item.id} forumId={forumId} />
             )}
-        />
-      
+        /> ): <Text>Loading...</Text>} 
     </SafeAreaView>
+    
   )
 }
 
