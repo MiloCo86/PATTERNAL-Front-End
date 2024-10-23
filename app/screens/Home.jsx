@@ -56,7 +56,7 @@ const Home = () => {
               <Text variant="bodyMedium" style={styles.recommendedContentHeader}>Recommended Content</Text>
 
               <FlatList
-                data={RecommendedContentData} // Example data for the carousel
+                data={RecommendedContentData} // Data for the carousel
                 horizontal
                 renderItem={({item}) => (
                   <View style={[styles.carouselSpacing,styles.componentSpacing]}>
