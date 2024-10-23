@@ -8,17 +8,17 @@ import { router } from 'expo-router'
 // colors and helper functions
 import colors from '../../config/colors'
 
-const handlePress = (title, userId) => {
+const handlePress = (userId,forumId,title) => {
     return router.push({
         pathname: '/screens/Forum',
-        params: { userAndTitle: [userId,title] }
+        params: { userForumAndTitle: [userId,forumId,title] }
     })
 }
 
 
-const MainForumCard = ({title,img, userId }) => {
+const MainForumCard = ({title,img, userId,forumId }) => {
   return (
-    <Pressable onPress={()=> handlePress(title,userId)}>
+    <Pressable onPress={()=> handlePress(userId,forumId,title)}>
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
             <View style={styles.photoContainer} >

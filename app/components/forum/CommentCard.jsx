@@ -6,6 +6,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 // router
 import { router } from 'expo-router'
 
+//backend connection
+import { API_URL } from '@env';
+import axios from 'axios';
+
 // colors and helper functions
 import colors from '../../config/colors'
 
@@ -16,7 +20,59 @@ import ProfilePic from '../icons/ProfilePic'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-const CommentCard = () => {
+const CommentCard = ({entryId, forumId,commentId}) => {
+
+    const [comment, setComment] = useState({
+        id: '',
+        comment: '',
+        user_id: '',
+        entry_id: '',
+        likes_count: '',
+        created_at: ''
+    });
+
+    const [user, setUser] = useState({
+        id: '',
+        username: "",
+        first_name: "",
+        last_name: "",
+        child_amount: 0,
+        email: "",
+        password: "",
+        created_at: "",
+        updated_at: ""
+    })
+
+    useEffect(() => {
+        const fetchCommentData = async () => {
+            try {
+                const getCommentData = await axios.get(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/comments/${commentId}`);
+                setComment(getCommentData.data);
+            } catch (error) {
+                console.log('Error fetching comment data:', error);
+            }
+        };
+
+        fetchCommentData();
+    } , [commentId]);
+
+    // fetch user data
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const getUserData = await axios.get(`${API_URL}/users/${comment.user_id}`);
+                setUser(getUserData.data);
+                console.log('User data:', getUserData.data.username);
+            } catch (error) {
+                console.log('Error fetching user data:', error);
+            }
+        };
+
+        fetchUserData();
+    }
+    , [comment.user_id]);
+
+
 
 
   return (
@@ -25,9 +81,9 @@ const CommentCard = () => {
         <MaterialCommunityIcons style={styles.optionIcon} name="dots-horizontal" size={24} color="black" />
         <View style={styles.userContainer} >
             <ProfilePic size={26}/>
-            <Text style={styles.username}>Username</Text>
+            <Text style={styles.username}>{user.username}</Text>
         </View>
-        <Text style={styles.entryText}>User post, question or experience here, text will be here!?</Text>
+        <Text style={styles.entryText}>{comment.comment}</Text>
         <View style={styles.reactionContainer}>
             <Pressable style={styles.likeIcon} onPress={() => console.log('pressed')}>
                 <FontAwesome6 name="thumbs-up" size={26} color="black" />
