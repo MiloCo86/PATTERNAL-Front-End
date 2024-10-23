@@ -17,7 +17,7 @@ import MainForums from '../assets/forum-data/MainForums'
 
 const AllForums = () => {
   const { userId } = useLocalSearchParams();
-  console.log('Received userId in AllForums', userId);
+  
   return (
 
     <SafeAreaView style={styles.container}>
@@ -28,7 +28,7 @@ const AllForums = () => {
         data={MainForums}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <MainForumCard title={item.title} img={item.img} userId={userId}/>
+          <MainForumCard forumId={item.id} title={item.title} img={item.img} userId={userId} />
         )}
       />
       

@@ -86,7 +86,7 @@ const JournalDailyView = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
     <SafeAreaView style={styles.container}>
-        <TopBar title={'Daily Overview'} showBackButton={true} showAddButton={true} onBackPress={handleBackArrow} />
+        <TopBar title={'Daily Overview'} onBackPress={handleBackArrow} onAddPress={handleAddNote}/>
         <Text style={styles.dateText}>{date}</Text>
         <DailyQuestionsJournalCard userId={userId} JournalId={journalId} />
         <FlatList

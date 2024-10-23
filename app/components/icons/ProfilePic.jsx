@@ -16,8 +16,6 @@ const ProfilePic = ({onPress, color, size}) => {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 5,
-    borderColor: colors.secondary,
     padding: 15,
     borderRadius: 100,
     backgroundColor: colors.altSecondary,
