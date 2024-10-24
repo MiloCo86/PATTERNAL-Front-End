@@ -12,14 +12,14 @@ import colors from '../config/colors'
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 
-const AddNewNote = ({handleClose}) => {
+const AddNewNote = ({handleClose, category, handleAdd}) => {
     const [note, setNote] = useState('')
   return (
     <SafeAreaView style={styles.container}>
         <View style={styles.backgroundOpacity}/>
         <View style={styles.itemsContainer}>
             
-            <Text style={styles.title}>Add New Note</Text>
+            <Text style={styles.title}>Add New {category}</Text>
             <Pressable style={styles.closeButton} onPress={handleClose}>
                 <AntDesign name="close" size={24} color="black" />
             </Pressable>
@@ -33,8 +33,8 @@ const AddNewNote = ({handleClose}) => {
             />
                 
             
-            <Pressable style={styles.button}>
-                <Text style={styles.buttonText}>Add Note</Text>
+            <Pressable style={styles.button} onPress={handleAdd}>
+                <Text style={styles.buttonText}>Add {category}</Text>
             </Pressable>
         </View>
     </SafeAreaView>

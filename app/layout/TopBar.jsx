@@ -6,8 +6,6 @@ import colors from '../config/colors';
 
 const TopBar = ({
     title,
-    showBackButton = false,
-    showAddButton = false,
     onBackPress, 
     onAddPress
 }) => {
