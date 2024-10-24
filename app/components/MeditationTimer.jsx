@@ -67,7 +67,7 @@ const MeditationTimer = () => {
             <Text style={styles.insideText}>Set meditation time:</Text>
 
             {
-                currIndex > 0 && currIndex <= 2 ?
+                currIndex > 0 && currIndex <= 4 ?
                     <View style={styles.timerControllers}>
                         <Pressable onPress={() => { handleTimeChange('-') }} >
                             <MaterialCommunityIcons name="minus-circle-outline" size={40} color="black" />
@@ -78,7 +78,7 @@ const MeditationTimer = () => {
                         </Pressable>
                     </View>
                     :
-                    currIndex > 2 ?
+                    currIndex > 4 ?
                         <View style={styles.timerControllers}>
                             <Pressable onPress={() => { handleTimeChange('-') }} >
                                 <MaterialCommunityIcons name="minus-circle-outline" size={40} color="black" />
