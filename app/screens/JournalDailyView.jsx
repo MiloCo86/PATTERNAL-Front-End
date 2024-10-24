@@ -82,15 +82,19 @@ const JournalDailyView = () => {
     }
 
     
-    const handleAddNote = () => {
+    const showAddNoteBtn = () => {
         setShowAddNote(!showAddNote)
+    }
+
+    const handleAddNote =() => {
+        console.log('Add note pressed')
     }
 
   return (
     <GestureHandlerRootView style={{ flex: 1, width: '100%', height: '100%' }}>
         <SafeAreaView style={styles.container}>
-            {showAddNote && <AddNewNote handleClose={handleAddNote}/>}
-            <TopBar title={'Daily Overview'} onBackPress={handleBackArrow} onAddPress={handleAddNote}/>
+            {showAddNote && <AddNewNote handleClose={showAddNoteBtn} category='Note' handleAdd={handleAddNote} />}
+            <TopBar title={'Daily Overview'} onBackPress={handleBackArrow} onAddPress={showAddNoteBtn}/>
             
             <Text style={styles.dateText}>{date}</Text>
             <DailyQuestionsJournalCard userId={userId} JournalId={journalId} />
