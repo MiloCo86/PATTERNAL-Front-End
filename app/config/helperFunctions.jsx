@@ -164,7 +164,7 @@ const convertDateToMonthDayFormat = (date) => {
 }
 
 const timeSelector = (durationArray, timeInSeconds) => {
-  return durationArray[Math.abs(timeInSeconds) % 4];
+  return durationArray[Math.abs(timeInSeconds) % 6];
 }
 
 const countDownTimerHeader = (seconds) => {
