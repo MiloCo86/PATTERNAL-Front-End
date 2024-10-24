@@ -22,7 +22,7 @@ const Meditation = () => {
         <SafeAreaView style={styles.container}>
 
             <TopBar title="Meditation" />
-            <Text style={styles.instructions}>Hello World</Text>
+            <Text style={styles.instructions}><Text style={{ fontWeight: '700' }}>Take a Breather!</Text> Please take a few minutes to relax and think about the children. Your streaks will be tallied daily. Let's see how you do.</Text>
 
             <MeditationTimer />
 
@@ -30,7 +30,7 @@ const Meditation = () => {
                 <Text style={styles.streakText}>Current Streak: {streak}</Text>
             </View>
 
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }
 
@@ -41,14 +41,16 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: colors.background,
+        paddingTop: 0,
     },
     instructions: {
-        fontSize: 20,
-        color: colors.primary,
+        paddingTop: 0,
+        fontSize: 16,
         width: '90%',
-        borderColor: 'red',
-        height: '20%',
-        borderWidth: 2,
+        height: 'auto',
+        textAlign: 'left',
+        marginBottom: '10%',
+        color: colors.primary,
     },
     streakContainer: {
         height: 100,
