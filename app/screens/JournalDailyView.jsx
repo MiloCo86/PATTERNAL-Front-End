@@ -19,6 +19,7 @@ import TopBar from '../layout/TopBar'
 import DailyQuestionsJournalCard from '../components/journal/DailyQuestionsJournalCard';
 import NoteMiniCard from '../components/journal/NoteMiniCard';
 import { FlatList } from 'react-native-gesture-handler';
+import AddNewNote from '../components/AddNewNote';
 
 const JournalDailyView = () => {
     const { userAndJournaliD } = useLocalSearchParams();
@@ -48,6 +49,8 @@ const JournalDailyView = () => {
     // ]
 
     const [date, setDate] = useState('')
+
+    const [showAddNote, setShowAddNote] = useState(false)
 
     useEffect(() => {
         const fetchJournalData = async () => {
@@ -80,35 +83,38 @@ const JournalDailyView = () => {
 
     
     const handleAddNote = () => {
-        //tbd
+        setShowAddNote(!showAddNote)
     }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
-    <SafeAreaView style={styles.container}>
-        <TopBar title={'Daily Overview'} onBackPress={handleBackArrow} onAddPress={handleAddNote}/>
-        <Text style={styles.dateText}>{date}</Text>
-        <DailyQuestionsJournalCard userId={userId} JournalId={journalId} />
-        <FlatList
-            style={styles.noteList}
-            contentContainerStyle={{alignItems: 'center'}}
-            data={notes}
-            keyExtractor={note => note.id.toString()}
-            renderItem={({item}) => (
-                <NoteMiniCard note={item.note}/>
-            )}
-        />
-    </SafeAreaView>
+    <GestureHandlerRootView style={{ flex: 1, width: '100%', height: '100%' }}>
+        <SafeAreaView style={styles.container}>
+            {showAddNote && <AddNewNote handleClose={handleAddNote}/>}
+            <TopBar title={'Daily Overview'} onBackPress={handleBackArrow} onAddPress={handleAddNote}/>
+            
+            <Text style={styles.dateText}>{date}</Text>
+            <DailyQuestionsJournalCard userId={userId} JournalId={journalId} />
+            <FlatList
+                style={styles.noteList}
+                contentContainerStyle={{alignItems: 'center'}}
+                data={notes}
+                keyExtractor={note => note.id.toString()}
+                renderItem={({item}) => (
+                    <NoteMiniCard note={item.note}/>
+                )}
+            />
+        </SafeAreaView>
     </GestureHandlerRootView>
   )
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        height: '100%',
         width: '100%',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        // backgroundColor: colors.altSecondary,
+        backgroundColor: 'white',
     },
     dateText: {
         fontSize: 30,
