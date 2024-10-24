@@ -22,6 +22,7 @@ const Meditation = () => {
         <SafeAreaView style={styles.container}>
 
             <TopBar title="Meditation" />
+            <Text style={styles.instructions}>Hello World</Text>
 
             <MeditationTimer />
 
@@ -37,9 +38,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: colors.background,
+    },
+    instructions: {
+        fontSize: 20,
+        color: colors.primary,
+        width: '90%',
+        borderColor: 'red',
+        height: '20%',
+        borderWidth: 2,
     },
     streakContainer: {
         height: 100,
