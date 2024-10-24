@@ -12,7 +12,7 @@ import { timeSelector, countDownTimerHeader, countDownTimerDisplay } from '../co
 
 import colors from '../config/colors'
 
-let durationArray = [60, 180, 300, 600];
+let durationArray = [60, 180, 300, 600, 1200, 1800];
 let currIndex = 0;
 
 const MeditationTimer = () => {
