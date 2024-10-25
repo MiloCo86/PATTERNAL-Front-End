@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Pressable } from 'react-native'
+import { View, StyleSheet, Pressable, Text } from 'react-native'
 
 //router
 import { router, useLocalSearchParams } from 'expo-router'
@@ -10,6 +10,8 @@ import colors from '../config/colors';
 // icon libraries
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 
 const NavBar = () => {
@@ -51,30 +53,30 @@ const NavBar = () => {
 
   return (
     <View style={styles.navBar}>
-
-      <Pressable onPress={handleIAChat}>
-        {/* <Image source={require('../assets/figma_icons/PATTERNAL_AIchat-icon.png')} style={styles.icon} /> */}
-        <MaterialIcons name="add-comment" size={40} color={colors.secondary} style={styles.icon} />
+     
+      <Pressable onPress={handleIAChat} style={styles.iaChatPressable}>
+      <Ionicons name="sparkles-sharp" size={28} color={colors.secondary} />
+        <Text style={styles.iaChatIconText}>AI</Text>
       </Pressable>
 
-      <Pressable onPress={handleMeditation}>
-        {/* <Image source={require('../assets/figma_icons/PATTERNAL_Meditation-icon.png')} style={styles.icon} /> */}
-        <MaterialIcons name="timelapse" size={42} color={colors.secondary}  style={styles.icon}/>
+      <Pressable onPress={handleMeditation} style={styles.meditationPressable}>
+      <MaterialCommunityIcons name="meditation" size={32} color={colors.secondary} />
+        <Text style={styles.meditationIconText}>Meditate</Text>
       </Pressable>
 
-      <Pressable onPress={handleHome}>
-        {/* <Image source={require('../assets/figma_icons/PATTERNAL_Home-icon.png')} style={styles.homeIcon} /> */}
-        <MaterialCommunityIcons name="home" size={50} color="white" style={styles.homeIcon} />
+      <Pressable onPress={handleHome} style={styles.homePressable}>
+        <MaterialCommunityIcons name="home" size={32} color="white" />
+        <Text style={styles.homeIconText}>Home</Text>
       </Pressable>
 
-      <Pressable onPress={handleNotes}>
-        {/* <Image source={require('../assets/figma_icons/PATTERNAL_Notes-icon.png')} style={styles.icon} /> */}
-        <MaterialCommunityIcons name="text-box" size={40} color={colors.secondary} style={styles.icon} />
+      <Pressable onPress={handleNotes} style={styles.notesPressable}>
+        <MaterialCommunityIcons name="text-box" size={32} color={colors.secondary}  />
+        <Text style={styles.notesIconText}>Notes</Text>
       </Pressable >
 
-      <Pressable onPress={handleForum}>
-        {/* <Image source={require('../assets/figma_icons/PATTERNAL_Discover-icon.png')} style={styles.icon} /> */}
-        <MaterialIcons name="forum" size={44} color={colors.secondary} style={styles.icon}/> 
+      <Pressable onPress={handleForum} style={styles.forumPressable}>
+        <MaterialIcons name="forum" size={32} color={colors.secondary} />
+        <Text style={styles.forumIconText}>Forum</Text> 
       </Pressable>
 
     </View>
@@ -85,24 +87,59 @@ const styles = StyleSheet.create({
     navBar: {
         paddingLeft: 20,
         paddingRight: 20,
+        paddingBottom: 32,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: colors.primary,
         width: '100%',
-        height: '12%',
-    },
-    icon: {
-      marginTop: -20,
-      width: 44,
-      height: 44,
-    },
-    homeIcon: {
-      marginTop: -20,
-      width: 50,
-      height: 50,
+        height: 100,
     },
     
+
+    iaChatIconText: {
+      color: colors.secondary,
+      fontSize: 12,
+      paddingTop: 4,
+    },
+    meditationIconText: {
+      color: colors.secondary,
+      fontSize: 12,
+    },
+    homeIconText: {
+      color: colors.secondary,
+      fontSize: 12,
+    },
+    notesIconText: {
+      color: colors.secondary,
+      fontSize: 12,
+    },
+    forumIconText: {
+      color: colors.secondary,
+      fontSize: 12,
+    },
+
+    iaChatPressable: {
+      alignItems: 'center',
+      flexDirection: 'column',
+    },
+    meditationPressable: {
+      alignItems: 'center',
+      flexDirection: 'column',
+    },
+    homePressable: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    },
+    notesPressable: {
+      alignItems: 'center',
+      flexDirection: 'column',
+    },
+    forumPressable: {
+      alignItems: 'center',
+      flexDirection: 'column',
+    }
 });
+
 
 export default NavBar;
