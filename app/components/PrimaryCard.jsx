@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 16,
         margin: 16,
-        borderRadius: 25,
+        borderRadius: 10,
     },
     
     header: {

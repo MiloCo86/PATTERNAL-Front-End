@@ -39,7 +39,7 @@ const MoodButton = ({mood, onPress, active}) => {
 
   return (
     <Pressable onPress={onPress} style={styles.button}>
-      <MaterialCommunityIcons name={icon} size={70} color={active ? color : colors.altSecondary} />
+      <MaterialCommunityIcons name={icon} size={90} color={active ? color : 'darkgrey'} />
     </Pressable>
   )
 }
