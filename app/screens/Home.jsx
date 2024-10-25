@@ -15,7 +15,7 @@ import MoodTrends from '../components/home/MoodTrends';
 import TopBar from '../layout/TopBar';
 
 //icon components
-import Menu from '../components/icons/Menu';
+import TopBar from '../layout/TopBar';
 
 //import recommended content data
 import {RecommendedContentData} from '../assets/recommended_content_data/RecommendedContentData';
@@ -31,30 +31,12 @@ const SPACING = 24;
 const Home = () => {
   const { userId } = useLocalSearchParams();
 
+  return (
+  
+    <View style={styles.container}>
 
-  //conditional rendering for the menu overlay
-  const [isMenuVisible, setIsMenuVisible] = React.useState(false);
-
-  const toggleMenuOverlay = () => {
-    setIsMenuVisible(!isMenuVisible);
-  };
-
-
-    return (
-   
-     <View style={styles.container}>
-
-        {/* <Image source={require('../assets/logos/Artboard-1.png')} style={styles.logo} />
+      <TopBar title="Home" userId={userId} />
         
-        <View style={styles.menu}>
-          <Menu onPress={toggleMenuOverlay} />
-
-        </View>
-
-        {isMenuVisible && <MenuOverlay userId={userId}/>} */}
-
-        <TopBar title='Welcome, User' style={styles.topBarSpacing} />
-
       <FlatList
           data={[{ key: '1' }]} // these are nested flatlists - this is the parent flatlist, it has the content for the home screen
           renderItem={() => (
@@ -96,7 +78,10 @@ const Home = () => {
           showsVerticalScrollIndicator={false} // Hide the vertical scroll bar
 
       />
+            
     </View>
+
+
   );
 }
 
@@ -104,32 +89,11 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.altSecondary,
-    width: '100%',
-    
+    backgroundColor: colors.background,
   },
-
-  // menu: {
-  //   position: 'absolute',
-  //   top: 48,
-  //   right: 0,
-  //   margin: 16,
-  // },
-
-
-  logo: {
-    width: 150,
-    height: 150,
-    marginTop: 16,
-  },
-
-  // topBarSpacing: {
-  //   marginBottom:, // Add some space between the logo and the top bar
-  // },
-    
-
   recommendedContentHeader: {
     fontSize: 20,
     color: 'black',
@@ -137,13 +101,12 @@ const styles = StyleSheet.create({
     marginBottom: -75, // Add some space between the placeholder and the content card
     fontWeight: 'bold',
     alignSelf: 'center',
-    margin: 0,
-    padding: 0,
   },
 
   tipOfTheDaySpacing: {
     marginTop: 30, // Add some space between the top bar and the tip of the day
     marginBottom: 32, // Add some space between the content cards
+    paddingTop: 15,
   },
 
   componentSpacing: {

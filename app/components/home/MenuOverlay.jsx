@@ -11,7 +11,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 
 
-const MenuOverlay = ({userId}) => {
+const MenuOverlay = ({userId, onPress}) => {
 
   console.log('userId in menuOverlay:', userId);
 
@@ -29,54 +29,73 @@ const MenuOverlay = ({userId}) => {
   }
 
   return (
-    <View style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container}>
+      <View style={styles.backgroundColor} />
+
+      <View style={styles.menuCard}>
      
-      <Pressable  style={styles.menuItemContainer} onPress={handleUserProfile}>
-        <FontAwesome name="user-circle" size={28} color={colors.secondary} />
-        <Text style={styles.userProfileText}>User Profile</Text>
-      </Pressable>
+        <Pressable  style={styles.menuItemContainer} onPress={handleUserProfile}>
+          <FontAwesome name="user-circle" size={28} color={colors.secondary} />
+          <Text style={styles.userProfileText}>User Profile</Text>
+        </Pressable>
 
-      <View style={styles.menuDivider}/>
-    
-      <Pressable style={styles.menuItemContainer} onPress={handleLogout}>
-        <FontAwesome name="sign-out" size={32} color={colors.secondary} /> 
-        <Text style={styles.logoutText}>Logout</Text>
-      </Pressable>
+        <View style={styles.menuDivider}/>
       
+        <Pressable style={styles.menuItemContainer} onPress={handleLogout}>
+          <FontAwesome name="sign-out" size={32} color={colors.secondary} /> 
+          <Text style={styles.logoutText}>Logout</Text>
+        </Pressable>
+      </View>
 
-    </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    zIndex: 1,
+    position: 'absolute',
+    width: '100%',
+    height: 1000,
+    justifyContent: 'center',
+    alignItems: 'center', 
+  },
+  backgroundColor: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'white',
+    opacity: 0.2,
+    position: 'absolute',
+  },
+  menuCard: {
+    zIndex: 2,
     width: 175,
     height: 120,
     position: 'absolute',
-    zIndex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: colors.primary,
-    borderRadius: 10,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    borderWidth: 1,
     top: 105,
     left: 170,
     paddingTop: 8,
   },
 
   userProfileText: {
-    color: 'white',
+    color: 'black',
     fontSize: 16,
     margin: 16,
     fontFamily: 'Roboto',
-    fontWeight: 'bold',
   },
 
   logoutText: {
-    color: 'white',
+    color: 'black',
     fontSize: 16,
     margin: 16,
     fontFamily: 'Roboto',
-    fontWeight: 'bold',
+   
   },
 
   menuItemContainer: {

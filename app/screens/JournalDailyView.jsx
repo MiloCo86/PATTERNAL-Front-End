@@ -94,7 +94,12 @@ const JournalDailyView = () => {
     <GestureHandlerRootView style={{ flex: 1, width: '100%', height: '100%' }}>
         <View style={styles.container}>
             {showAddNote && <AddNewNote handleClose={showAddNoteBtn} category='Note' handleAdd={handleAddNote} />}
-            <TopBar title={'Daily Overview'} onBackPress={handleBackArrow} onAddPress={showAddNoteBtn}/>
+            <TopBar 
+                userId={userId}
+                title={'Daily Overview'} 
+                onBackPress={handleBackArrow} 
+                onAddPress={showAddNoteBtn}
+            />
             
             <Text style={styles.dateText}>{date}</Text>
             <DailyQuestionsJournalCard userId={userId} JournalId={journalId} />
