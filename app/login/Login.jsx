@@ -82,7 +82,7 @@ const Login = () => {
                     </View>
 
                     <View style={styles.formContainer}>
-                        <Text>Email:</Text>
+                        <Text>Email</Text>
                         <TextInput
                             placeholder='john@example.com'
                             style={styles.inputControl}
@@ -92,7 +92,7 @@ const Login = () => {
                             autoCorrect={false}
                             keyboardType='email-address'
                         />
-                        <Text>Password:</Text>
+                        <Text>Password</Text>
                         <TextInput
                             placeholder='***********'
                             style={styles.inputControl}
