@@ -13,12 +13,20 @@ import colors from '../config/colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Divider } from 'react-native-paper';
 
-const TopBar = ({title, onBackPress, onAddPress}) => {
+//components
+import MenuOverlay from '../components/home/MenuOverlay';
+
+const TopBar = ({title, onBackPress, onAddPress, userId}) => {
+    const [menuVisible, setMenuVisible] = React.useState(false);
     const handleMenuPress = () => {
+        setMenuVisible(!menuVisible);
     }
     return (
         <View style={styles.topBarContainer}>
+            {menuVisible && <MenuOverlay userId={userId} onPress={handleMenuPress}/>}
             <View style={styles.colorTopBarContainer}>
+                
+                
                 <StatusBar style="light" />
 
                 <LinearGradient 
@@ -56,10 +64,11 @@ const TopBar = ({title, onBackPress, onAddPress}) => {
 
 const styles = StyleSheet.create({
     topBarContainer: {
-        justifyContent: 'flez-start',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         width: '100%',
         height: 150,
+        zIndex: 1,
     },
     colorTopBarContainer: {
         width: '100%',

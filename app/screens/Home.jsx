@@ -15,7 +15,7 @@ import MenuOverlay from '../components/home/MenuOverlay';
 import MoodTrends from '../components/home/MoodTrends';
 
 //icon components
-import Menu from '../components/icons/Menu';
+import TopBar from '../layout/TopBar';
 
 //import recommended content data
 import {RecommendedContentData} from '../assets/recommended_content_data/RecommendedContentData';
@@ -23,67 +23,51 @@ import {RecommendedContentData} from '../assets/recommended_content_data/Recomme
 const Home = () => {
   const { userId } = useLocalSearchParams();
 
+  return (
+  
+    <View style={styles.container}>
 
-  //conditional rendering for the menu overlay
-  const [isMenuVisible, setIsMenuVisible] = React.useState(false);
-
-  const toggleMenuOverlay = () => {
-    setIsMenuVisible(!isMenuVisible);
-  };
-
-
-    return (
-    <PaperProvider >
-      <View style={styles.container}>
-
-        <Image source={require('../assets/logos/Artboard-1.png')} style={styles.logo} />
-        
-        <View style={styles.menu}>
-          <Menu onPress={toggleMenuOverlay} />
-
-        </View>
-
-        {isMenuVisible && <MenuOverlay userId={userId}/>}
+      <TopBar title="Home" userId={userId} />
 
       <FlatList
-          data={[{ key: '1' }]} // these are nested flatlists - this is the parent flatlist, it has the content for the home screen
-          renderItem={() => (
-            <>
-              <View style={styles.tipOfTheDaySpacing}>
-                <TipOfTheDay style={styles.tipOfTheDay} />
-              </View>
+        data={[{ key: '1' }]} // these are nested flatlists - this is the parent flatlist, it has the content for the home screen
+        renderItem={() => (
+          <>
+            <View style={styles.tipOfTheDaySpacing}>
+              <TipOfTheDay style={styles.tipOfTheDay} />
+            </View>
 
-              <Text variant="bodyMedium" style={styles.recommendedContentHeader}>Recommended Content</Text>
+            <Text variant="bodyMedium" style={styles.recommendedContentHeader}>Recommended Content</Text>
 
-              <FlatList
-                data={RecommendedContentData} // Data for the carousel
-                horizontal
-                renderItem={({item}) => (
-                  <View style={[styles.carouselSpacing,styles.componentSpacing]}>
-                    <RecommendedContentCard 
-                    title={item.contentTitle}
-                    description={item.contentDescription}
-                    label={item.contentLabel}
-                    image={item.contentImage}/>
+            <FlatList
+              data={RecommendedContentData} // Data for the carousel
+              horizontal
+              renderItem={({item}) => (
+                <View style={[styles.carouselSpacing,styles.componentSpacing]}>
+                  <RecommendedContentCard 
+                  title={item.contentTitle}
+                  description={item.contentDescription}
+                  label={item.contentLabel}
+                  image={item.contentImage}/>
 
-                  </View>
-                )}
-                keyExtractor={(item) => item.id.toString()}
-                showsHorizontalScrollIndicator={false} // Hide the horizontal scroll bar
-                contentContainerStyle={styles.carouselSpacing}
-              />
+                </View>
+              )}
+              keyExtractor={(item) => item.id.toString()}
+              showsHorizontalScrollIndicator={false} // Hide the horizontal scroll bar
+              contentContainerStyle={styles.carouselSpacing}
+            />
 
-              <View>
-                <MoodTrends moodIntervalText='Weekly Trends' />
-              </View>
-            </>
-          )}
-          keyExtractor={(item) => item.key}
-          showsVerticalScrollIndicator={false} // Hide the vertical scroll bar
+            <View>
+              <MoodTrends moodIntervalText='Weekly Trends' />
+            </View>
+          </>
+        )}
+        keyExtractor={(item) => item.key}
+        showsVerticalScrollIndicator={false} // Hide the vertical scroll bar
 
       />
     </View>
-  </PaperProvider>
+
   );
 }
 
@@ -91,33 +75,11 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 16, // Optional: Add some padding to the container
+    backgroundColor: colors.background,
     
-  },
-
-  menu: {
-    position: 'absolute',
-    top: 48,
-    right: 0,
-    margin: 16,
-  },
-
-
-  logo: {
-    width: 150,
-    height: 150,
-    marginTop: 16,
-  },
-
-  placeholder: {
-    fontSize: 16,
-    color: colors.primary,
-    marginBottom: 8, // Add some space between the placeholder and the content card
-    fontWeight: '500',
-    alignSelf: 'center',
   },
 
   recommendedContentHeader: {
@@ -127,12 +89,11 @@ const styles = StyleSheet.create({
     marginBottom: -75, // Add some space between the placeholder and the content card
     fontWeight: 'bold',
     alignSelf: 'center',
-    margin: 0,
-    padding: 0,
   },
 
   tipOfTheDaySpacing: {
     marginBottom: 32, // Add some space between the content cards
+    paddingTop: 15,
   },
 
   componentSpacing: {

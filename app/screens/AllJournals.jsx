@@ -57,7 +57,7 @@ const AllJournals = () => {
     return (
         <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
         <View style={styles.journalsContainer}>
-            <TopBar title={'Notes'} />
+            <TopBar title={'Notes'} userId={userId}/>
             
             <View style={styles.buttonsContainer}>
                 <ButtonList handleSelect={handleSortBy} />
