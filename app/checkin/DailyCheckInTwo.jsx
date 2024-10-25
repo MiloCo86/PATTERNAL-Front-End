@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, SafeAreaView, FlatList, Pressable } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 //back-end functionality
 import axios from 'axios';
@@ -16,6 +17,13 @@ import { getCheckInQuestions } from '../config/helperFunctions';
 
 //router
 import { router, useLocalSearchParams } from 'expo-router';
+
+//get screen dimensions for carousel
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const CARD_WIDTH = SCREEN_WIDTH * 0.8; 
+const SPACING = 24;
+
+
 
 const DailyCheckInTwo = () => {
     const { idAndMood } = useLocalSearchParams();
@@ -111,17 +119,19 @@ const DailyCheckInTwo = () => {
     }, [journalText]);
 
     return (
-        <SafeAreaView style={styles.container}>
-            <Pressable onPress={handleBack} style={styles.arrowContainer}>
-                <Image source={require('../assets/back-arrow.png')} style={styles.backArrow} />
-            </Pressable>
+        <View style={styles.container}>
 
-            <Image source={require('../assets/logo.png')} style={styles.logo} />
+            <LinearGradient 
+                start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}
+                colors={[ '#D9D9D9','#FFFFFF']} 
+                style={styles.backgroundGradient} 
+            />
 
             <View style={styles.headersContainer}>
                 <Text style={styles.headerText}>Daily Check-In</Text>
                 <Text style={styles.subHeader}>Mood Questionnaire</Text>
             </View>
+
 
             <FlatList
                 data={tempData}
@@ -132,12 +142,18 @@ const DailyCheckInTwo = () => {
                 )}
                 keyExtractor={item => item.questionNum}
                 horizontal={true}
-                showsHorizontalScrollIndicator={false}
+                showsHorizontalScrollIndicator={true}
                 contentContainerStyle={styles.flatListContent}
+                snapToInterval={CARD_WIDTH + SPACING} // Snap to card width plus spacing
+                snapToAlignment="center"
+                decelerationRate="fast"
+                pagingEnabled={true}
             />
 
+            <Text style={styles.journalHeader}>Journal Entry</Text>
+
             <View style={styles.textInputContainer}>
-                <TextInputBox placeholder="Daily Log" text={journalText} setText={setJournalText} />
+                <TextInputBox  text={journalText} setText={setJournalText} />
             </View>
 
             {errorMessage ? (
@@ -147,7 +163,7 @@ const DailyCheckInTwo = () => {
             <View style={styles.finishButton}>
                 <PrimarySubmitButton buttonText="Finish" onPress={handleFinish} />
             </View>
-        </SafeAreaView>
+        </View>
     );
 };
 
@@ -159,44 +175,43 @@ const styles = StyleSheet.create({
         backgroundColor: colors.altSecondary,
         width: '100%',
     },
-    logo: {
-        width: 44,
-        height: 44,
-        marginTop: 8,
-        color: colors.secondary
+    backgroundGradient: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
     },
-    arrowContainer: {
-        alignSelf: 'flex-start',
-        marginTop: 25,
-        marginLeft: 25,
-    },
-    backArrow: {
-        width: 26,
-        height: 26,
-        marginBottom: -32,
-    },
+    
     headersContainer: {
         justifyContent: 'flex-end',
         alignItems: 'center',
-        marginTop: 16,
+        marginTop: 64,
     },
     headerText: {
-        fontSize: 28,
-        marginTop: 16,
+        fontSize: 36,
         fontWeight: 'bold',
+        color: colors.primary,
     },
     subHeader: {
-        fontSize: 12,
+        fontSize: 18,
     },
     cardContainer: {
-        marginHorizontal: 16,
         marginTop: 16,
+        width: CARD_WIDTH,
     },
     flatListContent: {
-        paddingHorizontal: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: SPACING,
+        
     },
+    journalHeader: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'black',
+        top: 16,
+    },
+
     textInputContainer: {
-        top: 32,
         justifyContent: 'center',
         alignItems: 'center',
     },

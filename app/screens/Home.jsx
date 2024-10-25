@@ -22,7 +22,7 @@ import {RecommendedContentData} from '../assets/recommended_content_data/Recomme
 
 //get screen dimensions for carousel
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const CARD_WIDTH = SCREEN_WIDTH * 0.75; 
+const CARD_WIDTH = SCREEN_WIDTH * 0.8; 
 const SPACING = 24;
 
 

@@ -20,8 +20,7 @@ const textInputBox = ({placeholder, text, setText}) => {
             value={text}
             onChangeText={text => setText(text)}
             style={styles.textInput}
-            // contentStyle={styles.textInputContent}
-            outlineColor={colors.primary}
+            // outlineColor={colors.primary}
             activeOutlineColor={colors.primary}
             mode='outlined'
             multiline={true}
@@ -42,13 +41,13 @@ const styles = StyleSheet.create({
         height: 150,
         marginBottom: 48,
     },
-    boxLabel: {
-        fontSize: 16,
-        fontWeight: '',
-        color: colors.primary,
-        alignSelf: 'flex-start',
-        marginBottom: 2,
-    }
+    // boxLabel: {
+    //     fontSize: 16,
+    //     fontWeight: '',
+    //     color: colors.primary,
+    //     alignSelf: 'flex-start',
+    //     marginBottom: 2,
+    // }
 });
     
 
