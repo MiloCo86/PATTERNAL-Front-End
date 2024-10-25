@@ -20,7 +20,7 @@ const Login = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
 
     const [errorMessage, setErrorMessage] = useState('');
-    
+
 
     const handleLogin = async () => {
         if (!form.email || !form.password) {
@@ -49,7 +49,7 @@ const Login = () => {
                     pathname: '/screens/Home',
                     params: { userId: response.data.user.id }
                 });
-            }else{
+            } else {
                 // Navigate to the DailyCheckInOne screen, passing userId in the params
                 router.push({
                     pathname: '/checkin/DailyCheckInOne',
@@ -57,9 +57,9 @@ const Login = () => {
                 });
             }
 
-                       
-            
-            
+
+
+
         } catch (error) {
             setErrorMessage('Invalid email or password.');
             console.log('Error:', error);
@@ -82,9 +82,9 @@ const Login = () => {
                     </View>
 
                     <View style={styles.formContainer}>
-                        <Text>Email</Text>
+                        {/* <Text>Email</Text> */}
                         <TextInput
-                            placeholder='john@example.com'
+                            placeholder='Email'
                             style={styles.inputControl}
                             value={form.email}
                             onChangeText={email => setForm({ ...form, email })}
@@ -92,9 +92,9 @@ const Login = () => {
                             autoCorrect={false}
                             keyboardType='email-address'
                         />
-                        <Text>Password</Text>
+                        {/* <Text>Password</Text> */}
                         <TextInput
-                            placeholder='***********'
+                            placeholder='Password'
                             style={styles.inputControl}
                             value={form.password}
                             onChangeText={password => setForm({ ...form, password })}
@@ -123,7 +123,8 @@ const Login = () => {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        flex: 1
+        flex: 1,
+        width: '100%',
     },
     loginContainer: {
         flex: 1,
@@ -151,10 +152,16 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         paddingLeft: 5,
-        borderRadius: 5
+        borderRadius: 5,
+        width: '100%',
+        borderTopColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
     },
     formContainer: {
-        marginTop: 80
+        marginTop: 40,
+        justifyContent: 'space-around',
+        height: '25%',
     },
     errorText: {
         color: 'red',
