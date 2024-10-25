@@ -76,7 +76,7 @@ const JournalDailyView = () => {
 
     const handleBackArrow = (   ) => {
         return router.push({
-            pathname: '/screens/AllNotes',
+            pathname: '/screens/AllJournals',
             params: { userId }
         })
     }
@@ -92,7 +92,7 @@ const JournalDailyView = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1, width: '100%', height: '100%' }}>
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             {showAddNote && <AddNewNote handleClose={showAddNoteBtn} category='Note' handleAdd={handleAddNote} />}
             <TopBar title={'Daily Overview'} onBackPress={handleBackArrow} onAddPress={showAddNoteBtn}/>
             
@@ -107,7 +107,7 @@ const JournalDailyView = () => {
                     <NoteMiniCard note={item.note}/>
                 )}
             />
-        </SafeAreaView>
+        </View>
     </GestureHandlerRootView>
   )
 }

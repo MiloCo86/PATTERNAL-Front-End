@@ -38,7 +38,7 @@ const NavBar = () => {
   }
   const handleNotes = () => {
     return router.push({
-      pathname: '/screens/AllNotes',
+      pathname: '/screens/AllJournals',
       params: { userId: userId }
     })
   }

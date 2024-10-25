@@ -16,7 +16,7 @@ import JournalMiniCard from '../components/journal/JournalMiniCard'
 import ButtonList from '../components/buttons/ButtonList'
 
 
-const AllNotes = () => {
+const AllJournals = () => {
 
     const { userId } = useLocalSearchParams();
     const [journals, setJournals] = useState([])
@@ -56,7 +56,7 @@ const AllNotes = () => {
 
     return (
         <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
-        <SafeAreaView style={styles.journalsContainer}>
+        <View style={styles.journalsContainer}>
             <TopBar title={'Notes'} />
             
             <View style={styles.buttonsContainer}>
@@ -73,7 +73,7 @@ const AllNotes = () => {
                 )}
             />
 
-        </SafeAreaView>
+        </View>
         </GestureHandlerRootView>
     )
 }
@@ -87,16 +87,15 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonsContainer: {
-        marginTop: -20,
+        marginTop: 10,
         width: '70%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 10,
     },
     journalList: {
         width: '90%',
-        marginTop: 20,
+        marginTop: 10,
     },
 })
 
-export default AllNotes;
+export default AllJournals;
