@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
+import { Text, View, StyleSheet, Image, FlatList, Dimensions} from 'react-native';
 
 //colors and helper functions
 import colors from '../config/colors';
@@ -13,12 +12,21 @@ import TipOfTheDay from '../components/home/TipOfTheDay';
 import RecommendedContentCard from '../components/home/RecommendedContentCard';
 import MenuOverlay from '../components/home/MenuOverlay';
 import MoodTrends from '../components/home/MoodTrends';
+import TopBar from '../layout/TopBar';
 
 //icon components
 import Menu from '../components/icons/Menu';
 
 //import recommended content data
 import {RecommendedContentData} from '../assets/recommended_content_data/RecommendedContentData';
+
+//get screen dimensions for carousel
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const CARD_WIDTH = SCREEN_WIDTH * 0.75; 
+const SPACING = 24;
+
+
+
 
 const Home = () => {
   const { userId } = useLocalSearchParams();
@@ -33,17 +41,19 @@ const Home = () => {
 
 
     return (
-    <PaperProvider >
-      <View style={styles.container}>
+   
+     <View style={styles.container}>
 
-        <Image source={require('../assets/logos/Artboard-1.png')} style={styles.logo} />
+        {/* <Image source={require('../assets/logos/Artboard-1.png')} style={styles.logo} />
         
         <View style={styles.menu}>
           <Menu onPress={toggleMenuOverlay} />
 
         </View>
 
-        {isMenuVisible && <MenuOverlay userId={userId}/>}
+        {isMenuVisible && <MenuOverlay userId={userId}/>} */}
+
+        <TopBar title='Welcome, User' style={styles.topBarSpacing} />
 
       <FlatList
           data={[{ key: '1' }]} // these are nested flatlists - this is the parent flatlist, it has the content for the home screen
@@ -59,7 +69,7 @@ const Home = () => {
                 data={RecommendedContentData} // Data for the carousel
                 horizontal
                 renderItem={({item}) => (
-                  <View style={[styles.carouselSpacing,styles.componentSpacing]}>
+                  <View style={[styles.carouselItem,styles.componentSpacing]}>
                     <RecommendedContentCard 
                     title={item.contentTitle}
                     description={item.contentDescription}
@@ -69,8 +79,12 @@ const Home = () => {
                   </View>
                 )}
                 keyExtractor={(item) => item.id.toString()}
-                showsHorizontalScrollIndicator={false} // Hide the horizontal scroll bar
+                showsHorizontalScrollIndicator={true} // Hide the horizontal scroll bar
                 contentContainerStyle={styles.carouselSpacing}
+                snapToInterval={CARD_WIDTH + SPACING} // Snap to card width plus spacing
+                snapToAlignment="center"
+                decelerationRate="fast"
+                pagingEnabled={false}
               />
 
               <View>
@@ -83,7 +97,6 @@ const Home = () => {
 
       />
     </View>
-  </PaperProvider>
   );
 }
 
@@ -93,17 +106,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    padding: 16, // Optional: Add some padding to the container
+    backgroundColor: colors.altSecondary,
+    width: '100%',
     
   },
 
-  menu: {
-    position: 'absolute',
-    top: 48,
-    right: 0,
-    margin: 16,
-  },
+  // menu: {
+  //   position: 'absolute',
+  //   top: 48,
+  //   right: 0,
+  //   margin: 16,
+  // },
 
 
   logo: {
@@ -112,13 +125,10 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 
-  placeholder: {
-    fontSize: 16,
-    color: colors.primary,
-    marginBottom: 8, // Add some space between the placeholder and the content card
-    fontWeight: '500',
-    alignSelf: 'center',
-  },
+  // topBarSpacing: {
+  //   marginBottom:, // Add some space between the logo and the top bar
+  // },
+    
 
   recommendedContentHeader: {
     fontSize: 20,
@@ -132,6 +142,7 @@ const styles = StyleSheet.create({
   },
 
   tipOfTheDaySpacing: {
+    marginTop: 30, // Add some space between the top bar and the tip of the day
     marginBottom: 32, // Add some space between the content cards
   },
 
@@ -143,6 +154,11 @@ const styles = StyleSheet.create({
     justifyContent  : 'center',
     alignItems: 'space-between',
     paddingHorizontal: 12, // Add some padding to the content card
+  },
+
+  carouselItem: {
+    width: CARD_WIDTH,
+    marginHorizontal: SPACING / 2,
   },
 });
 
