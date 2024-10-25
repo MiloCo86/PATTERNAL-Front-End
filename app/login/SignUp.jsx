@@ -20,7 +20,7 @@ const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const re = {/*/^[^\s@]+@[^\s@]+\.[^\s@]+$/*/} /^[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
         return re.test(email);
     };
 
