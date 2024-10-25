@@ -15,7 +15,7 @@ import MoodTrends from '../components/home/MoodTrends';
 import TopBar from '../layout/TopBar';
 
 //icon components
-import TopBar from '../layout/TopBar';
+
 
 //import recommended content data
 import {RecommendedContentData} from '../assets/recommended_content_data/RecommendedContentData';
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
 
   tipOfTheDaySpacing: {
-    marginTop: 30, // Add some space between the top bar and the tip of the day
+    marginTop: 10, // Add some space between the top bar and the tip of the day
     marginBottom: 32, // Add some space between the content cards
     paddingTop: 15,
   },
