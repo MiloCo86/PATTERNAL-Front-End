@@ -107,7 +107,7 @@ const SignUp = () => {
                             <Text style={styles.title}>User Details</Text>
                         </View>
                         <View style={styles.formContainer}>
-                            <Text>First Name</Text>
+                            <Text style={styles.labelText}>First Name</Text>
                             <TextInput
                                 placeholder='First Name'
                                 style={styles.inputControl}
@@ -116,7 +116,7 @@ const SignUp = () => {
                                 autoCorrect={false}
                                 keyboardType='default'
                             />
-                            <Text>Last Name</Text>
+                            <Text style={styles.labelText}>Last Name</Text>
                             <TextInput
                                 placeholder='Last Name'
                                 style={styles.inputControl}
@@ -125,7 +125,7 @@ const SignUp = () => {
                                 autoCorrect={false}
                                 keyboardType='default'
                             />
-                            <Text>E-mail</Text>
+                            <Text style={styles.labelText}>E-mail</Text>
                             <TextInput
                                 placeholder='E-mail'
                                 style={styles.inputControl}
@@ -135,7 +135,7 @@ const SignUp = () => {
                                 autoCorrect={false}
                                 keyboardType='email-address'
                             />
-                            <Text>Username</Text>
+                            <Text style={styles.labelText}>Username</Text>
                             <TextInput
                                 placeholder='Username'
                                 style={styles.inputControl}
@@ -145,7 +145,7 @@ const SignUp = () => {
                                 autoCorrect={false}
                                 keyboardType='default'
                             />
-                            <Text>Password</Text>
+                            <Text style={styles.labelText}>Password</Text>
                             <TextInput
                                 placeholder='Password'
                                 style={styles.inputControl}
@@ -157,7 +157,7 @@ const SignUp = () => {
                                 secureTextEntry={true}
                                 textContentType="none" // Prevents strong password suggestions
                             />
-                            <Text>Verify Password</Text>
+                            <Text style={styles.labelText}>Verify Password</Text>
                             <TextInput
                                 placeholder='Verify Password'
                                 style={styles.inputControl}
@@ -194,6 +194,7 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
         backgroundColor: colors.white,
+        width: '100%',
     },
     scrollContainer: {
         flexGrow: 1,
@@ -227,13 +228,16 @@ const styles = StyleSheet.create({
         color: colors.secondary
     },
     inputControl: {
+        width: '100%',
+        minWidth: '90%',
         height: 40,
-        borderColor: 'gray',
         borderWidth: 1,
-        paddingLeft: 5,
-        borderRadius: 5,
-        marginBottom: 10,
-        color: colors.primary,
+        borderColor: colors.altSecondary,
+        marginBottom: 5,
+        backgroundColor: colors.white,
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        borderTopColor: 'transparent',
     },
     formContainer: {
         marginTop: 20
@@ -262,7 +266,13 @@ const styles = StyleSheet.create({
         color: 'red',
         textAlign: 'center',
         marginTop: 10,
-    }
+    },
+    labelText: {
+        width: '80%',
+        color: 'darkgrey',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
 });
 
 export default SignUp;

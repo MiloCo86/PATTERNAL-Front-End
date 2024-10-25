@@ -82,7 +82,7 @@ const Login = () => {
                     </View>
 
                     <View style={styles.formContainer}>
-                        {/* <Text>Email</Text> */}
+                        <Text style={styles.labelText}>Email</Text>
                         <TextInput
                             placeholder='Email'
                             style={styles.inputControl}
@@ -92,7 +92,7 @@ const Login = () => {
                             autoCorrect={false}
                             keyboardType='email-address'
                         />
-                        {/* <Text>Password</Text> */}
+                        <Text style={styles.labelText}>Password</Text> 
                         <TextInput
                             placeholder='Password'
                             style={styles.inputControl}
@@ -149,15 +149,16 @@ const styles = StyleSheet.create({
         color: colors.secondary
     },
     inputControl: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        paddingLeft: 5,
-        borderRadius: 5,
         width: '100%',
-        borderTopColor: 'transparent',
+        minWidth: '90%',
+        height: 40,
+        borderWidth: 1,
+        borderColor: colors.altSecondary,
+        marginBottom: 5,
+        backgroundColor: colors.white,
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
+        borderTopColor: 'transparent',
     },
     formContainer: {
         marginTop: 40,
@@ -187,7 +188,13 @@ const styles = StyleSheet.create({
     signUpButton: {
         fontSize: 15,
         color: colors.secondary
-    }
+    },
+    labelText: {
+        width: '80%',
+        color: 'darkgrey',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
 });
 
 export default Login;
