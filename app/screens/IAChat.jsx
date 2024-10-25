@@ -68,12 +68,13 @@ const IAChat = () => {
 };
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     padding: 10,
-    width:"90%"
-    
+    width:"100%",
+    backgroundColor: colors.background,
   },
   chatContainer: {
     flexGrow: 1, // Allow ScrollView to expand
@@ -106,6 +107,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row', // Layout input and button in a row
     alignItems: 'center',
+    width: '90%',
+    marginLeft: '5%',
   },
   input: {
     flex: 1, // Allow the input to take the remaining space
