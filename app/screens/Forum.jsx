@@ -58,19 +58,19 @@ const Forum = () => {
     
   return (
     
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <TopBar title={title} onBackPress={handleBackArrow} onAddPress={handleAddEntry}/>
 
         {showEntries ? (
             <FlatList
-            style={{ width: '100%' }}
+            style={styles.flatList}
             data={entries}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
                 <EntryCard entryId={item.id} forumId={forumId} />
             )}
         /> ): <Text>Loading...</Text>} 
-    </SafeAreaView>
+    </View>
     
   )
 }
@@ -83,13 +83,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.background,
     },
-    headersContainer: {
-        marginTop: 40,
-        marginBottom: 40,
-    },
-    subHeader: {
-        fontSize: 25,
-        color: colors.text,
+    flatList: {
+        width: '100%',
+        paddingTop: 10,
+        marginTop: 2,
     },
 })
 

@@ -35,13 +35,17 @@ const TopBar = ({title, onBackPress, onAddPress}) => {
             </View>
 
             <View style={styles.navigationBarContainer}>
-                <Pressable onPress={onBackPress}>
-                    <Ionicons name="chevron-back" size={32} color={colors.primary} />
-                </Pressable>
+                {onBackPress && 
+                    <Pressable onPress={onBackPress}>
+                        <Ionicons name="chevron-back" size={32} color={colors.primary} />
+                    </Pressable>
+                }
                 <Text style={styles.title}>{title}</Text>
-                <Pressable onPress={onAddPress}>
-                    <Ionicons name="add-circle-outline" size={32} color={colors.primary} />
-                </Pressable>
+                {onAddPress &&
+                    <Pressable onPress={onAddPress}>
+                        <Ionicons name="add-circle-outline" size={32} color={colors.primary} />
+                    </Pressable>
+                }
             </View>
 
             <Divider style={styles.divider}/>
@@ -83,13 +87,16 @@ const styles = StyleSheet.create({
 
     navigationBarContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         width: '90%',
         height: 50,
     },
 
     title: {
+        width: '86%',
+        textAlign: 'center',
+        alignSelf: 'center',
         fontSize: 20,
         fontWeight: 'bold',
         color: "black",

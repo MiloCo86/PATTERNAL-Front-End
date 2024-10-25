@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, SafeAreaView, FlatList} from 'react-native'
+import { StyleSheet, View, FlatList} from 'react-native'
 
 // router
 import { router, useLocalSearchParams } from 'expo-router'
@@ -20,7 +20,7 @@ const AllForums = () => {
   
   return (
 
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <TopBar title="Forum" />
 
       <FlatList
@@ -32,7 +32,7 @@ const AllForums = () => {
         )}
       />
       
-    </SafeAreaView>
+    </View>
   )
 }
 
