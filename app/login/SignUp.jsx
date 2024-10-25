@@ -20,7 +20,7 @@ const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const validateEmail = (email) => {
-        const re = {/*/^[^\s@]+@[^\s@]+\.[^\s@]+$/*/} /^[a-zA-Z0-9]+(?:[._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     };
 
@@ -196,8 +196,8 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     scrollContainer: {
-        flexGrow: 1, 
-        justifyContent: 'center',  
+        flexGrow: 1,
+        justifyContent: 'center',
     },
     backButton: {
         paddingTop: 50,
@@ -232,11 +232,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingLeft: 5,
         borderRadius: 5,
-        marginBottom: 10,  
+        marginBottom: 10,
         color: colors.primary,
     },
     formContainer: {
-        marginTop: 20 
+        marginTop: 20
     },
     buttonContainer: {
         marginBottom: 80
