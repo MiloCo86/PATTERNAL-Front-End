@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     errorMessage: {
-        color: colors.tertiary,
+        color: 'red',
         textAlign: 'center',
         marginTop: 10,
     }
