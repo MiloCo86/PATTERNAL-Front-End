@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         width: '100%',
+        color: colors.background,
     },
     loginContainer: {
         flex: 1,
