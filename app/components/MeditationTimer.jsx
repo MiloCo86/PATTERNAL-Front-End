@@ -15,7 +15,7 @@ import colors from '../config/colors'
 let durationArray = [60, 180, 300, 600, 1200, 1800];
 let currIndex = 0;
 
-const MeditationTimer = () => {
+const MeditationTimer = ({ updateUser }) => {
 
     const [key, setKey] = useState(0);
     const [duration, setDuration] = useState(durationArray[currIndex]);
@@ -46,6 +46,7 @@ const MeditationTimer = () => {
 
     const renderTime = ({ remainingTime }) => { // remainingTime
         if (remainingTime === 0) {
+            updateUser();
             return <Text style={styles.wellDoneText}>Well done!</Text>;
         }
 
