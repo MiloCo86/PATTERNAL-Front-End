@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
-import {SafeAreaView, View, Text, StyleSheet, Pressable, TextInput } from 'react-native'
+import { useState, useEffect} from 'react'
+import {SafeAreaView, View, Text, StyleSheet, Pressable, TextInput, Alert} from 'react-native'
 
 // router
 import { router } from 'expo-router'
@@ -14,13 +14,43 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 const AddNewNote = ({handleClose, category, handleAdd}) => {
     const [note, setNote] = useState('')
+    const [showAddBtn, setShowAddBtn] = useState(false)
+
+    useEffect(() => {
+        if (note.length > 0) {
+            setShowAddBtn(true)
+        } else {
+            setShowAddBtn(false)
+        }
+    }, [note])
+
+    const handleCloseIcon = (category) => {
+        if (note.length > 0) {
+            Alert.alert(
+                "Are you sure you want to close?",
+                `your ${category} will not be saved`,
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    { text: "Close", onPress: handleClose }
+                ]
+            );
+            
+        }else {
+            handleClose()
+        }
+    }
+
   return (
     <SafeAreaView style={styles.container}>
         <View style={styles.backgroundOpacity}/>
         <View style={styles.itemsContainer}>
             
             <Text style={styles.title}>Add New {category}</Text>
-            <Pressable style={styles.closeButton} onPress={handleClose}>
+            <Pressable style={styles.closeButton} onPress={()=>handleCloseIcon(category)}>
                 <AntDesign name="close" size={24} color="black" />
             </Pressable>
             
@@ -31,11 +61,12 @@ const AddNewNote = ({handleClose, category, handleAdd}) => {
             onChangeText={setNote}
             value={note}
             />
-                
             
-            <Pressable style={styles.button} onPress={handleAdd}>
-                <Text style={styles.buttonText}>Add {category}</Text>
-            </Pressable>
+            {showAddBtn ? <Pressable style={styles.button} onPress={()=>handleAdd(note)}>
+                    <Text style={styles.buttonText}>Add {category}</Text>
+                </Pressable> : <View style={{height:30}}/> 
+                
+            }   
         </View>
     </SafeAreaView>
   )
@@ -56,17 +87,18 @@ const styles = StyleSheet.create({
     backgroundOpacity: {
         position: 'absolute',
         width: '100%',
-        height: '100%',
+        height: '120%',
         backgroundColor: 'white',
         opacity: 0.4,
     },
     itemsContainer: {
         width: '90%',
-        height: 'auto',
+        height: 'a',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.background,
         borderRadius: 5,
+        paddingBottom: 10,
     },
     title: {
         alignSelf: 'flex-start',
@@ -90,7 +122,7 @@ const styles = StyleSheet.create({
         padding: 20,
         textAlignVertical: 'top',
         borderRadius: 5,
-        marginBottom: 5,
+        marginBottom: 10,
         borderWidth: 2,
         borderColor: colors.primary,
     },
@@ -103,7 +135,6 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         backgroundColor: colors.primary,
         borderRadius: 5,
-        marginBottom: 10,
     },
     buttonText: {
         color: 'white',
