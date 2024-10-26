@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         zIndex: 1,
         width: '90%',
-        height: 110,
+        height: 100,
         alignItems: 'center',
         justifyContent: 'space-between',
     },
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
         paddingLeft: 35,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
     },
     questionsContainer: {
         position: 'absolute',
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         width: '80%',
         height: '25%',
         backgroundColor: 'white',
-        borderRadius: 5,
+        borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
         //shadow
