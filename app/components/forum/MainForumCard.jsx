@@ -31,19 +31,19 @@ const MainForumCard = ({title,img, userId,forumId }) => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 220,
+        height: 200,
         paddingRight: 30,
     },
     title: {
-        fontSize: 25,
+        fontSize: 22,
         marginTop: 10,
-        marginLeft: 10,
+        marginLeft: 15,
         marginBottom: 10,
         fontWeight: 'semibold',
     },
     photoContainer: {
         width: '90%',
-        height: 150,
+        height: 140,
         alignSelf: 'flex-end',
         justifyContent: 'center',
         alignItems: 'center',
