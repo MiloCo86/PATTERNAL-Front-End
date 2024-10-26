@@ -132,23 +132,29 @@ const styles = StyleSheet.create({
         width: 300,
         height: 80,
         backgroundColor: colors.altSecondary,
-        borderRadius: 10,
+        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        //shadow
+        shadowColor: colors.primary,
+        shadowOffset: {width: 2, height: 2},
+        shadowOpacity: 0.3,
+        shadowRadius: 3.84,
+
     },
     moodColor: {
         width: '12%',
         height: 80,
-        borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5
     },
     detailsContainer: {
         marginLeft: 15,
         width: '88%',
         height: 80,
         justifyContent: 'center',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
     },
     date: {
         position: 'absolute',
@@ -162,14 +168,14 @@ const styles = StyleSheet.create({
     note: {
         marginTop: 10,
         fontSize: 16,
-        width: '90%',
+        width: '85%',
         
         color: colors.primary,
     },
     amountIcon: {
         position: 'absolute',
         bottom: 10,
-        right: 20
+        right: 15
     }
 })
 

@@ -24,7 +24,7 @@ const ButtonList = ({handleSelect}) => {
         save='value'
         search={false}
         onSelect={()=>handleSelect(selected)}
-        maxHeight={90}
+        maxHeight={80}
         boxStyles={styles.boxStyles}
         inputStyles={styles.inputStyles}
         dropdownStyles={styles.dropdownStyles}
@@ -34,22 +34,26 @@ const ButtonList = ({handleSelect}) => {
 
 const styles = StyleSheet.create({
     boxStyles: {
-        backgroundColor: colors.white,
-        borderRadius: 10,
+        height: 40,
+        padding: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius: 5,
         borderColor: colors.primary,
-        width: 120,
+        width: 110,
     },
     inputStyles: {
         color: colors.primary,
-        fontSize: 14,
+        fontSize: 13,
         fontFamily: 'Roboto',
     },
     dropdownStyles: {
         marginTop: 0,
-        backgroundColor: colors.white,
-        borderRadius: 10,
-        borderColor: colors.secondary,
-        width: 120,
+        backgroundColor: 'white',
+        borderRadius: 5,
+        borderColor: colors.primary,
+        width: 110,
     }
 })
 
