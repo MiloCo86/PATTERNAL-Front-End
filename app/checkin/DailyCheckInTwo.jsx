@@ -19,9 +19,9 @@ import { getCheckInQuestions } from '../config/helperFunctions';
 import { router, useLocalSearchParams } from 'expo-router';
 
 //get screen dimensions for carousel
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const CARD_WIDTH = SCREEN_WIDTH * 0.8; 
-const SPACING = 24;
+// const { width: SCREEN_WIDTH } = Dimensions.get('window');
+// const CARD_WIDTH = SCREEN_WIDTH * 0.8; 
+// const SPACING = 24
 
 
 
@@ -144,10 +144,10 @@ const DailyCheckInTwo = () => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={true}
                 contentContainerStyle={styles.flatListContent}
-                snapToInterval={CARD_WIDTH + SPACING} // Snap to card width plus spacing
-                snapToAlignment="center"
-                decelerationRate="fast"
-                pagingEnabled={true}
+                // snapToInterval={SCREEN_WIDTH + SPACING} // Snap to card width plus spacing
+                // snapToAlignment="center"
+                // decelerationRate="fast"
+                // pagingEnabled={true}
             />
 
             <Text style={styles.journalHeader}>Journal Entry</Text>
@@ -195,13 +195,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     cardContainer: {
-        marginTop: 16,
-        width: CARD_WIDTH,
+        width: 340,
+        justifyContent  : 'center',
+        paddingHorizontal: 16,
+
+       
     },
     flatListContent: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingHorizontal: SPACING,
+        padding: 16,
+        margin: 16,
         
     },
     journalHeader: {

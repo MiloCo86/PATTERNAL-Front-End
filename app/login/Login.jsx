@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
 import { Link, router } from 'expo-router';
 import axios from 'axios';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { API_URL } from '@env';
 
@@ -74,10 +75,18 @@ const Login = () => {
 
     return (
         <SafeAreaView style={styles.mainContainer}>
+
+            <LinearGradient
+                start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}
+                colors={[colors.primary,'#ffffff',colors.altSecondary,]} 
+                style={styles.backgroundGradient} 
+            />
+            
+
             <ScrollView>
                 <View style={styles.loginContainer}>
                     <View style={styles.header}>
-                        <Image source={require('../assets/logo.png')} style={styles.logo} />
+                        <Image source={require('../assets/logos/Artboard 20 copy 15.png')} style={styles.logo} />
                         <Text style={styles.title}>Create Better Patterns For Your Family</Text>
                     </View>
 
@@ -125,21 +134,27 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         width: '100%',
-        color: colors.background,
     },
     loginContainer: {
         flex: 1,
         padding: 25,
         justifyContent: 'flex-start',
     },
+    
+    backgroundGradient: {
+        position: 'absolute',
+        width: '100%',
+        height: 2000,
+    },
+
     header: {
         marginTop: 50,
         justifyContent: 'center',
         alignItems: 'center'
     },
     logo: {
-        width: 120,
-        height: 120
+        width: 350,
+        height: 60,
     },
     title: {
         fontSize: 30,
@@ -155,10 +170,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: colors.altSecondary,
         marginBottom: 5,
-        backgroundColor: colors.white,
+        // backgroundColor: colors.white,
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
         borderTopColor: 'transparent',
+        color: colors.secondary,
+        fontSize: 18,
     },
     formContainer: {
         marginTop: 40,
@@ -187,11 +204,11 @@ const styles = StyleSheet.create({
     },
     signUpButton: {
         fontSize: 15,
-        color: colors.secondary
+        color: colors.primary
     },
     labelText: {
         width: '80%',
-        color: 'darkgrey',
+        color: colors.primary,
         fontSize: 18,
         fontWeight: 'bold',
     },

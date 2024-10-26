@@ -48,12 +48,11 @@ const PrimaryCard = ({CardText,questionId, questionNum, getResponse}) => {
 
 const styles = StyleSheet.create({
     cardContainer: {
-        width: 300,
-        height: 200,
+        width: '95%',
+        height: 210,
         justifyContent: 'flex-start',
         alignItems: 'center',
         padding: 16,
-        margin: 16,
         borderRadius: 10,
     },
     
@@ -69,6 +68,8 @@ const styles = StyleSheet.create({
     buttonContainer: {
         width: '100%',
         padding: 16,
+        position: 'absolute',
+        top: 80,
     },
 
     button: {
