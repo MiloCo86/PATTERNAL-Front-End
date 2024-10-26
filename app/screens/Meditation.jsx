@@ -2,9 +2,6 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
 
-
-
-
 import colors from '../config/colors'
 
 // import components
@@ -28,7 +25,7 @@ const Meditation = () => {
 
     useEffect(() => {
 
-        const fetchStreak = async () => {
+        const fetchStreakInfo = async () => {
             try {
                 const getUser = await axios.get(`${API_URL}/users/${userId}`);
                 setStreak(getUser.data.meditation_streak);
@@ -37,18 +34,8 @@ const Meditation = () => {
                 console.log('Error fetching streak:', error);
             }
         }
-        fetchStreak();
+        fetchStreakInfo();
     }, [userId]);
-
-    const handleMeditationEnd = () => {
-        console.log('handle meditaiton');
-        if (meditationStatus) {
-            return;
-        } else {
-            setMeditationStatus(true);
-            setStreak(streak + 1);
-        }
-
 
         useEffect(() => {
 
@@ -63,9 +50,22 @@ const Meditation = () => {
                     console.log('Error updating streak', error);
                 }
             }
+            
             updateUserStreak();
 
         }, [meditationStatus]);
+
+
+
+        const handleMeditationEnd = () => {
+            console.log('handle meditaiton');
+            if (meditationStatus) {
+                return;
+            } else {
+                setStreak(streak + 1);
+                setMeditationStatus(true);
+            }
+
     }
 
 
