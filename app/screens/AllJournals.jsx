@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
     },
     journalList: {
         width: '90%',
-        marginTop: 10,
+        paddingTop: 5,
+        
     },
 })
 
