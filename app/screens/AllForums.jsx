@@ -43,15 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: colors.background,
-  },
-  headersContainer: {
-    marginTop: 40,
-    marginBottom: 40,
-  },
-  subHeader: {
-    fontSize: 25,
-    color: colors.text,
-  },
+  }
 })
 
 export default AllForums
