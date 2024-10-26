@@ -14,7 +14,7 @@ const CheckinBtn = ({state, onPress}) => {
 
   return (
     <Pressable onPress={onPress} style={styles.container}>
-        <Text style={state ? styles.text : {...styles.text, color: "orange"}}>{btnText}</Text>
+        <Text style={state ? styles.text : {...styles.text, color: "red"}}>{btnText}</Text>
     </Pressable>
   )
 }
@@ -23,15 +23,23 @@ const styles = StyleSheet.create({
   container: {
     width: 80,
     height: 40,
-    borderWidth: 2,
+    borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 30,
+    borderRadius: 5,
     borderColor: colors.primary,
-    backgroundColor: colors.altBackground,
+    backgroundColor: "white",
+    //shadow
+    shadowColor: colors.primary,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    elevation: 5,
+
+
   },
   text: {
-    color: colors.primary,
+    color: "green",
     fontSize: 20,
     fontWeight: 'bold',
   }

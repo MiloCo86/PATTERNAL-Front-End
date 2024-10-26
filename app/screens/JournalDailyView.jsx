@@ -86,8 +86,21 @@ const JournalDailyView = () => {
         setShowAddNote(!showAddNote)
     }
 
-    const handleAddNote =() => {
-        console.log('Add note pressed')
+    const handleAddNote =(note) => {
+        if (note.length > 0) {
+            axios.post(`${API_URL}/users/${userId}/journal-entries/${journalId}/notes`, { note: note })
+            .then(() => {
+                axios.get(`${API_URL}/users/${userId}/journal-entries/${journalId}/notes`)
+                .then((response) => {
+                    setNotes(response.data)
+                })
+                setShowAddNote()
+            })
+            
+            .catch((error) => {
+                console.log('Error adding note:', error)
+            })
+        }
     }
 
   return (
@@ -106,7 +119,7 @@ const JournalDailyView = () => {
             <FlatList
                 style={styles.noteList}
                 contentContainerStyle={{alignItems: 'center'}}
-                data={notes}
+                data={notes.reverse()}
                 keyExtractor={note => note.id.toString()}
                 renderItem={({item}) => (
                     <NoteMiniCard note={item.note}/>
@@ -123,7 +136,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: colors.background,
     },
     dateText: {
         fontSize: 30,
@@ -132,6 +145,7 @@ const styles = StyleSheet.create({
     },
     noteList: {
         flex: 1,
+        paddingTop: 10,
         width: '100%',
     }
 })

@@ -99,6 +99,7 @@ const DailyQuestionsJournalCard = ({userId,JournalId}) => {
   return (
     <View style={styles.container}>
         <Text style={styles.title}>Daily Check-In Answers</Text>
+        <Text style={styles.description}>(Tap to view questions)</Text>
         <View style={styles.questionsBtnsContainer}>
             <CheckinBtn onPress={()=> handleShowQuestionCard(1)} state={answerQuestion1}/>
             <CheckinBtn onPress={()=> handleShowQuestionCard(2)} state={answerQuestion2}/>
@@ -106,10 +107,13 @@ const DailyQuestionsJournalCard = ({userId,JournalId}) => {
         </View>
         {showQuestionCard && 
             <View style={styles.questionsContainer}>
-                <Pressable style={styles.xIcon} onPress={handleShowQuestionCard}>
-                    <Feather name="x" size={26} color="black" />
-                </Pressable>
-                <Text style={styles.questionText}>{DisplayQuestion}</Text>
+                <Pressable style={styles.backgroundColor} onPress={handleShowQuestionCard}/>
+                <View style={styles.questionCardContainer}>
+                    <Pressable style={styles.xIcon} onPress={handleShowQuestionCard}>
+                        <Feather name="x" size={26} color="black" />
+                    </Pressable>
+                    <Text style={styles.questionText}>{DisplayQuestion}</Text>
+                </View>
             </View>
         }
     </View>
@@ -118,47 +122,63 @@ const DailyQuestionsJournalCard = ({userId,JournalId}) => {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 10,
         zIndex: 1,
         width: '90%',
-        height: '20%',
-        borderRadius: 10,
-        padding: 10,
+        height: 110,
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        shadowColor: colors.black,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        justifyContent: 'space-between',
     },
     title: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
+        color: 'black',
+    },
+    description: {
+        marginTop: 2,
+        fontSize: 14,
+        fontStyle: 'italic',
         color: colors.primary,
     },
     questionsBtnsContainer: {
         width: '100%',
-        height: '50%',
         paddingRight: 35,
         paddingLeft: 35,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
     },
     questionsContainer: {
         position: 'absolute',
-        top: '30%',
-        width: '80%',
+        top: -200,
+        width: '120%',
+        height: 900,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    backgroundColor: {
+        flex: 1,
+        position: 'absolute',
+        top: 0,
+        width: '100%',
         height: '100%',
         backgroundColor: colors.altSecondary,
-        borderRadius: 10,
+        borderRadius: 5,
+        opacity: 0.2,
+    },
+    questionCardContainer: {
+        width: '80%',
+        height: '25%',
+        backgroundColor: 'white',
+        borderRadius: 5,
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
+        //shadow
         shadowColor: colors.primary,
-        shadowOffset: { width: 2, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 3,
-        elevation: 5,
+        shadowOffset: {width: 2, height: 2},
+        shadowOpacity: 0.9,
+        shadowRadius: 3.84,
     },
     xIcon: {
         position: 'absolute',
