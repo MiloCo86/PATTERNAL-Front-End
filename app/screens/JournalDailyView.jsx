@@ -139,13 +139,14 @@ const styles = StyleSheet.create({
         backgroundColor: colors.background,
     },
     dateText: {
-        fontSize: 30,
-        fontFamily: 'HelveticaNeue-Italic',
-        fontWeight: 'bold',
+        marginTop: 10,
+        fontSize: 24,
+        fontFamily: 'roboto',
+        fontWeight: 300,
     },
     noteList: {
         flex: 1,
-        paddingTop: 10,
+        paddingTop: 30,
         width: '100%',
     }
 })

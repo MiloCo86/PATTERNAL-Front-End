@@ -17,26 +17,21 @@ const NoteMiniCard = ({note}) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 15,
-    width: 260,
+    marginBottom: 10,
+    width: 290,
     minHeight: 130,
     height: 'auto',
     padding: 2,
     justifyContent: 'center',
     alignItems: 'flex-start',
     borderRadius: 10,
-    //shadow
-    shadowColor: colors.primary,
-    shadowOffset: {width: 2, height: 2},
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
   },
   textContainer: {
-    padding: 10,
-    width: 256,
+    padding: 15,
+    width: 286,
     minHeight: 126,
     height: 'auto',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     borderRadius: 10,
     backgroundColor: 'white',
   },
