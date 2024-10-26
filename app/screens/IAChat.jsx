@@ -44,7 +44,7 @@ const IAChat = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <TopBar title="AI Chat" />
       <ScrollView contentContainerStyle={styles.chatContainer}>
         {chatHistory.map((item, index) => (
@@ -63,7 +63,7 @@ const IAChat = () => {
         />
         <Button title="Send" onPress={handleSend} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    padding: 10,
     width:"100%",
     backgroundColor: colors.background,
   },

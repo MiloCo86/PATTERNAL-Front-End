@@ -19,7 +19,7 @@ const Meditation = () => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
 
             <TopBar title="Meditation" />
             <Text style={styles.instructions}><Text style={{ fontWeight: '700' }}>Take a Breather!</Text> Please take a few minutes to relax and think about the children. Your streaks will be tallied daily. Let's see how you do.</Text>
@@ -30,7 +30,7 @@ const Meditation = () => {
                 <Text style={styles.streakText}>Current Streak: {streak}</Text>
             </View>
 
-        </SafeAreaView >
+        </View >
     )
 }
 
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         paddingTop: 0,
     },
     instructions: {
-        paddingTop: 0,
+        paddingTop: 10,
         fontSize: 16,
         width: '90%',
         height: 'auto',
