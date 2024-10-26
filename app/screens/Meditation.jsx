@@ -37,9 +37,15 @@ const Meditation = () => {
         fetchStreakInfo();
     }, [userId]);
 
-        useEffect(() => {
+    const handleMeditationEnd = () => {
+        console.log('handle meditaiton');
+        if (meditationStatus) {
+            console.log('meditation status is true');
+        } else {
+            setStreak(streak + 1);
+            setMeditationStatus(true);
 
-            const updateUserStreak = async () => {
+            const updateUser = async () => {
                 try {
                     const updateUser = await axios.put(`${API_URL}/users/${userId}`, {
                         meditation_streak: streak + 1,
@@ -50,22 +56,8 @@ const Meditation = () => {
                     console.log('Error updating streak', error);
                 }
             }
-            
-            updateUserStreak();
-
-        }, [meditationStatus]);
-
-
-
-        const handleMeditationEnd = () => {
-            console.log('handle meditaiton');
-            if (meditationStatus) {
-                return;
-            } else {
-                setStreak(streak + 1);
-                setMeditationStatus(true);
-            }
-
+            updateUser();
+        }
     }
 
 
