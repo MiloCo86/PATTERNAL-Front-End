@@ -30,6 +30,11 @@ const AllForums = () => {
         renderItem={({ item }) => (
           <MainForumCard forumId={item.id} title={item.title} img={item.img} userId={userId} />
         )}
+        snapToInterval={200}
+        snapToAlignment='center'
+        decelerationRate='fast'
+        pagingEnabled={false}
+        
       />
       
     </View>
