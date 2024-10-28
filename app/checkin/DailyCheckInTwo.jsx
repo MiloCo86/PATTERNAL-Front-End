@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions} from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions, SafeAreaView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 //back-end functionality
@@ -18,10 +18,8 @@ import { getCheckInQuestions } from '../config/helperFunctions';
 //router
 import { router, useLocalSearchParams } from 'expo-router';
 
-//get screen dimensions for carousel
-// const { width: SCREEN_WIDTH } = Dimensions.get('window');
-// const CARD_WIDTH = SCREEN_WIDTH * 0.8; 
-// const SPACING = 24
+const { width, height } = Dimensions.get('window');
+const CARD_WIDTH = width * 0.85; // Slightly wider cards for better readability
 
 
 
@@ -119,110 +117,136 @@ const DailyCheckInTwo = () => {
     }, [journalText]);
 
     return (
-        <View style={styles.container}>
-
+        <SafeAreaView style={styles.safeArea}>
             <LinearGradient 
-                start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}
-                colors={[ '#D9D9D9','#FFFFFF']} 
+                start={{ x: 0, y: 0 }} 
+                end={{ x: 0, y: 1 }}
+                colors={['#D9D9D9', '#FFFFFF']} 
                 style={styles.backgroundGradient} 
             />
 
-            <View style={styles.headersContainer}>
-                <Text style={styles.headerText}>Daily Check-In</Text>
-                <Text style={styles.subHeader}>Mood Questionnaire</Text>
-            </View>
+            <View style={styles.container}>
+                <View style={styles.headersContainer}>
+                    <Text style={styles.headerText}>Daily Check-In</Text>
+                    <Text style={styles.subHeader}>Mood Questionnaire</Text>
+                </View>
 
+                <View style={styles.carouselContainer}>
+                    <FlatList
+                        data={tempData}
+                        renderItem={({ item }) => (
+                            <View style={styles.cardContainer}>
+                                <PrimaryCard 
+                                    CardText={item.text} 
+                                    questionNum={item.questionNum} 
+                                    questionId={item.questionId} 
+                                    getResponse={getResponse}
+                                />
+                            </View>
+                        )}
+                        keyExtractor={item => item.questionNum}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={true}
+                        contentContainerStyle={styles.flatListContent}
+                        snapToInterval={CARD_WIDTH + width * 0.04} // Responsive spacing
+                        snapToAlignment="center"
+                        decelerationRate="fast"
+                        pagingEnabled={true}
+                    />
+                </View>
 
-            <FlatList
-                data={tempData}
-                renderItem={({ item }) => (
-                    <View style={styles.cardContainer}>
-                        <PrimaryCard CardText={item.text} questionNum={item.questionNum} questionId={item.questionId} getResponse={getResponse} />
+                <View style={styles.journalSection}>
+                    {/* <Text style={styles.journalHeader}>Journal Entry</Text> */}
+                    <View style={styles.textInputContainer}>
+                        <TextInputBox  placeholder="Journal Entry "text={journalText} setText={setJournalText} />
                     </View>
-                )}
-                keyExtractor={item => item.questionNum}
-                horizontal={true}
-                showsHorizontalScrollIndicator={true}
-                contentContainerStyle={styles.flatListContent}
-                // snapToInterval={SCREEN_WIDTH + SPACING} // Snap to card width plus spacing
-                // snapToAlignment="center"
-                // decelerationRate="fast"
-                // pagingEnabled={true}
-            />
+                </View>
 
-            <Text style={styles.journalHeader}>Journal Entry</Text>
-
-            <View style={styles.textInputContainer}>
-                <TextInputBox  text={journalText} setText={setJournalText} />
+                <View style={styles.bottomContainer}>
+                    {errorMessage ? (
+                        <Text style={styles.errorText}>{errorMessage}</Text>
+                    ) : null}
+                    <View style={styles.finishButton}>
+                        <PrimarySubmitButton buttonText="Finish" onPress={handleFinish} />
+                    </View>
+                </View>
             </View>
-
-            {errorMessage ? (
-                <Text style={styles.errorText}>{errorMessage}</Text>
-            ) : null}
-
-            <View style={styles.finishButton}>
-                <PrimarySubmitButton buttonText="Finish" onPress={handleFinish} />
-            </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: colors.altSecondary,
         width: '100%',
+        paddingHorizontal: width * 0.05,
     },
     backgroundGradient: {
         position: 'absolute',
         width: '100%',
         height: '100%',
     },
-    
     headersContainer: {
-        justifyContent: 'flex-end',
+        paddingTop: height * 0.08,
         alignItems: 'center',
-        marginTop: 64,
+        marginBottom: height * 0.02,
     },
     headerText: {
-        fontSize: 36,
+        fontSize: Math.min(36, width * 0.09),
         fontWeight: 'bold',
         color: colors.primary,
     },
     subHeader: {
-        fontSize: 18,
+        fontSize: Math.min(18, width * 0.05),
+        marginTop: height * 0.01,
+    },
+    carouselContainer: {
+        height: height * 0.30, // Fixed height for carousel section
+        marginVertical: height * 0.02,
+        bottom: height * 0.03,
     },
     cardContainer: {
-        width: 340,
-        justifyContent  : 'center',
-        paddingHorizontal: 16,
-
-       
+        width: CARD_WIDTH,
+        paddingHorizontal: width * 0.045,
+        justifyContent: 'center',
     },
     flatListContent: {
-        padding: 16,
-        margin: 16,
-        
-    },
-    journalHeader: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: 'black',
-        top: 16,
-    },
-
-    textInputContainer: {
-        justifyContent: 'center',
+        paddingHorizontal: width * 0.025,
         alignItems: 'center',
     },
+    journalSection: {
+        width: '100%',
+        height: height * 0.25,
+        alignItems: 'center',
+        marginVertical: height * -0.03,
+        bottom: height * 0.01,
+    },
+    textInputContainer: {
+        width: '100%',
+        alignItems: 'center',
+        marginBottom: height * 0.09,
+    },
+    bottomContainer: {
+        width: '100%',
+        alignItems: 'center',
+        paddingBottom: height * 0.05,
+    },
     finishButton: {
-        marginBottom: 64,
+        width: '100%',
+        alignItems: 'center',
     },
     errorText: {
         color: 'red',
-        marginBottom: 16,
+        fontSize: Math.min(16, width * 0.04),
+        position: 'absolute',
+        top: -24,
+        left: 8,
+
     },
 });
 
