@@ -35,19 +35,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
+        borderRadius: 15,
     },
     textInput: {
         width: 260,
-        height: 150,
+        height: 136,
         marginBottom: 48,
     },
-    // boxLabel: {
-    //     fontSize: 16,
-    //     fontWeight: '',
-    //     color: colors.primary,
-    //     alignSelf: 'flex-start',
-    //     marginBottom: 2,
-    // }
+    boxLabel: {
+        fontSize: 18,
+        fontWeight: '500',
+        color: colors.primary,
+        alignSelf: 'flex-start',
+        marginBottom: 2,
+    }
 });
     
 

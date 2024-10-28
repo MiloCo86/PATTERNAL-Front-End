@@ -2,9 +2,9 @@ export default {
     primary: '#27187E',
     secondary: '#C0E8F9',
     tertiery: '#E77728',
-    altSecondary: '#DDDDDD',
-    background: '#DDDDDD',
-    altBackground: '#C3C3C3',
+    altSecondary: 'darkgrey',
+    background: 'white',
+    altBackground: '#DDDDDD',
     mood: {
         one: '#E86D7C',
         two: '#E8976A',
