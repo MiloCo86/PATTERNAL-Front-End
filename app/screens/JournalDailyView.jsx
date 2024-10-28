@@ -2,6 +2,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { View, SafeAreaView, Text, StyleSheet, Pressable } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient';
 
 //router
 import { router,useLocalSearchParams } from 'expo-router'

@@ -57,7 +57,7 @@ const AllJournals = () => {
     return (
         <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
         <View style={styles.journalsContainer}>
-            <TopBar title={'Notes'} userId={userId}/>
+            <TopBar title={'Journal Entries'} userId={userId}/>
             
             <View style={styles.buttonsContainer}>
                 <ButtonList handleSelect={handleSortBy} />
@@ -88,9 +88,10 @@ const styles = StyleSheet.create({
     },
     buttonsContainer: {
         marginTop: 10,
-        width: '70%',
+        width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 8,
     },
     journalList: {
         width: '90%',

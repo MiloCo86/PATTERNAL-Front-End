@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native'
 
 //router
 import { router, useLocalSearchParams } from 'expo-router'
+import { LinearGradient } from 'expo-linear-gradient'
 
 //backend connection
 import { API_URL } from '@env';
@@ -81,7 +82,7 @@ const JournalMiniCard = ({journalId, userId}) => {
 
 
 
-    let moodColor = colors.primary
+    let moodColor = colors.altBackground
 
     switch (journal.mood) {
         case '1':
@@ -112,7 +113,19 @@ const JournalMiniCard = ({journalId, userId}) => {
   return (
     <Pressable onPress={handleSelectNote}>
         <View style={styles.container}>
-            <View style={{...styles.moodColor, backgroundColor:moodColor}}/>
+
+        <LinearGradient
+            start={{ x: 2.5, y: 1.4 }} 
+            end={{ x: 1, y: -.1 }}
+            colors={[colors.primary, moodColor]} 
+            style={styles.moodColor} 
+            >
+                <View style={{...styles.moodColor}}/>
+
+        </LinearGradient> 
+      
+
+
             <View style={styles.detailsContainer}>
                 <Text style={styles.date}>{date}</Text>
                 <Text style={styles.note}>{textNote}</Text>
@@ -129,13 +142,14 @@ const JournalMiniCard = ({journalId, userId}) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        width: 300,
+        width: 280,
         height: 80,
         backgroundColor: colors.altBackground,
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 12,
+        // marginTop: 4,
         //shadow
         shadowColor: colors.primary,
         shadowOffset: {width: 2, height: 2},
