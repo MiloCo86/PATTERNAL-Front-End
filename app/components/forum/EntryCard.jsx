@@ -152,8 +152,32 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
             })
     }
 
-
-
+    const handleDeleteComment = (comment_id) => {
+        Alert.alert(
+            "Delete Comment",
+            "Are you sure you want to delete this comment?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                {
+                    text: "Delete",
+                    onPress: () => {
+                        axios.delete(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/comments/${comment_id}`)
+                            .then(() => {
+                                setComments(comments.filter((comment) => comment.id !== comment_id));
+                            })
+                            .catch((error) => {
+                                console.log('Error deleting comment:', error);
+                            })
+                    }
+                }
+            ]
+        );
+    }
+    
 
     
   return (
@@ -182,11 +206,11 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
             </View>
 
 
-            {showEditIcons &&
+            {/* {showEditIcons &&
                 <Pressable  style={styles.editIcon} >
                     <MaterialCommunityIcons name="application-edit-outline" size={28} color={colors.primary} />
                 </Pressable>
-            }
+            } */}
 
             {showEditIcons &&
                 <Pressable onPress={()=>deleteEntry(entryId)} style={styles.deleteIcon} >
@@ -204,7 +228,7 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
                 data={comments}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <CommentCard entryId={entryId} forumId={forumId} commentId={item.id} />
+                    <CommentCard entryId={entryId} forumId={forumId} commentId={item.id} userId={userId} deleteComment={handleDeleteComment} />
                 )}
             />
             {showAddComment ? 
@@ -284,7 +308,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         height: '100%',
-        borderRadius: 15,
+        borderRadius: 10,
     },
     heartIcon: {
         width: '100%',
@@ -298,15 +322,15 @@ const styles = StyleSheet.create({
         right: 15,
         top: 15,
     },
-    editIcon: {
-        position: 'absolute',
-        right: -35,
-        top: 10,
-    },
+    // editIcon: {
+    //     position: 'absolute',
+    //     right: -35,
+    //     top: 10,
+    // },
     deleteIcon: {
         position: 'absolute',
-        right: -38,
-        top: 50,
+        right: -35,
+        top: 0,
     },
     CommentsContainer: {
         width: '100%',
