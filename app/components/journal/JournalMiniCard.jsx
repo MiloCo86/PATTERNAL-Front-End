@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: 300,
         height: 80,
-        backgroundColor: colors.altSecondary,
+        backgroundColor: colors.altBackground,
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
