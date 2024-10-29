@@ -36,7 +36,7 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
 
     const [showComments, setShowComments] = useState(false);
 
-    const [heartIcon, setHeartIcon] = useState('cards-heart-outline');
+    const [heartIcon, setHeartIcon] = useState('thumb-up-outline');
 
     const [entry, setEntry] = useState({  
         id: '',
@@ -61,6 +61,10 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
     const [date, setDate] = useState('');
 
     const [comments, setComments] = useState([]);
+
+    //array with the likes each element has the id, user_id, forum_entry_id
+    const [likesData, setLikesData] = useState([]);
+    const [likesCount, setLikesCount] = useState(0);
 
     const [showEditIcons, setShowEditIcons] = useState(false);
     
@@ -111,6 +115,23 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
         fetchCommentData();
     }, [entryId]);
 
+    //fetch likes
+    useEffect(() => {
+        const fetchLikesData = async () => {
+            try {
+                const getLikesData = await axios.get(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/forum-likes`);
+                setLikesData(getLikesData.data);
+                setLikesCount(getLikesData.data.length);
+                if (getLikesData.data.some((like) => like.user_id == userId)) {
+                    setHeartIcon('cards-heart');
+                }
+            } catch (error) {
+                console.log('Error fetching likes data:', error);
+            }
+        }
+        fetchLikesData();
+    }, [entryId]);
+
 
     const handleShowComments = () => {
         setShowComments(!showComments);
@@ -120,10 +141,24 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
     }
 
     const handleHeartPress = () => {
-        if (heartIcon === 'cards-heart-outline') {
-            setHeartIcon('cards-heart');
+        if (heartIcon === 'thumb-up-outline') {
+            setHeartIcon('thumb-up');
+            setLikesCount(likesCount + 1);
+            const newLike = {
+                user_id: userId,
+                entry_id: entry.id
+            }
+            // axios.post(`${API_URL}/forums/${forumId}/forum-entry/${entry.id}/forum-likes`, newLike)
+            //     .then(() => {
+            //         setLikesData([...likesData, newLike]);
+            //     })
+            //     .catch((error) => {
+            //         console.log('Error posting new like:', error);
+            //     })
+
         } else {
-            setHeartIcon('cards-heart-outline');
+            setHeartIcon('thumb-up-outline');
+            setLikesCount(likesCount - 1);
         } 
     }
 
@@ -197,7 +232,7 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
             <View style={styles.reactionContainer}>
                 <Pressable style={styles.iconAndCounter} onPress={handleHeartPress}>
                     <MaterialCommunityIcons name={heartIcon} size={30} color={colors.primary}/>
-                    <Text style={styles.numCounter}>2</Text>
+                    <Text style={styles.numCounter}>{likesCount}</Text>
                 </Pressable>
                 <Pressable style={styles.iconAndCounter} onPress={handleShowComments}>
                     <MaterialCommunityIcons name="comment-text-outline" size={30} color={colors.primary} />
