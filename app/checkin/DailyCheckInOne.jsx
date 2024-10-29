@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   bottomContainer: {
     width: '100%',
     alignItems: 'center',
-    paddingBottom: height * 0.05, // 5% from bottom
+    paddingBottom: height * 0.1, // 10% padding from bottom
   },
   errorText: {
     color: 'red',

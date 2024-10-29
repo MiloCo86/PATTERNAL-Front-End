@@ -68,6 +68,7 @@ const JournalMiniCard = ({journalId, userId}) => {
                 }
             } catch (error) {
                 console.log('Error fetching notes data:', error);
+                setTextNote('Add a note...')
             }
         };
         
