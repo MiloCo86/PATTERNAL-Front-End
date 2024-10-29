@@ -1,22 +1,27 @@
 import React from 'react'
-import { StyleSheet, View, Image, Text, Pressable } from 'react-native';
+import { StyleSheet, View, Image, Pressable } from 'react-native';
 // statusBar
 import { StatusBar } from 'expo-status-bar';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
+//router
+import { useLocalSearchParams } from 'expo-router';
 
 // colors and helper functions
 import colors from '../config/colors';
 
 //icons
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Divider } from 'react-native-paper';
 
 //components
 import MenuOverlay from '../components/home/MenuOverlay';
 
-const TopBar = ({title, onBackPress, onAddPress, userId}) => {
+const TopBar = () => {
+
+    const { userId } = useLocalSearchParams();
+    console.log('Received userId in TopBar', userId);
+
     const [menuVisible, setMenuVisible] = React.useState(false);
     const handleMenuPress = () => {
         setMenuVisible(!menuVisible);
@@ -25,7 +30,6 @@ const TopBar = ({title, onBackPress, onAddPress, userId}) => {
         <View style={styles.topBarContainer}>
             {menuVisible && <MenuOverlay userId={userId} onPress={handleMenuPress}/>}
             <View style={styles.colorTopBarContainer}>
-                
                 
                 <StatusBar style="light" />
 
@@ -42,21 +46,6 @@ const TopBar = ({title, onBackPress, onAddPress, userId}) => {
                 </View>
             </View>
 
-            <View style={styles.navigationBarContainer}>
-                {onBackPress && 
-                    <Pressable onPress={onBackPress}>
-                        <Ionicons name="chevron-back" size={32} color={colors.primary} />
-                    </Pressable>
-                }
-                <Text style={styles.title}>{title}</Text>
-                {onAddPress &&
-                    <Pressable onPress={onAddPress}>
-                        <Ionicons name="add-circle-outline" size={32} color={colors.primary} />
-                    </Pressable>
-                }
-            </View>
-
-            <Divider style={styles.divider}/>
             
         </View>
     )
@@ -67,7 +56,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         width: '100%',
-        height: 150,
+        height: 100,
         zIndex: 1,
     },
     colorTopBarContainer: {
@@ -94,27 +83,7 @@ const styles = StyleSheet.create({
         height: 60,
     },
 
-    navigationBarContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '90%',
-        height: 50,
-    },
-
-    title: {
-        width: '86%',
-        textAlign: 'center',
-        alignSelf: 'center',
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: "black",
-    },
-    divider: {
-        width: '93%',
-        height: 2,
-        backgroundColor: colors.primary,
-    },
+    
 });
 
 export default TopBar

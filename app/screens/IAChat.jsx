@@ -4,7 +4,7 @@ import axios from 'axios';
 import colors from '../config/colors';
 
 //components
-import TopBar from '../layout/TopBar';
+import NavigationBar from '../layout/NavigationBar';
 
 const IAChat = () => {
   const [userMessage, setUserMessage] = useState('');
@@ -45,7 +45,7 @@ const IAChat = () => {
 
   return (
     <View style={styles.container}>
-      <TopBar title="AI Chat" />
+      <NavigationBar title="AI Chat" />
       <ScrollView contentContainerStyle={styles.chatContainer}>
         {chatHistory.map((item, index) => (
           <View key={index} style={item.type === 'user' ? styles.userMessage : item.type === 'ai' ? styles.aiMessage : styles.errorMessage}>

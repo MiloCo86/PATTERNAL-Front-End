@@ -13,7 +13,7 @@ import axios from 'axios';
 import colors from '../config/colors'
 
 //Components
-import TopBar from '../layout/TopBar'
+import NavigationBar from '../layout/NavigationBar';
 import EntryCard from '../components/forum/EntryCard'
 import AddNewNote from '../components/AddNewNote'
 
@@ -110,7 +110,9 @@ const Forum = () => {
   return (
     
     <View style={styles.container}>
-      <TopBar title={title} onBackPress={handleBackArrow} onAddPress={handleShowAddEntry}/>
+      
+      <NavigationBar title={title} onBackPress={handleBackArrow} onAddPress={handleShowAddEntry} />
+      
 
         {showAddEntry && <AddNewNote category="Entry" handleAdd={handleNewEntry} handleClose={handleShowAddEntry} />}
         

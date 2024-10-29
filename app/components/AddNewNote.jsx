@@ -87,9 +87,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         height: 900,
-        top: 100,
+        top: 0,
         backgroundColor: 'black',
-        opacity: 0.7,
+        opacity: 0.2,
     },
     itemsContainer: {
         width: '85%',

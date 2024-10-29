@@ -16,7 +16,7 @@ import colors from '../config/colors'
 import { convertDateToMonthDayFormat } from '../config/helperFunctions';
 
 //components
-import TopBar from '../layout/TopBar'
+import NavigationBar from '../layout/NavigationBar';
 import DailyQuestionsJournalCard from '../components/journal/DailyQuestionsJournalCard';
 import NoteMiniCard from '../components/journal/NoteMiniCard';
 import { FlatList } from 'react-native-gesture-handler';
@@ -108,12 +108,8 @@ const JournalDailyView = () => {
     <GestureHandlerRootView style={{ flex: 1, width: '100%', height: '100%' }}>
         <View style={styles.container}>
             {showAddNote && <AddNewNote handleClose={showAddNoteBtn} category='Note' handleAdd={handleAddNote} />}
-            <TopBar 
-                userId={userId}
-                title={'Daily Overview'} 
-                onBackPress={handleBackArrow} 
-                onAddPress={showAddNoteBtn}
-            />
+            
+            <NavigationBar title={'Daily Overview'} onBackPress={handleBackArrow} onAddPress={showAddNoteBtn} />
             
             <Text style={styles.dateText}>{date}</Text>
             <DailyQuestionsJournalCard userId={userId} JournalId={journalId} />

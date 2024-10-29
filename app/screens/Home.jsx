@@ -9,12 +9,12 @@ import colors from '../config/colors';
 import { router, useLocalSearchParams } from 'expo-router';
 
 //components
+import NavigationBar from '../layout/NavigationBar';
 import TipOfTheDay from '../components/home/TipOfTheDay';
 import RecommendedContentCard from '../components/home/RecommendedContentCard';
-import MenuOverlay from '../components/home/MenuOverlay';
 import MoodTrends from '../components/home/MoodTrends';
-import TopBar from '../layout/TopBar';
 import Paginator from '../components/Paginator';
+
 
 //icon components
 
@@ -50,8 +50,8 @@ const Home = () => {
   return (
   
     <View style={styles.container}>
+      <NavigationBar title={`Welcome`}/>
 
-      <TopBar title="Home" userId={userId} />
         
       <FlatList
           data={[{ key: '1' }]} // these are nested flatlists - this is the parent flatlist, it has the content for the home screen
