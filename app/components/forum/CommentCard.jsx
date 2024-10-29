@@ -49,6 +49,8 @@ const CommentCard = ({entryId, forumId,commentId, userId, deleteComment}) => {
 
     const [showDeleteIcon, setShowDeleteIcon] = useState(false);
 
+    const [likesCount, setLikesCount] = useState(0);
+
 
     useEffect(() => {
         const fetchCommentData = async () => {
@@ -87,9 +89,11 @@ const CommentCard = ({entryId, forumId,commentId, userId, deleteComment}) => {
 
     const handleLike = () => {
         if (likeIcon === 'thumb-up-outline') {
-            setLikeIcon('thumb-up');    
+            setLikeIcon('thumb-up');
+            setLikesCount(likesCount + 1);    
         } else {
             setLikeIcon('thumb-up-outline');
+            setLikesCount(likesCount - 1);
         }
     }
 
@@ -107,6 +111,7 @@ const CommentCard = ({entryId, forumId,commentId, userId, deleteComment}) => {
             <Pressable style={styles.likeIcon} onPress={handleLike}>
                 <MaterialCommunityIcons name={likeIcon} size={24} color={colors.primary} />
             </Pressable>
+            <Text style={styles.likesCounter}>{likesCount}</Text>
         </View>
 
         {showDeleteIcon &&
@@ -166,15 +171,13 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        marginLeft: 15,
+        marginLeft: 20,
         marginBottom: 10,
     },
-    likeIcon: {
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 4,
+    likesCounter: {
+        fontSize: 20,
+        marginLeft: 2,
+        color: colors.primary,
     },
     dateText: {
         position: 'absolute',
