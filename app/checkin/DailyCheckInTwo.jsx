@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions, SafeAreaView} from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, Text, StyleSheet, FlatList, Dimensions, SafeAreaView, ScrollView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 //back-end functionality
@@ -17,6 +17,8 @@ import { getCheckInQuestions } from '../config/helperFunctions';
 
 //router
 import { router, useLocalSearchParams } from 'expo-router';
+import Paginator from '../components/Paginator';
+
 
 const { width, height } = Dimensions.get('window');
 const CARD_WIDTH = width * 0.85; // Slightly wider cards for better readability
@@ -116,62 +118,86 @@ const DailyCheckInTwo = () => {
         setCheckinData(prevState => ({ ...prevState, journal: journalText }));
     }, [journalText]);
 
+    //paginator
+    const [activeCardIndex, setActiveCardIndex] = useState(0);
+    const flatListRef = useRef(null);
+
+    const handleViewableItemsChanged = useRef(({ viewableItems }) => {
+        if (viewableItems[0] != null) {
+        setActiveCardIndex(viewableItems[0].index);
+        }
+    }).current;
+
+    const viewabilityConfig = useRef({
+        itemVisiblePercentThreshold: 50,
+    }).current;
+
+
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <LinearGradient 
-                start={{ x: 0, y: 0 }} 
-                end={{ x: 0, y: 1 }}
-                colors={['#D9D9D9', '#FFFFFF']} 
-                style={styles.backgroundGradient} 
-            />
+        
+            <SafeAreaView style={styles.safeArea}>
+                <LinearGradient 
+                    start={{ x: 0, y: 0 }} 
+                    end={{ x: 0, y: 1 }}
+                    colors={['#D9D9D9', '#FFFFFF']} 
+                    style={styles.backgroundGradient} 
+                />
 
-            <View style={styles.container}>
-                <View style={styles.headersContainer}>
-                    <Text style={styles.headerText}>Daily Check-In</Text>
-                    <Text style={styles.subHeader}>Mood Questionnaire</Text>
-                </View>
+                <View style={styles.container}>
+                    <View style={styles.headersContainer}>
+                        <Text style={styles.headerText}>Daily Check-In</Text>
+                        <Text style={styles.subHeader}>Mood Questionnaire</Text>
+                    </View>
 
-                <View style={styles.carouselContainer}>
-                    <FlatList
-                        data={tempData}
-                        renderItem={({ item }) => (
-                            <View style={styles.cardContainer}>
-                                <PrimaryCard 
-                                    CardText={item.text} 
-                                    questionNum={item.questionNum} 
-                                    questionId={item.questionId} 
-                                    getResponse={getResponse}
-                                />
-                            </View>
-                        )}
-                        keyExtractor={item => item.questionNum}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={true}
-                        contentContainerStyle={styles.flatListContent}
-                        snapToInterval={CARD_WIDTH + width * 0.04} // Responsive spacing
-                        snapToAlignment="center"
-                        decelerationRate="fast"
-                        pagingEnabled={true}
-                    />
-                </View>
+                    <View style={styles.carouselContainer}>
+                        <FlatList
+                            data={tempData}
+                            renderItem={({ item }) => (
+                                <View style={styles.cardContainer}>
+                                    <PrimaryCard 
+                                        CardText={item.text} 
+                                        questionNum={item.questionNum} 
+                                        questionId={item.questionId} 
+                                        getResponse={getResponse}
+                                    />
+                                </View>
+                            )}
+                            keyExtractor={item => item.questionNum}
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={styles.flatListContent}
+                            snapToAlignment="center"
+                            decelerationRate="fast"
+                            pagingEnabled={true}
+                            bounces={false}
+                            viewabilityConfig={viewabilityConfig}
+                            onViewableItemsChanged={handleViewableItemsChanged}
+                            ref={flatListRef}
+                        />
+                    </View>
+                    
+                    <View  style={styles.paginator}>
+                        <Paginator  data={tempData} cardIndex={activeCardIndex}/>
+                    </View>
 
-                <View style={styles.journalSection}>
-                    {/* <Text style={styles.journalHeader}>Journal Entry</Text> */}
-                    <View style={styles.textInputContainer}>
-                        <TextInputBox  placeholder="Journal Entry "text={journalText} setText={setJournalText} />
+                    <View style={styles.journalSection}>
+                        {/* <Text style={styles.journalHeader}>Journal Entry</Text> */}
+                        <View style={styles.textInputContainer}>
+                            <TextInputBox  placeholder="Journal Entry "text={journalText} setText={setJournalText} />
+                        </View>
+                    </View>
+
+                    <View style={styles.bottomContainer}>
+                        {errorMessage ? (
+                            <Text style={styles.errorText}>{errorMessage}</Text>
+                        ) : null}
+                        <View style={styles.finishButton}>
+                            <PrimarySubmitButton buttonText="Finish" onPress={handleFinish} />
+                        </View>
                     </View>
                 </View>
-
-                <View style={styles.bottomContainer}>
-                    {errorMessage ? (
-                        <Text style={styles.errorText}>{errorMessage}</Text>
-                    ) : null}
-                    <View style={styles.finishButton}>
-                        <PrimarySubmitButton buttonText="Finish" onPress={handleFinish} />
-                    </View>
-                </View>
-            </View>
-        </SafeAreaView>
+            </SafeAreaView>
+        
     );
 };
 
@@ -181,7 +207,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         width: '100%',
         paddingHorizontal: width * 0.05,
@@ -207,8 +233,8 @@ const styles = StyleSheet.create({
     },
     carouselContainer: {
         height: height * 0.30, // Fixed height for carousel section
-        marginVertical: height * 0.02,
-        bottom: height * 0.03,
+        marginVertical: height * 0.02, //
+        bottom: height * 0.04,
     },
     cardContainer: {
         width: CARD_WIDTH,
@@ -218,6 +244,10 @@ const styles = StyleSheet.create({
     flatListContent: {
         paddingHorizontal: width * 0.025,
         alignItems: 'center',
+    },
+    paginator: {
+        bottom: height * 0.06,
+      
     },
     journalSection: {
         width: '100%',
@@ -234,7 +264,7 @@ const styles = StyleSheet.create({
     bottomContainer: {
         width: '100%',
         alignItems: 'center',
-        paddingBottom: height * 0.05,
+        paddingBottom: height * 0.1, // 10% padding from bottom
     },
     finishButton: {
         width: '100%',
@@ -245,7 +275,6 @@ const styles = StyleSheet.create({
         fontSize: Math.min(16, width * 0.04),
         position: 'absolute',
         top: -24,
-        left: 8,
 
     },
 });

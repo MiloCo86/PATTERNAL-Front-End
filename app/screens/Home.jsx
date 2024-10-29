@@ -32,7 +32,7 @@ const SPACING = 12;
 const Home = () => {
   const { userId } = useLocalSearchParams();
 
-  //pagitator
+  //paginator
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const flatListRef = useRef(null);
 
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
 
   tipOfTheDaySpacing: {
     marginTop: 8, // Add some space between the top bar and the tip of the day
-    marginBottom: 48, // Add some space between the content cards
+    marginBottom: 44, // Add some space between the content cards
     paddingTop: 15,
   },
 
