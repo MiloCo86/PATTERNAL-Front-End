@@ -77,7 +77,7 @@ const Login = () => {
         <SafeAreaView style={styles.mainContainer}>
 
             <LinearGradient
-                start={{ x: 2.3, y: 0 }} end={{ x: 2, y: 1.2 }}
+                start={{ x: 2.4, y: 0 }} end={{ x: 2, y: 1.2 }}
                 colors={[colors.primary, colors.altBackground, colors.secondary]} 
                 style={styles.backgroundGradient} 
             />
@@ -100,7 +100,7 @@ const Login = () => {
                             autoCapitalize='none'
                             autoCorrect={false}
                             keyboardType='email-address'
-                            placeholderTextColor={colors.altBackground}
+                            placeholderTextColor={colors.secondary}
                         />
                         <Text style={styles.labelText}>Password</Text> 
                         <TextInput
@@ -109,7 +109,7 @@ const Login = () => {
                             value={form.password}
                             onChangeText={password => setForm({ ...form, password })}
                             secureTextEntry={true}
-                            placeholderTextColor={colors.altBackground}
+                            placeholderTextColor={colors.secondary}
                     
                         />
                     </View>
@@ -167,20 +167,22 @@ const styles = StyleSheet.create({
         color: colors.secondary
     },
     inputControl: {
-        width: '80%',
+        width: '81%',
         height: 40,
         borderWidth: 1,
         borderColor: colors.primary,
         marginBottom: 16,
+        paddingTop: 8, 
         // backgroundColor: colors.white,
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
         borderTopColor: 'transparent',
         color: colors.primary,
         fontSize: 16,
+        fontWeight: '400',
     },
     formContainer: {
-        marginTop: 96,
+        marginTop: 80,
         alignItems: 'center',
         justifyContent: 'center',
         height: '20%',
@@ -192,7 +194,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     buttonContainer: {
-        marginTop: 80
+        top: 180,
+       
     },
     loginButton: {
         justifyContent: 'center',
@@ -215,6 +218,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         alignSelf: 'flex-start',
         marginLeft: 32,
+        top: 4,
     },
 });
 

@@ -53,19 +53,15 @@ const styles = StyleSheet.create({
   },
   
   cardContainer: {
-    width: 300,
-    height: 200,
+    width: '95%',
+    height: 180,
     flexDirection: 'row',
     justifyContent: 'flex-start', // Align to start of the container
     alignItems: 'center',
     padding: 16,
-    marginTop: 85,
-    borderRadius: 15,
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    elevation: 5,
+    marginTop: 90,
+    borderRadius: 10,
+
     },
 
     contentHeader: {
@@ -112,7 +108,7 @@ const styles = StyleSheet.create({
 
   contentDescription: {
     color: 'black',
-    fontSize: 14,
+    fontSize: 16,
   },
 
   labelContainer: {
@@ -122,7 +118,7 @@ const styles = StyleSheet.create({
 
   labelContent: {
     backgroundColor: colors.altSecondary,
-    alignSelf: 'center',
+    alignSelf: 'flex-start',
     color: colors.primary,
   },
 });

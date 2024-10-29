@@ -123,11 +123,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: Math.min(36, width * 0.09), // Responsive font size
-    fontWeight: 'bold',
+    fontWeight: '700',
     color: colors.primary,
   },
   subHeader: {
-    fontSize: Math.min(16, width * 0.05),
+    fontSize: Math.min(18, width * 0.05),
     marginTop: height * 0.01,
   },
   buttonContainer: {
