@@ -7,6 +7,7 @@ import TopBar from "../layout/TopBar";
 export default function Layout() {
   return (
     <View style={styles.mainLayout}>
+      <TopBar />
       <Slot />
       <NavBar />
     </View>

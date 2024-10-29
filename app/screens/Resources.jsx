@@ -5,16 +5,18 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
 import colors from '../config/colors'
 
 //components
+import NavigationBar from '../layout/NavigationBar'
 
 
 const Resources = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <NavigationBar title={`Resources`} />
       <View style={styles.headersContainer}>
         <Text style={styles.title}>Resources</Text>
         <Text style={styles.subHeader}>Find resources to help you</Text>
       </View>
-    </SafeAreaView>
+    </View>
    
   )
 }
