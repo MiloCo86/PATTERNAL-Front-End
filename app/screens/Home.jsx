@@ -70,10 +70,11 @@ const Home = () => {
                   
                   <View style={[styles.carouselItem,styles.componentSpacing]}>
                       <RecommendedContentCard 
-                      title={item.contentTitle}
-                      description={item.contentDescription}
-                      label={item.contentLabel}
-                      image={item.contentImage}/>
+                      title={item.title}
+                      description={item.description}
+                      label={item.label}
+                      image={item.image}
+                      url={item.url}/>
 
                   </View>
                   )}
