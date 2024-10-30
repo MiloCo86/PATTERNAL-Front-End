@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { router } from 'expo-router';
-import { Text, View, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, Pressable } from 'react-native';
+import { Text, View, TextInput, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../config/colors';
 import axios from 'axios';
 import { API_URL } from '@env';
+
+//components
+import PrimarySubmitButton from '../components/PrimarySubmitButton';
+
+
+//header & footer
+import ProfileHeader from '../components/profile/ProfileHeader';
+import FooterLogo from '../components/profile/FooterLogo';
+
+//import linear gradient for background
+import { LinearGradient } from 'expo-linear-gradient';
 
 const SignUp = () => {
     const [form, setForm] = useState({
@@ -95,17 +106,27 @@ const SignUp = () => {
 
     return (
         <SafeAreaView style={styles.safeArea}>
+
+            <LinearGradient
+                start={{ x: 1.9, y: 0 }} end={{ x: 1.5, y: 1.5 }}
+                colors={[colors.altBackground, colors.primary]} 
+                style={styles.backgroundGradient} 
+            />
+            
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                 <ScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.container}>
+                       
                         <View style={styles.backButton}>
                             <Pressable onPress={handleBackArrow}>
                                 <Image source={require('../assets/back-arrow.png')} style={styles.backButtonImage} />
                             </Pressable>
                         </View>
+
                         <View style={styles.header}>
                             <Text style={styles.title}>User Details</Text>
                         </View>
+
                         <View style={styles.formContainer}>
                             <Text style={styles.labelText}>First Name</Text>
                             <TextInput
@@ -115,6 +136,7 @@ const SignUp = () => {
                                 onChangeText={first_name => setForm({ ...form, first_name })}
                                 autoCorrect={false}
                                 keyboardType='default'
+                                placeholderTextColor={colors.altBackground}
                             />
                             <Text style={styles.labelText}>Last Name</Text>
                             <TextInput
@@ -124,6 +146,7 @@ const SignUp = () => {
                                 onChangeText={last_name => setForm({ ...form, last_name })}
                                 autoCorrect={false}
                                 keyboardType='default'
+                                placeholderTextColor={colors.altBackground}
                             />
                             <Text style={styles.labelText}>E-mail</Text>
                             <TextInput
@@ -134,6 +157,7 @@ const SignUp = () => {
                                 autoCapitalize='none'
                                 autoCorrect={false}
                                 keyboardType='email-address'
+                                placeholderTextColor={colors.altBackground}
                             />
                             <Text style={styles.labelText}>Username</Text>
                             <TextInput
@@ -144,6 +168,7 @@ const SignUp = () => {
                                 autoCapitalize='none'
                                 autoCorrect={false}
                                 keyboardType='default'
+                                placeholderTextColor={colors.altBackground}
                             />
                             <Text style={styles.labelText}>Password</Text>
                             <TextInput
@@ -156,6 +181,7 @@ const SignUp = () => {
                                 keyboardType='default'
                                 secureTextEntry={true}
                                 textContentType="none" // Prevents strong password suggestions
+                                placeholderTextColor={colors.altBackground}
                             />
                             <Text style={styles.labelText}>Verify Password</Text>
                             <TextInput
@@ -168,6 +194,7 @@ const SignUp = () => {
                                 keyboardType='default'
                                 secureTextEntry={true}
                                 textContentType="none" // Prevents strong password suggestions
+                                placeholderTextColor={colors.altBackground}
                             />
 
                         </View>
@@ -177,12 +204,13 @@ const SignUp = () => {
                         ) : null}
 
                         <View style={styles.buttonContainer}>
-                            <View style={styles.continueButton}>
-                                <TouchableOpacity style={styles.button} onPress={handleContinue}>
-                                    <Text style={styles.continueButtonText}>Continue</Text>
-                                </TouchableOpacity>
-                            </View>
+                           <PrimarySubmitButton buttonText='Continue' onPress={handleContinue} /> 
                         </View>
+                        
+                        <View style={styles.footerLogo}>
+                            <FooterLogo/>
+                        </View>
+
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>
@@ -200,78 +228,81 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center',
     },
-    backButton: {
-        paddingTop: 50,
-        alignItems: 'flex-start',
-    },
-    backButtonImage: {
-        height: 30,
-        width: 30,
-        tintColor: colors.secondary,
-    },
     container: {
         flex: 1,
         padding: 25,
         justifyContent: 'flex-start',
-        backgroundColor: colors.white,
+    },
+    backgroundGradient: {
+        position: 'absolute',
+        width: '100%',
+        height: 900,
+    },
+    backButton: {
+        alignItems: 'flex-start',
+        marginTop: -10,
+    },
+    backButtonImage: {
+        height: 30,
+        width: 30,
+        tintColor: colors.primary,
     },
     header: {
-        marginTop: 25,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: -8,
+        marginBottom: 8,
     },
     title: {
-        fontSize: 30,
+        fontSize: 28,
         textAlign: 'center',
         marginTop: 20,
         width: 300,
-        color: colors.secondary
+        color: colors.primary
     },
     inputControl: {
-        width: '100%',
-        minWidth: '90%',
+        width: '81%',
+        minWidth: '81%',
         height: 40,
         borderWidth: 1,
-        borderColor: colors.altSecondary,
-        marginBottom: 5,
-        backgroundColor: colors.white,
+        borderColor: colors.primary,
+        marginBottom: 16,
+        color: colors.primary,
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
         borderTopColor: 'transparent',
+        fontWeight: '700',
+        fontSize: 16,
+        opacity: 0.7,
     },
     formContainer: {
-        marginTop: 20
-    },
-    buttonContainer: {
-        marginBottom: 80
-    },
-    continueButton: {
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         marginTop: 20,
     },
-    continueButtonText: {
-        color: colors.primary,
-        fontSize: 20,
-        fontWeight: 'bold',
-        alignSelf: 'center',
+    buttonContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20,
     },
-    button: {
-        backgroundColor: colors.secondary,
-        padding: 10,
-        width: 200,
-        borderRadius: 10
-    },
+    
+   
     errorMessage: {
         color: 'red',
         textAlign: 'center',
         marginTop: 10,
     },
     labelText: {
-        width: '80%',
-        color: 'darkgrey',
-        fontSize: 18,
-        fontWeight: 'bold',
+        color: 'black',
+        fontSize: 16,
+        alignSelf: 'flex-start',
+        marginLeft: 32,
+     
+    },
+    footerLogo: {
+        marginTop: 20,
+        alignItems: 'center',
+        
     },
 });
 

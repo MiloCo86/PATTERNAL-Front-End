@@ -100,7 +100,7 @@ const Login = () => {
                             autoCapitalize='none'
                             autoCorrect={false}
                             keyboardType='email-address'
-                            placeholderTextColor={colors.secondary}
+                            placeholderTextColor={colors.altBackground}
                         />
                         <Text style={styles.labelText}>Password</Text> 
                         <TextInput
@@ -109,7 +109,7 @@ const Login = () => {
                             value={form.password}
                             onChangeText={password => setForm({ ...form, password })}
                             secureTextEntry={true}
-                            placeholderTextColor={colors.secondary}
+                            placeholderTextColor={colors.altBackground}
                     
                         />
                     </View>
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     logo: {
-        width: 350,
+        width: 330,
         height: 60,
     },
     title: {
@@ -179,7 +179,8 @@ const styles = StyleSheet.create({
         borderTopColor: 'transparent',
         color: colors.primary,
         fontSize: 16,
-        fontWeight: '400',
+        fontWeight: '700',
+        opacity: 0.7,
     },
     formContainer: {
         marginTop: 80,
