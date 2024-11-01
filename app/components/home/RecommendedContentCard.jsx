@@ -1,20 +1,62 @@
 import React from 'react';
-import { StyleSheet, View,  Image, Text } from 'react-native';
+import { useState, useCallback, useRef} from 'react';
+import { StyleSheet, View,  Image, Text, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 //import colors
 import colors from '../../config/colors'
 
-//import recommended content dummy data
-import RecommendedContentData from '../../assets/recommended_content_data/RecommendedContentData'
-import { shadow } from 'react-native-paper';
+
+//youtube video player
+import YoutubePlayer from "react-native-youtube-iframe";
+
+//icons
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 
-const RecommendedContentCard = ({title,description,label,image,}) => {
-  
+const RecommendedContentCard = ({title,description,label,image,url}) => {
+
+  const [showVideo, setShowVideo] = useState(false);
+  const [playing, setPlaying] = useState(true);
+
+  const onStateChange = useCallback((state) => {
+    if (state === "ended") {
+      setPlaying(true);
+    }
+  }, []);
+
+  const togglePlaying = useCallback(() => {
+    setPlaying((prev) => !prev);
+  }, []);
+
+  const handlePress = () => {
+    if (title === 'Video') {
+      setShowVideo(true);
+    }
+  }
+
+  const handleCloseVideo = () => {
+    setShowVideo(false);
+  }
+
+    
   return (
-    <View style={styles.shadowOutline}>
+    <Pressable onPress={handlePress} style={styles.handleCloseVideo}>
+
+      {showVideo && 
+        <View style={styles.youtubeContainer}>
+          <Pressable style={styles.closeIcon} onPress={handleCloseVideo}> 
+            <AntDesign name="close" size={22} color="black" />
+          </Pressable>
+          <YoutubePlayer
+            height={300}
+            play={playing}
+            videoId={url}
+            onChangeState={onStateChange}
+          />
+        </View>
+      }
 
       <LinearGradient
         colors={['#F7F7F7', '#C0E8F9']}
@@ -22,6 +64,7 @@ const RecommendedContentCard = ({title,description,label,image,}) => {
         end={{ x: 0, y: 0 }}
         style={styles.cardContainer}
       >
+        
         <View style={styles.imageContainer}>
           <Image source={{uri:image}} style={styles.image}/>
         </View>
@@ -39,7 +82,9 @@ const RecommendedContentCard = ({title,description,label,image,}) => {
 
       </LinearGradient>
 
-    </View>
+
+
+    </Pressable>
   );
 }
 
@@ -53,19 +98,15 @@ const styles = StyleSheet.create({
   },
   
   cardContainer: {
-    width: 300,
-    height: 200,
+    width: '95%',
+    height: 180,
     flexDirection: 'row',
     justifyContent: 'flex-start', // Align to start of the container
     alignItems: 'center',
     padding: 16,
-    marginTop: 85,
-    borderRadius: 15,
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    elevation: 5,
+    marginTop: 90,
+    borderRadius: 10,
+
     },
 
     contentHeader: {
@@ -112,7 +153,7 @@ const styles = StyleSheet.create({
 
   contentDescription: {
     color: 'black',
-    fontSize: 14,
+    fontSize: 16,
   },
 
   labelContainer: {
@@ -122,8 +163,26 @@ const styles = StyleSheet.create({
 
   labelContent: {
     backgroundColor: colors.altSecondary,
-    alignSelf: 'center',
+    alignSelf: 'flex-start',
     color: colors.primary,
+  },
+
+  youtubeContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    position: 'fixed',
+    top: 100,
+    left: 0,
+    width: '100%',
+    height: 190,
+    zIndex: 3,
+  },
+
+  closeIcon: {
+    position: 'absolute',
+    top: -18,
+    right: -18,
+    zIndex: 4,
   },
 });
 

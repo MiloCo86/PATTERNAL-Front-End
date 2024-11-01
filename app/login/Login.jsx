@@ -77,8 +77,8 @@ const Login = () => {
         <SafeAreaView style={styles.mainContainer}>
 
             <LinearGradient
-                start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}
-                colors={[colors.primary,'#ffffff',colors.altSecondary,]} 
+                start={{ x: 2.4, y: 0 }} end={{ x: 2, y: 1.2 }}
+                colors={[colors.primary, colors.altBackground, colors.secondary]} 
                 style={styles.backgroundGradient} 
             />
             
@@ -100,6 +100,7 @@ const Login = () => {
                             autoCapitalize='none'
                             autoCorrect={false}
                             keyboardType='email-address'
+                            placeholderTextColor={colors.altBackground}
                         />
                         <Text style={styles.labelText}>Password</Text> 
                         <TextInput
@@ -108,6 +109,8 @@ const Login = () => {
                             value={form.password}
                             onChangeText={password => setForm({ ...form, password })}
                             secureTextEntry={true}
+                            placeholderTextColor={colors.altBackground}
+                    
                         />
                     </View>
 
@@ -144,7 +147,7 @@ const styles = StyleSheet.create({
     backgroundGradient: {
         position: 'absolute',
         width: '100%',
-        height: 2000,
+        height: 1200,
     },
 
     header: {
@@ -153,7 +156,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     logo: {
-        width: 350,
+        width: 330,
         height: 60,
     },
     title: {
@@ -164,23 +167,27 @@ const styles = StyleSheet.create({
         color: colors.secondary
     },
     inputControl: {
-        width: '100%',
-        minWidth: '90%',
+        width: '81%',
         height: 40,
         borderWidth: 1,
-        borderColor: colors.altSecondary,
-        marginBottom: 5,
+        borderColor: colors.primary,
+        marginBottom: 16,
+        paddingTop: 8, 
         // backgroundColor: colors.white,
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
         borderTopColor: 'transparent',
-        color: colors.secondary,
-        fontSize: 18,
+        color: colors.primary,
+        fontSize: 16,
+        fontWeight: '700',
+        opacity: 0.7,
     },
     formContainer: {
-        marginTop: 40,
-        justifyContent: 'space-around',
-        height: '25%',
+        marginTop: 80,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '20%',
+        width: '100%'
     },
     errorText: {
         color: 'red',
@@ -188,7 +195,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     buttonContainer: {
-        marginTop: 80
+        top: 180,
+       
     },
     loginButton: {
         justifyContent: 'center',
@@ -207,10 +215,11 @@ const styles = StyleSheet.create({
         color: colors.primary
     },
     labelText: {
-        width: '80%',
-        color: colors.primary,
-        fontSize: 18,
-        fontWeight: 'bold',
+        color: 'black',
+        fontSize: 16,
+        alignSelf: 'flex-start',
+        marginLeft: 32,
+        top: 4,
     },
 });
 

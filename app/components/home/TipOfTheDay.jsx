@@ -51,23 +51,22 @@ const styles = StyleSheet.create({
     tipCard: {
         borderRadius: 10,
         width: 280,
-        height: 110,
+        height: 116,
         flex: 1,
         // justifyContent: 'center',
         alignSelf: 'center',
         backgroundColor: colors.primary,
         position: 'absolute',
         top: 175,
-        shadowColor: colors.altSecondaryecondary,
-        shadowOffset: {width: 1, height: 2},
+        shadowColor: colors.primary,
+        shadowOffset: {width: 2, height: 3},
         // opacity: 0.9,
 
     },
 
     tipHeader: {
-        fontSize: 16,
+        fontSize: 24,
         fontWeight: 'bold',
-        alignself: 'center',
         color: colors.secondary,
     },
 
@@ -76,6 +75,7 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: 8,
         alignSelf: 'center',
+        fontWeight: '300',
     },
 
 });

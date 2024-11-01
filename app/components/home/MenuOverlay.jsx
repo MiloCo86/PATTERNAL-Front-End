@@ -35,14 +35,14 @@ const MenuOverlay = ({userId, onPress}) => {
       <View style={styles.menuCard}>
      
         <Pressable  style={styles.menuItemContainer} onPress={handleUserProfile}>
-          <FontAwesome name="user-circle" size={28} color={colors.secondary} />
+          <FontAwesome name="user-circle" size={24} color={colors.primary} />
           <Text style={styles.userProfileText}>User Profile</Text>
         </Pressable>
 
         <View style={styles.menuDivider}/>
       
         <Pressable style={styles.menuItemContainer} onPress={handleLogout}>
-          <FontAwesome name="sign-out" size={32} color={colors.secondary} /> 
+          <FontAwesome name="sign-out" size={28} color={colors.primary} /> 
           <Text style={styles.logoutText}>Logout</Text>
         </Pressable>
       </View>
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
   menuCard: {
     zIndex: 2,
     width: 175,
-    height: 120,
     position: 'absolute',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -79,8 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     top: 105,
-    left: 170,
-    paddingTop: 8,
+    left: 170
   },
 
   userProfileText: {

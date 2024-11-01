@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import {useState,useRef} from 'react';
 import { Text, View, StyleSheet, Image, FlatList, Dimensions} from 'react-native';
 
 //colors and helper functions
@@ -8,11 +9,12 @@ import colors from '../config/colors';
 import { router, useLocalSearchParams } from 'expo-router';
 
 //components
+import NavigationBar from '../layout/NavigationBar';
 import TipOfTheDay from '../components/home/TipOfTheDay';
 import RecommendedContentCard from '../components/home/RecommendedContentCard';
-import MenuOverlay from '../components/home/MenuOverlay';
 import MoodTrends from '../components/home/MoodTrends';
-import TopBar from '../layout/TopBar';
+import Paginator from '../components/Paginator';
+
 
 //icon components
 
@@ -23,19 +25,33 @@ import {RecommendedContentData} from '../assets/recommended_content_data/Recomme
 //get screen dimensions for carousel
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = SCREEN_WIDTH * 0.8; 
-const SPACING = 24;
-
+const SPACING = 12;
 
 
 
 const Home = () => {
   const { userId } = useLocalSearchParams();
 
+  //paginator
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const flatListRef = useRef(null);
+
+  const handleViewableItemsChanged = useRef(({ viewableItems }) => {
+    if (viewableItems[0] != null) {
+      setActiveCardIndex(viewableItems[0].index);
+    }
+  }).current;
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 50,
+  }).current;
+
+
   return (
   
     <View style={styles.container}>
+      <NavigationBar title={`Welcome`}/>
 
-      <TopBar title="Home" userId={userId} />
         
       <FlatList
           data={[{ key: '1' }]} // these are nested flatlists - this is the parent flatlist, it has the content for the home screen
@@ -45,29 +61,38 @@ const Home = () => {
                 <TipOfTheDay style={styles.tipOfTheDay} />
               </View>
 
-              <Text variant="bodyMedium" style={styles.recommendedContentHeader}>Recommended Content</Text>
+              <Text style={styles.recommendedContentHeader}>Recommended Content</Text>
 
               <FlatList
                 data={RecommendedContentData} // Data for the carousel
                 horizontal
                 renderItem={({item}) => (
+                  
                   <View style={[styles.carouselItem,styles.componentSpacing]}>
-                    <RecommendedContentCard 
-                    title={item.contentTitle}
-                    description={item.contentDescription}
-                    label={item.contentLabel}
-                    image={item.contentImage}/>
+                      <RecommendedContentCard 
+                      title={item.title}
+                      description={item.description}
+                      label={item.label}
+                      image={item.image}
+                      url={item.url}/>
 
                   </View>
-                )}
+                  )}
+
                 keyExtractor={(item) => item.id.toString()}
-                showsHorizontalScrollIndicator={true} // Hide the horizontal scroll bar
+                showsHorizontalScrollIndicator={false} // Hide the horizontal scroll bar
                 contentContainerStyle={styles.carouselSpacing}
-                snapToInterval={CARD_WIDTH + SPACING} // Snap to card width plus spacing
                 snapToAlignment="center"
                 decelerationRate="fast"
-                pagingEnabled={false}
+                pagingEnabled={true}
+                bounces={false}
+                viewabilityConfig={viewabilityConfig}
+                onViewableItemsChanged={handleViewableItemsChanged}
+                ref={flatListRef}
+
               />
+
+              <Paginator data={RecommendedContentData} cardIndex={activeCardIndex}/>
 
               <View>
                 <MoodTrends moodIntervalText='Weekly Trends' />
@@ -94,18 +119,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.background,
   },
+  
   recommendedContentHeader: {
-    fontSize: 20,
+    fontSize: 22,
     color: 'black',
     marginTop: 44, // Add some space between the placeholder and the
-    marginBottom: -75, // Add some space between the placeholder and the content card
+    marginBottom: -80, // Add some space between the placeholder and the content card
     fontWeight: 'bold',
     alignSelf: 'center',
   },
 
   tipOfTheDaySpacing: {
-    marginTop: 10, // Add some space between the top bar and the tip of the day
-    marginBottom: 32, // Add some space between the content cards
+    marginTop: 8, // Add some space between the top bar and the tip of the day
+    marginBottom: 44, // Add some space between the content cards
     paddingTop: 15,
   },
 
@@ -116,13 +142,15 @@ const styles = StyleSheet.create({
   carouselSpacing: {
     justifyContent  : 'center',
     alignItems: 'space-between',
-    paddingHorizontal: 12, // Add some padding to the content card
+    // paddingHorizontal: 14, // Add some padding to the content card
+    marginLeft: 6,
   },
 
   carouselItem: {
     width: CARD_WIDTH,
-    marginHorizontal: SPACING / 2,
+    marginHorizontal: SPACING,
   },
+
 });
 
 export default Home;

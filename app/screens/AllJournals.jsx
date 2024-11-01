@@ -11,7 +11,7 @@ import { API_URL } from '@env';
 import axios from 'axios';
 
 //Components
-import TopBar from '../layout/TopBar'
+import NavigationBar from '../layout/NavigationBar';
 import JournalMiniCard from '../components/journal/JournalMiniCard'
 import ButtonList from '../components/buttons/ButtonList'
 
@@ -57,7 +57,8 @@ const AllJournals = () => {
     return (
         <GestureHandlerRootView style={{ flex: 1, width: '100%' }}>
         <View style={styles.journalsContainer}>
-            <TopBar title={'Notes'} userId={userId}/>
+
+            <NavigationBar title={'All Journals'} />
             
             <View style={styles.buttonsContainer}>
                 <ButtonList handleSelect={handleSortBy} />
@@ -88,9 +89,10 @@ const styles = StyleSheet.create({
     },
     buttonsContainer: {
         marginTop: 10,
-        width: '70%',
+        width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 8,
     },
     journalList: {
         width: '90%',

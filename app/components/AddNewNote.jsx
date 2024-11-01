@@ -2,8 +2,6 @@ import React from 'react'
 import { useState, useEffect} from 'react'
 import {SafeAreaView, View, Text, StyleSheet, Pressable, TextInput, Alert} from 'react-native'
 
-// router
-import { router } from 'expo-router'
 
 // colors and helper functions
 import colors from '../config/colors'
@@ -12,12 +10,12 @@ import colors from '../config/colors'
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 
-const AddNewNote = ({handleClose, category, handleAdd}) => {
+const AddNewNote = ({handleClose, category, handleAdd,  }) => {
     const [note, setNote] = useState('')
     const [showAddBtn, setShowAddBtn] = useState(false)
 
     useEffect(() => {
-        if (note.length > 0) {
+        if (note.trim().length > 0) {
             setShowAddBtn(true)
         } else {
             setShowAddBtn(false)
@@ -25,22 +23,23 @@ const AddNewNote = ({handleClose, category, handleAdd}) => {
     }, [note])
 
     const handleCloseIcon = (category) => {
-        if (note.length > 0) {
+
+        //if note is empty or with enters only, close the modal
+        if (note.trim().length === 0) {
+            handleClose(category)
+        } else {
             Alert.alert(
-                "Are you sure you want to close?",
-                `your ${category} will not be saved`,
+                "Discard Note",
+                "Are you sure you want to discard this note?",
                 [
                     {
                         text: "Cancel",
                         onPress: () => console.log("Cancel Pressed"),
                         style: "cancel"
                     },
-                    { text: "Close", onPress: handleClose }
+                    { text: "Discard", onPress: () => handleClose(category) }
                 ]
             );
-            
-        }else {
-            handleClose()
         }
     }
 
@@ -60,6 +59,7 @@ const AddNewNote = ({handleClose, category, handleAdd}) => {
             numberOfLines={4}
             onChangeText={setNote}
             value={note}
+            placeholder={`Write your ${category} here`}
             />
             
             {showAddBtn ? <Pressable style={styles.button} onPress={()=>handleAdd(note)}>
@@ -72,7 +72,6 @@ const AddNewNote = ({handleClose, category, handleAdd}) => {
   )
 }
 
-//container should be flex 1 to take up the whole screen  with opacity 0.8 and position absolute
 
 const styles = StyleSheet.create({
     container: {
@@ -87,18 +86,20 @@ const styles = StyleSheet.create({
     backgroundOpacity: {
         position: 'absolute',
         width: '100%',
-        height: '120%',
-        backgroundColor: 'white',
-        opacity: 0.4,
+        height: 900,
+        top: 0,
+        backgroundColor: 'black',
+        opacity: 0.2,
     },
     itemsContainer: {
-        width: '90%',
-        height: 'a',
+        width: '85%',
+        height: '40%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.background,
+        backgroundColor: colors.altBackground,
         borderRadius: 5,
         paddingBottom: 10,
+        borderRadius: 10,
     },
     title: {
         alignSelf: 'flex-start',
@@ -107,11 +108,12 @@ const styles = StyleSheet.create({
         marginLeft: 25,
         marginTop: 10,
         marginBottom: 10,
+        color: colors.primary,
     },
     closeButton: {
         position: 'absolute',
-        top: 5,
-        right: 5,
+        top: 8,
+        right: 8,
     },
     textBox: {
         width: '85%',

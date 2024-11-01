@@ -14,15 +14,14 @@ import axios from 'axios';
 import colors from '../../config/colors'
 import { convertDateToMonthDayFormat } from '../../config/helperFunctions';
 
-//icon components
-import ProfilePic from '../icons/ProfilePic'
+
 
 //icons
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 
-const CommentCard = ({entryId, forumId,commentId}) => {
+const CommentCard = ({entryId, forumId,commentId, userId, deleteComment}) => {
 
     const [comment, setComment] = useState({
         id: '',
@@ -47,15 +46,22 @@ const CommentCard = ({entryId, forumId,commentId}) => {
     })
 
     const [likeIcon, setLikeIcon] = useState('thumb-up-outline');
- 
+
+    const [showDeleteIcon, setShowDeleteIcon] = useState(false);
+
+    const [likesCount, setLikesCount] = useState(0);
+
 
     useEffect(() => {
         const fetchCommentData = async () => {
             try {
                 const getCommentData = await axios.get(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/comments/${commentId}`);
                 setComment(getCommentData.data);
-                
-                setDate(convertDateToMonthDayFormat(getCommentData.data.created_at.slice(0, 10)));   
+                setDate(convertDateToMonthDayFormat(getCommentData.data.created_at.slice(0, 10)));
+
+                if (getCommentData.data.user_id == userId) {
+                    setShowDeleteIcon(true);
+                }
             } catch (error) {
                 console.log('Error fetching comment data:', error);
             }
@@ -83,9 +89,11 @@ const CommentCard = ({entryId, forumId,commentId}) => {
 
     const handleLike = () => {
         if (likeIcon === 'thumb-up-outline') {
-            setLikeIcon('thumb-up');    
+            setLikeIcon('thumb-up');
+            setLikesCount(likesCount + 1);    
         } else {
             setLikeIcon('thumb-up-outline');
+            setLikesCount(likesCount - 1);
         }
     }
 
@@ -95,7 +103,7 @@ const CommentCard = ({entryId, forumId,commentId}) => {
         <LinearGradient colors={['#C3C3C3', '#F7F7F7']} style={styles.background} />
         <Text style={styles.dateText}>{date}</Text>
         <View style={styles.userContainer} >
-            <ProfilePic size={20}/>
+            <AntDesign name="user" size={28} color="black" />
             <Text style={styles.username}>{user.username}</Text>
         </View>
         <Text style={styles.entryText}>{comment.comment}</Text>
@@ -103,7 +111,14 @@ const CommentCard = ({entryId, forumId,commentId}) => {
             <Pressable style={styles.likeIcon} onPress={handleLike}>
                 <MaterialCommunityIcons name={likeIcon} size={24} color={colors.primary} />
             </Pressable>
-        </View>     
+            <Text style={styles.likesCounter}>{likesCount}</Text>
+        </View>
+
+        {showDeleteIcon &&
+        <Pressable style={styles.deleteIcon} onPress={()=>deleteComment(comment.id)}>
+            <MaterialCommunityIcons name="delete-forever-outline" size={34} color={colors.primary} />
+        </Pressable>
+        }    
     </View>
 
   )
@@ -112,9 +127,9 @@ const CommentCard = ({entryId, forumId,commentId}) => {
 const styles = StyleSheet.create({
     container: {
         width: '80%',
-        minHeight: 180,
+        minHeight: 170,
         justifyContent: 'space-between',
-        borderRadius: 15,
+        borderRadius: 10,
         marginBottom: 10,
         marginRight: 25,
         marginLeft: 55,
@@ -131,7 +146,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         height: '100%',
-        borderRadius: 15,
+        borderRadius: 10,
     },
     userContainer: {
         flexDirection: 'row',
@@ -156,21 +171,24 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        marginLeft: 15,
+        marginLeft: 20,
         marginBottom: 10,
     },
-    likeIcon: {
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: 4,
+    likesCounter: {
+        fontSize: 20,
+        marginLeft: 2,
+        color: colors.primary,
     },
     dateText: {
         position: 'absolute',
         top: 10,
         right: 10,
-    }
+    },
+    deleteIcon: {
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+    },
 })
 
 export default CommentCard

@@ -1,17 +1,17 @@
 import React from 'react'
 import { View, Text, StyleSheet, Pressable } from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient';
+// import { LinearGradient } from 'expo-linear-gradient';
 
 //colors and helper functions
 import colors from '../../config/colors';
 
 const NoteMiniCard = ({note}) => {
   return (
-    <LinearGradient colors={['#C0E8F9', colors.primary]} style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{note}</Text>
       </View>
-    </LinearGradient>
+    </View>
   )
 }
 
@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     borderRadius: 10,
+    shadowColor: colors.primary,
+    shadowOffset: {width: 3, height: 4},
+    shadowOpacity: 0.3,
   },
   textContainer: {
     padding: 15,
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
     height: 'auto',
     justifyContent: 'flex-start',
     borderRadius: 10,
-    backgroundColor: 'white',
+    backgroundColor: colors.altBackground,
   },
   text: {   
     fontSize: 18,

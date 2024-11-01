@@ -9,7 +9,7 @@ import colors from '../config/colors'
 
 
 //Components
-import TopBar from '../layout/TopBar'
+import NavigationBar from '../layout/NavigationBar'
 import MainForumCard from '../components/forum/MainForumCard'
 
 //data
@@ -21,7 +21,8 @@ const AllForums = () => {
   return (
 
     <View style={styles.container}>
-      <TopBar title="Forum" />
+    
+      <NavigationBar title="Forums" />
 
       <FlatList
         style={{ width: '100%' }}
@@ -30,6 +31,11 @@ const AllForums = () => {
         renderItem={({ item }) => (
           <MainForumCard forumId={item.id} title={item.title} img={item.img} userId={userId} />
         )}
+        snapToInterval={200}
+        snapToAlignment='center'
+        decelerationRate='fast'
+        pagingEnabled={false}
+        
       />
       
     </View>
