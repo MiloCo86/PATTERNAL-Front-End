@@ -65,8 +65,11 @@ const Meditation = () => {
     return (
         <View style={styles.container}>
 
+
+            <Text style={styles.instructions}>{'\n'}<Text style={{ fontWeight: '700' }}>Take a breather!</Text> {'\n\n'}Please take a few minutes to relax and think about the children. Your streaks will be tallied daily. Let's see how you do.</Text>
+
             <NavigationBar title={`Meditation`} />
-            <Text style={styles.instructions}><Text style={{ fontWeight: '700' }}>Take a Breather!</Text> Please take a few minutes to relax and think about the children. Your streaks will be tallied daily. Let's see how you do.</Text>
+           
 
             <MeditationTimer updateUser={handleMeditationEnd} />
 
@@ -95,6 +98,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         marginBottom: '10%',
         color: colors.primary,
+        paddingBottom: 0
     },
     streakContainer: {
         height: 100,
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     streakText: {
         fontSize: 25,
         color: colors.primary,
-    },
+    }
 })
 
 export default Meditation;
