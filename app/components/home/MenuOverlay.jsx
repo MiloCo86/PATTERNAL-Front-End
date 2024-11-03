@@ -36,7 +36,7 @@ const MenuOverlay = ({userId, onPress}) => {
      
         <Pressable  style={styles.menuItemContainer} onPress={handleUserProfile}>
           <FontAwesome name="user-circle" size={24} color={colors.primary} />
-          <Text style={styles.userProfileText}>User Profile</Text>
+          <Text style={styles.userProfileText}>My Profile</Text>
         </Pressable>
 
         <View style={styles.menuDivider}/>
