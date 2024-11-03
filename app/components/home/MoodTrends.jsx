@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, Text, Pressable } from 'react-native';
 
 //import charting library
@@ -8,11 +8,17 @@ import { PieChart } from "react-native-gifted-charts";
 //import styles - for more modular approach - WE HAVE TO CHANGE THIS IN THE REST OF THE APP
 import { styles } from '../../styles/MoodTrends.styles';
 
+//backend connection
+import { API_URL } from '@env';
+import axios from 'axios';
+
+
 //import colors
 import colors from '../../config/colors';
 
+
 //import helper function to calculate mood
-import { getMoodValueWeekly } from '../../config/helperFunctions';
+import { getMoodValueWeekly, getPastWeekMoods } from '../../config/helperFunctions';
 
 
 // dummy data for testing - need to pull from userId and mood from backend
@@ -23,10 +29,36 @@ console.log('Dummy Moods Array:', dummyMoodsArray);
 
 
 
-const MoodTrends = ({moodsArray, moodIntervalText}) => {
+const MoodTrends = ({userId, moodIntervalText}) => {
+    
+    const [moodData, setMoodData] = useState([]);
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+
+    const [moodCounts, setMoodCounts] = useState(getMoodValueWeekly(dummyMoodsArray));
+
+    const [pastWeekMoods, setPastWeekMoods] = useState([]);
+
+    // fetch mood data
+    useEffect(() => {
+        const fetchMoodData = async () => {
+            try {
+                const getMoodData = await axios.get(`${API_URL}/users/${userId}/journal-entries`);
+                setMoodData(getMoodData.data);
+
+
+            } catch (error) {
+                console.log('Error fetching mood data:', error);
+            }
+        }
+        fetchMoodData();
+    } ,[]);
+
+
+
     const [showLegend, setShowLegend] = useState(false);
     
-    const moodCounts = getMoodValueWeekly(dummyMoodsArray);
+
 
     // get the most frequent mood to focus that section in the pie chart
     const focusMostFrequentMood = Math.max(
@@ -97,6 +129,8 @@ const MoodTrends = ({moodsArray, moodIntervalText}) => {
             </>
         );
     };
+
+
 
     return (
         <View style={styles.chartCard}>

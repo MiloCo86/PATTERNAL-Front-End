@@ -96,7 +96,7 @@ const Home = () => {
               <Paginator data={RecommendedContentData} cardIndex={activeCardIndex}/>
 
               <View>
-                <MoodTrends moodIntervalText='Weekly Trends' />
+                <MoodTrends userId={userId} moodIntervalText='Weekly Trends' />
               </View>
             </>
           )}
