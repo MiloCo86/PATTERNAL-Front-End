@@ -179,6 +179,20 @@ const selectedTime = (seconds) => {
   return `${Math.floor(seconds / 60)}:0${seconds % 60}`
 };
 
+//function that gets an array of mood entries and returns the mood values of the past week
+function getPastWeekMoods(entries, currentDate) {
+  const currentDateObj = new Date(currentDate);
+  const oneWeekAgo = new Date(currentDateObj);
+  oneWeekAgo.setDate(currentDateObj.getDate() - 7);
 
-export { getCheckInQuestions, getMoodValueWeekly, getQuestionById, convertDateToMonthDayFormat, timeSelector, countDownTimerHeader, countDownTimerDisplay, selectedTime };
+  return entries
+      .filter(entry => {
+          const entryDate = new Date(entry.created_at);
+          return entryDate >= oneWeekAgo && entryDate <= currentDateObj;
+      })
+      .map(entry => entry.mood);
+}
+
+
+export { getCheckInQuestions, getMoodValueWeekly, getQuestionById, convertDateToMonthDayFormat, timeSelector, countDownTimerHeader, countDownTimerDisplay, selectedTime, getPastWeekMoods };
 
