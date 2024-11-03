@@ -50,13 +50,14 @@ const Home = () => {
   return (
   
     <View style={styles.container}>
-      <NavigationBar title={`Welcome`}/>
+      
 
         
       <FlatList
           data={[{ key: '1' }]} // these are nested flatlists - this is the parent flatlist, it has the content for the home screen
           renderItem={() => (
             <>
+              <NavigationBar title={`Welcome`}/>  
               <View style={styles.tipOfTheDaySpacing}>
                 <TipOfTheDay style={styles.tipOfTheDay} />
               </View>

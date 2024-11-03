@@ -1,80 +1,104 @@
-import React, { useState } from 'react';
-import { router } from 'expo-router';
-import { Text, View, StyleSheet, Pressable, Platform, KeyboardAvoidingView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLocalSearchParams } from 'expo-router'
+import React from 'react'
+import { useState, useEffect } from 'react'
+import { StyleSheet, View, Text, Pressable } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient';
+
+// router
+import { router, useLocalSearchParams } from 'expo-router'
+
+
+//backend connection
+import { API_URL } from '@env';
+import axios from 'axios';
 
 // colors and helper functions
-import colors from '../config/colors';
+import colors from '../config/colors'
 
 //components
-import UserForm from '../components/forms/UserForm';
-import ProfileHeader from '../components/profile/ProfileHeader';
-import FooterLogo from '../components/profile/FooterLogo';
+import NavigationBar from '../layout/NavigationBar'
+
+//icons
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 const Profile = () => {
-
     const { userId } = useLocalSearchParams();
-
-    console.log('userId in Profile:', userId);
-
-    const [form, setForm] = useState({
-        first_name: 'John',
-        last_name: 'Doe',
-        email: 'john_doe_uniqu@example.com',
-        username: 'johndoe',
-        password: '****************',
-        verify_password: '****************'
+    
+    const [user, setUser] = useState({
+        username: '',
+        first_name: '',
+        last_name: '',
+        child_amount: 0,
+        email: '',
+        password: '',
+        created_at: '',
+        updated_at: '',
+        meditation_streak: 0,
+        meditation_status: false,
     });
 
-    const [errorMessage, setErrorMessage] = useState('');
+    const handleBack = () => {
+        router.push({
+            pathname: '/screens/Home',
+            params: { userId: userId }
+        });
+    }
 
-    const handleSave = () => {
-        if (form.password !== form.verify_password) {
-            setErrorMessage("Passwords do not match!");
-        } else {
-            setErrorMessage(''); // Clear any previous error
-            console.log('Save button pressed');
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const getUserData = await axios.get(`${API_URL}/users/${userId}`);
+                setUser(getUserData.data);
+            } catch (error) {
+                console.log('Error fetching user data:', error);
+            }
         }
-    };
+        fetchUserData();
+    } ,[]);
+    
 
+  return (
+    <View style={styles.container}>
+        <LinearGradient
+            start={{ x: 2.4, y: 0 }} end={{ x: 2, y: 1.2 }}
+            colors={[colors.primary, colors.altBackground, colors.secondary]} 
+            style={styles.backgroundGradient} 
+        />
+        
+        <View style={styles.header}>
+            <Pressable onPress={handleBack}>
+                <Ionicons name="chevron-back" size={32} color={colors.primary} />
+            </Pressable>
+            <Text style={styles.headerText}>{user.first_name} {user.last_name}</Text>
+        </View>
+    </View>
 
-    return (
-        <SafeAreaView style={styles.container}>
-            
-            <ProfileHeader userId={userId}/>
-            
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Edit Profile</Text>
-            </View>
-
-            <UserForm />
-
-            <FooterLogo />
-            
-        </SafeAreaView >
-    );
+  )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        color: colors.primary,
         width: '100%',
-    },
-    titleContainer: {
-        marginBottom: 20,
-    },
-    titleText: {
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+      },
+      header: {
+        width: '100%',
+        height: 150,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      headerText: {
+        color: colors.white,
         fontSize: 20,
-        fontFamily: 'Roboto',
-        textAlign: 'center',
-        fontWeight: '700',
-        lineHeight: 48,
-        color: 'black',
-    }
-});
+    },
+    backgroundGradient: {
+        position: 'absolute',
+        width: '100%',
+        height: 1200,
+    },
+})
 
-export default Profile;
+
+export default Profile
