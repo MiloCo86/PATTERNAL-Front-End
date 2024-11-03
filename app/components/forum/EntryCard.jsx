@@ -123,7 +123,7 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
                 setLikesData(getLikesData.data);
                 setLikesCount(getLikesData.data.length);
                 if (getLikesData.data.some((like) => like.user_id == userId)) {
-                    setHeartIcon('cards-heart');
+                    setHeartIcon('thumb-up');
                 }
             } catch (error) {
                 console.log('Error fetching likes data:', error);
@@ -145,20 +145,28 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
             setHeartIcon('thumb-up');
             setLikesCount(likesCount + 1);
             const newLike = {
-                user_id: userId,
-                entry_id: entry.id
+                userId: userId
             }
-            // axios.post(`${API_URL}/forums/${forumId}/forum-entry/${entry.id}/forum-likes`, newLike)
-            //     .then(() => {
-            //         setLikesData([...likesData, newLike]);
-            //     })
-            //     .catch((error) => {
-            //         console.log('Error posting new like:', error);
-            //     })
-
+            axios.post(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/forum-likes`, newLike)
+                .then((response) => {
+                    setLikesData([response.data, ...likesData]);
+                })
+                .catch((error) => {
+                    console.log('Error posting new like:', error);
+                })
         } else {
             setHeartIcon('thumb-up-outline');
             setLikesCount(likesCount - 1);
+            const deleteLike = {
+                userId: userId
+            }
+            axios.delete(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/forum-likes`, {data: deleteLike})
+                .then(() => {
+                    setLikesData(likesData.filter((like) => like.user_id !== userId));
+                })
+                .catch((error) => {
+                    console.log('Error deleting like:', error);
+                })  
         } 
     }
 

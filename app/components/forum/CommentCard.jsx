@@ -86,14 +86,52 @@ const CommentCard = ({entryId, forumId,commentId, userId, deleteComment}) => {
     }
     , [comment.user_id]);
 
+    // fetch likes count
+    useEffect(() => {
+        const fetchLikesCount = async () => {
+            try {
+                const getLikesCount = await axios.get(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/comments/${commentId}/comments-likes`);
+                setLikesCount(getLikesCount.data.length);
+                if (getLikesCount.data.some(like => like.user_id == userId)) {
+                    setLikeIcon('thumb-up');
+                }
+            } catch (error) {
+                console.log('Error fetching likes count:', error);
+            }
+        };
 
+        fetchLikesCount();
+    }, [commentId]);
+
+    
     const handleLike = () => {
         if (likeIcon === 'thumb-up-outline') {
             setLikeIcon('thumb-up');
-            setLikesCount(likesCount + 1);    
+            setLikesCount(likesCount + 1);
+            const newLike = {
+                userId: userId,
+            }
+            axios.post(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/comments/${commentId}/comments-likes`, newLike)
+                .then((response) => {
+                    console.log('Like response:', response.data);
+                })
+                .catch((error) => {
+                    console.log('Error liking comment:', error);
+                })
+
         } else {
             setLikeIcon('thumb-up-outline');
             setLikesCount(likesCount - 1);
+            const deleteLike = {
+                userId: userId,
+            }
+            axios.delete(`${API_URL}/forums/${forumId}/forum-entry/${entryId}/comments/${commentId}/comments-likes`, {data: deleteLike})
+                .then((response) => {
+                    console.log('Like deleted:', response.data);
+                })
+                .catch((error) => {
+                    console.log('Error deleting like:', error);
+                })
         }
     }
 
