@@ -1,16 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 import colors from '../config/colors'
 
 // import components
-import TopBar from '../layout/TopBar'
 import NavigationBar from '../layout/NavigationBar'
 import MeditationTimer from '../components/MeditationTimer'
 
 //router
-import { router, useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams } from 'expo-router'
 
 //backend connection
 import { API_URL } from '@env';
@@ -65,12 +64,11 @@ const Meditation = () => {
     return (
         <View style={styles.container}>
 
+            <NavigationBar title={`Meditation`} />
 
             <Text style={styles.instructions}>{'\n'}<Text style={{ fontWeight: '700' }}>Take a breather!</Text> {'\n\n'}Please take a few minutes to relax and think about the children. Your streaks will be tallied daily. Let's see how you do.</Text>
-
-            <NavigationBar title={`Meditation`} />
+         
            
-
             <MeditationTimer updateUser={handleMeditationEnd} />
 
             <View style={styles.streakContainer}>
