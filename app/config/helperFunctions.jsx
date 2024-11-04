@@ -175,10 +175,6 @@ const countDownTimerDisplay = (seconds) => {
   return `${Math.floor(seconds / 60)} : ${(seconds % 60) < 10 ? "0" + String(seconds % 60) : seconds % 60}`;
 }
 
-const selectedTime = (seconds) => {
-  return `${Math.floor(seconds / 60)}:0${seconds % 60}`
-};
-
 //function that gets an array of mood entries and returns the mood values of the past week
 function getPastWeekMoods(entries, currentDate) {
   const currentDateObj = new Date(currentDate);
@@ -194,5 +190,5 @@ function getPastWeekMoods(entries, currentDate) {
 }
 
 
-export { getCheckInQuestions, getMoodValueWeekly, getQuestionById, convertDateToMonthDayFormat, timeSelector, countDownTimerHeader, countDownTimerDisplay, selectedTime, getPastWeekMoods };
+export { getCheckInQuestions, getMoodValueWeekly, getQuestionById, convertDateToMonthDayFormat, timeSelector, countDownTimerHeader, countDownTimerDisplay, getPastWeekMoods };
 
