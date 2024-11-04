@@ -8,11 +8,11 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
-import { timeSelector, countDownTimerHeader, countDownTimerDisplay, selectedTime } from '../config/helperFunctions';
+import { timeSelector, countDownTimerHeader, countDownTimerDisplay } from '../config/helperFunctions';
 
 import colors from '../config/colors'
 
-let durationArray = [60, 180, 300, 600, 1200, 1800];
+let durationArray = [10, 30, 60, 180, 300, 600, 1200, 1800];
 let currIndex = 0;
 
 const MeditationTimer = ({ updateUser }) => {
@@ -73,7 +73,7 @@ const MeditationTimer = ({ updateUser }) => {
                         <Pressable onPress={() => { handleTimeChange('-') }} >
                             <MaterialCommunityIcons name="minus-circle-outline" size={40} color="black" />
                         </Pressable>
-                        <Text style={styles.currentTime}>{selectedTime(remainingTime)}</Text>
+                        <Text style={styles.currentTime}>{countDownTimerDisplay(remainingTime)}</Text>
                         <Pressable onPress={() => { handleTimeChange('+') }} >
                             <MaterialIcons name="add-circle-outline" size={40} color="black" />
                         </Pressable>
@@ -84,13 +84,13 @@ const MeditationTimer = ({ updateUser }) => {
                             <Pressable onPress={() => { handleTimeChange('-') }} >
                                 <MaterialCommunityIcons name="minus-circle-outline" size={40} color="black" />
                             </Pressable>
-                            <Text style={styles.currentTime}>{selectedTime(remainingTime)}</Text>
+                            <Text style={styles.currentTime}>{countDownTimerDisplay(remainingTime)}</Text>
                             <MaterialIcons name="add-circle-outline" size={40} color="gray" />
                         </View>
                         :
                         <View style={styles.timerControllers}>
                             <MaterialCommunityIcons name="minus-circle-outline" size={40} color="gray" />
-                            <Text style={styles.currentTime}>{selectedTime(remainingTime)}</Text>
+                            <Text style={styles.currentTime}>{countDownTimerDisplay(remainingTime)}</Text>
                             <Pressable onPress={() => { handleTimeChange('+') }} >
                                 <MaterialIcons name="add-circle-outline" size={40} color="black" />
                             </Pressable>
@@ -100,9 +100,9 @@ const MeditationTimer = ({ updateUser }) => {
             <CountdownCircleTimer
                 isPlaying={isPlaying}
                 key={key}
-                duration={durationArray[Math.abs(currIndex) % 6]}
+                duration={durationArray[Math.abs(currIndex) % 8]}
                 colors={[colors.tertiery, colors.primary, colors.primary]}
-                colorsTime={[durationArray[Math.abs(currIndex) % 4], durationArray[Math.abs(currIndex) % 6] - 10, 0]}
+                colorsTime={[durationArray[Math.abs(currIndex) % 6], durationArray[Math.abs(currIndex) % 8] - 10, 0]}
                 onComplete={() => [true, 1000]}
                 size={250}
                 strokeWidth={25}

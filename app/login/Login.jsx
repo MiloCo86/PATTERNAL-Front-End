@@ -78,10 +78,10 @@ const Login = () => {
 
             <LinearGradient
                 start={{ x: 2.4, y: 0 }} end={{ x: 2, y: 1.2 }}
-                colors={[colors.primary, colors.altBackground, colors.secondary]} 
-                style={styles.backgroundGradient} 
+                colors={[colors.primary, colors.altBackground, colors.secondary]}
+                style={styles.backgroundGradient}
             />
-            
+
 
             <ScrollView>
                 <View style={styles.loginContainer}>
@@ -102,7 +102,7 @@ const Login = () => {
                             keyboardType='email-address'
                             placeholderTextColor={colors.altBackground}
                         />
-                        <Text style={styles.labelText}>Password</Text> 
+                        <Text style={styles.labelText}>Password</Text>
                         <TextInput
                             placeholder='Password'
                             style={styles.inputControl}
@@ -110,7 +110,6 @@ const Login = () => {
                             onChangeText={password => setForm({ ...form, password })}
                             secureTextEntry={true}
                             placeholderTextColor={colors.altBackground}
-                    
                         />
                     </View>
 
@@ -143,7 +142,7 @@ const styles = StyleSheet.create({
         padding: 25,
         justifyContent: 'flex-start',
     },
-    
+
     backgroundGradient: {
         position: 'absolute',
         width: '100%',
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: colors.primary,
         marginBottom: 16,
-        paddingTop: 8, 
+        paddingTop: 8,
         // backgroundColor: colors.white,
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
@@ -181,6 +180,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         opacity: 0.7,
+        marginBottom: 20,
     },
     formContainer: {
         marginTop: 80,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         top: 180,
-       
+
     },
     loginButton: {
         justifyContent: 'center',
