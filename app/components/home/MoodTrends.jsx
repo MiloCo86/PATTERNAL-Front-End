@@ -24,7 +24,8 @@ import { getMoodValueWeekly, getPastWeekMoods } from '../../config/helperFunctio
 // dummy data for testing - need to pull from userId and mood from backend
 
 //generate an array with 7 random mood values
-const dummyMoodsArray = Array.from({ length: 7 }, () => Math.floor(Math.random() * 5) + 1);
+// const dummyMoodsArray = Array.from({ length: 7 }, () => Math.floor(Math.random() * 5) + 1);
+const dummyMoodsArray = [1, 1, 1, 1, 3, 1, 4];
 console.log('Dummy Moods Array:', dummyMoodsArray);
 
 
