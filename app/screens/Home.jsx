@@ -150,6 +150,9 @@ const styles = StyleSheet.create({
   carouselItem: {
     width: CARD_WIDTH,
     marginHorizontal: SPACING,
+    shadowColor: colors.primary,
+    shadowOffset: {width: 2.5, height: 2},
+    shadowOpacity: 0.2,
   },
 
 });

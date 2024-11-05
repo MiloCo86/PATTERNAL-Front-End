@@ -22,7 +22,7 @@ const TipOfTheDay = () => {
                 <Card style={styles.tipCard}>
                     <Card.Content>
                         <Text style={styles.tipHeader}>Tip Of The Day</Text>
-                        <Text style={styles.tipContent}>Make eye contact when they speak. Little moments build big connections.</Text>
+                        <Text style={styles.tipContent}>Learn to politely decline commitments that interfere with family time.</Text>
                     </Card.Content>
                 </Card>
             </Card>
@@ -73,9 +73,11 @@ const styles = StyleSheet.create({
     tipContent: {
         fontSize: 14,
         color: 'white',
-        marginTop: 8,
+        marginTop: 12,
+        marginLeft: 24,
         alignSelf: 'center',
-        fontWeight: '300',
+        fontWeight: '500',
+        width: 275,
     },
 
 });

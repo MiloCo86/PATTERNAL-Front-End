@@ -55,13 +55,13 @@ const NavBar = () => {
     <View style={styles.navBar}>
      
       <Pressable onPress={handleIAChat} style={styles.iaChatPressable}>
-      <Ionicons name="sparkles-sharp" size={28} color={colors.secondary} />
+      <Ionicons name="sparkles-sharp" size={27} color={colors.secondary} />
         <Text style={styles.iaChatIconText}>AI</Text>
       </Pressable>
 
       <Pressable onPress={handleMeditation} style={styles.meditationPressable}>
       <MaterialCommunityIcons name="meditation" size={32} color={colors.secondary} />
-        <Text style={styles.meditationIconText}>Meditate</Text>
+        <Text style={styles.meditationIconText}>Breathe</Text>
       </Pressable>
 
       <Pressable onPress={handleHome} style={styles.homePressable}>
@@ -71,7 +71,7 @@ const NavBar = () => {
 
       <Pressable onPress={handleNotes} style={styles.notesPressable}>
         <MaterialCommunityIcons name="text-box" size={32} color={colors.secondary}  />
-        <Text style={styles.notesIconText}>Notes</Text>
+        <Text style={styles.notesIconText}>Journal</Text>
       </Pressable >
 
       <Pressable onPress={handleForum} style={styles.forumPressable}>

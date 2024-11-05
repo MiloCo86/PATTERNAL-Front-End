@@ -64,7 +64,7 @@ const Meditation = () => {
     return (
         <View style={styles.container}>
 
-            <NavigationBar title={`Meditation`} />
+            <NavigationBar title={`Mindful Breathing`} />
 
             <Text style={styles.instructions}>{'\n'}<Text style={{ fontWeight: '700' }}>Take a breather!</Text> {'\n\n'}Please take a few minutes to relax and think about the children. Your streaks will be tallied daily. Let's see how you do.</Text>
          
