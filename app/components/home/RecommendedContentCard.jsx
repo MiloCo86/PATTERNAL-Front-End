@@ -89,13 +89,13 @@ const RecommendedContentCard = ({title,description,label,image,url}) => {
 }
 
 const styles = StyleSheet.create({
-  shadowOutline: {
-    shadowColor: colors.primary,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
-    elevation: 5,
-  },
+  // shadowOutline: {
+  //   shadowColor: colors.primary,
+  //   shadowOffset: { width: 0, height: 2 },
+  //   shadowOpacity: 0.5,
+  //   shadowRadius: 3,
+  //   elevation: 5,
+  // },
   
   cardContainer: {
     width: '95%',
