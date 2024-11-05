@@ -147,7 +147,7 @@ const CommentCard = ({entryId, forumId,commentId, userId, deleteComment}) => {
         <Text style={styles.entryText}>{comment.comment}</Text>
         <View style={styles.reactionContainer}>
             <Pressable style={styles.likeIcon} onPress={handleLike}>
-                <MaterialCommunityIcons name={likeIcon} size={24} color={colors.primary} />
+                <MaterialCommunityIcons name={likeIcon} size={16} color={colors.primary} />
             </Pressable>
             <Text style={styles.likesCounter}>{likesCount}</Text>
         </View>
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 10,
         marginRight: 25,
-        marginLeft: 55,
+        marginLeft: 48,
         //shadow
         shadowColor: colors.primary,
         shadowOffset: {
@@ -193,28 +193,34 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     username: {
-        fontSize: 20,
+        fontSize: 16,
         marginLeft: 10,
-        fontWeight: 'bold',
+        fontWeight: '800',
     },
     entryText: {
-        fontSize: 16,
-        marginLeft: 45,
+        fontSize: 13,
+        marginLeft: 40,
         marginBottom: 10,
         marginRight: 25,
+        paddingTop: 16,
+        alignSelf: 'flex-start',
     },
     reactionContainer: {
-        width: 40,
+        width: '85%',
         height: 30,
         alignSelf: 'flex-start',
         flexDirection: 'row',
         justifyContent: 'flex-start',
         marginLeft: 20,
-        marginBottom: 10,
+        marginBottom: 16,
+    },
+    likeIcon: {
+        marginTop: 15,
     },
     likesCounter: {
-        fontSize: 20,
+        fontSize: 16,
         marginLeft: 2,
+        marginTop: 14,
         color: colors.primary,
     },
     dateText: {
