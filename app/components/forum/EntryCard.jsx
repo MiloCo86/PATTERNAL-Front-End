@@ -239,11 +239,11 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
             
             <View style={styles.reactionContainer}>
                 <Pressable style={styles.iconAndCounter} onPress={handleHeartPress}>
-                    <MaterialCommunityIcons name={heartIcon} size={30} color={colors.primary}/>
+                    <MaterialCommunityIcons name={heartIcon} size={16} color={colors.primary}/>
                     <Text style={styles.numCounter}>{likesCount}</Text>
                 </Pressable>
                 <Pressable style={styles.iconAndCounter} onPress={handleShowComments}>
-                    <MaterialCommunityIcons name="comment-text-outline" size={30} color={colors.primary} />
+                    <MaterialCommunityIcons name="comment-text-outline" size={16} color={colors.primary} />
                     <Text style={styles.numCounter}>{comments.length}</Text>
                 </Pressable>
             </View>
@@ -257,7 +257,7 @@ const EntryCard = ({entryId, forumId, userId, deleteEntry}) => {
 
             {showEditIcons &&
                 <Pressable onPress={()=>deleteEntry(entryId)} style={styles.deleteIcon} >
-                    <MaterialCommunityIcons name="delete-forever-outline" size={34} color={colors.primary} />
+                    <MaterialCommunityIcons name="delete-forever-outline" size={20} color={colors.primary} />
                 </Pressable>
             }
                        
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     cardContainer: {
-        width: '76%',
+        width: '80%',
         minHeight: 170,
         justifyContent: 'space-between',
         borderRadius: 10,
@@ -321,12 +321,12 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     username: {
-        fontSize: 18,
+        fontSize: 16,
         marginLeft: 10,
-        fontWeight: 'bold',
+        fontWeight: '800',
     },
     entryText: {
-        fontSize: 15,
+        fontSize: 13,
         marginLeft: 40,
         marginBottom: 10,
         marginRight: 25,
@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     numCounter: {
-        fontSize: 20,
+        fontSize: 16,
     },
     reactionContainer: {
         width: '85%',
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     // },
     deleteIcon: {
         position: 'absolute',
-        right: -35,
+        right: -24,
         top: 0,
     },
     CommentsContainer: {
