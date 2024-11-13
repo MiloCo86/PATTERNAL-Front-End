@@ -195,7 +195,7 @@ const getChatResponse = (message,user) => {
   if (msg.trim() === "hi" || msg.trim() === "hello" || msg.trim() === "hey" || msg.trim() === "hi!" || msg.trim() === "hello!" || msg.trim() === "hey!") {
 
     // return a random greeting
-    const greetings = [`Hello ${user}! How can I help you today?`, `Hi ${user}! What can I do for you today?`, `Hey ${user}! How can I assist you today?`];
+    const greetings = [`Hello ${user}! How can I help you today?`, `Hi ${user}! What can I do for you today?`, `Hey ${user}! How can I assist you today?`, `Hi there ${user}! What can I help you with today?`];
     const randomIndex = Math.floor(Math.random() * greetings.length);
     return greetings[randomIndex];
     
@@ -230,6 +230,16 @@ const getChatResponse = (message,user) => {
   if (msg.includes('tip') && msg.includes('today')) {
 
     return "A great tip for today is to take a few minutes to practice mindfulness. Mindfulness can help you stay present and reduce stress. You can try deep breathing exercises, meditation, or simply focus on the present moment. Remember, self-care is important for your well-being too!"
+
+  }
+
+  if (msg.includes('thanks') || msg.includes('thank you')) {
+
+    // return a random thank you response
+    const thankYouResponses = [`You're welcome! I'm here to help.`, `No problem! Let me know if you need anything else.`, `You're welcome! I'm glad I could assist you.`, `No worries! ${user} I'm here to support you.`, ];
+    
+    const randomIndex = Math.floor(Math.random() * thankYouResponses.length);
+    return thankYouResponses[randomIndex];
 
   }
 

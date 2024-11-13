@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
   chatContainer: {
     flexGrow: 1, // Allow ScrollView to expand
     marginBottom: 10,
+    padding: 10,
   },
   userMessage: {
     alignSelf: 'flex-end',
