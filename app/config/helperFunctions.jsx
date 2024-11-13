@@ -221,6 +221,18 @@ const getChatResponse = (message,user) => {
 
   }
 
+  if (msg.includes('feel') && msg.includes('frustrated')) {
+
+    return "It's okay to feel frustrated. Parenting is hard work, and it's normal to feel overwhelmed sometimes. Remember to take a deep breath and give yourself grace. You're doing your best, and that's what matters most."
+
+  }
+
+  if (msg.includes('tip') && msg.includes('today')) {
+
+    return "A great tip for today is to take a few minutes to practice mindfulness. Mindfulness can help you stay present and reduce stress. You can try deep breathing exercises, meditation, or simply focus on the present moment. Remember, self-care is important for your well-being too!"
+
+  }
+
   return "I'm sorry, I don't understand that. Can you please rephrase it?";
 
 
