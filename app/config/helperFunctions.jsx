@@ -189,6 +189,43 @@ function getPastWeekMoods(entries, currentDate) {
       .map(entry => entry.mood);
 }
 
+const getChatResponse = (message,user) => {
+  const msg = message.toLowerCase();
 
-export { getCheckInQuestions, getMoodValueWeekly, getQuestionById, convertDateToMonthDayFormat, timeSelector, countDownTimerHeader, countDownTimerDisplay, getPastWeekMoods };
+  if (msg.trim() === "hi" || msg.trim() === "hello" || msg.trim() === "hey" || msg.trim() === "hi!" || msg.trim() === "hello!" || msg.trim() === "hey!") {
+
+    // return a random greeting
+    const greetings = [`Hello ${user}! How can I help you today?`, `Hi ${user}! What can I do for you today?`, `Hey ${user}! How can I assist you today?`];
+    const randomIndex = Math.floor(Math.random() * greetings.length);
+    return greetings[randomIndex];
+    
+  }
+
+  if (msg.includes("how are you") || msg.includes("how are you doing") || msg.includes("how are you today")) {
+    return "I am just a computer program, I don't have feelings. But I am here to help you!";
+  }
+
+  if (msg.includes("what is your name") || msg.includes("what's your name")) {
+    return "My name is Patt!!";
+  }
+
+  if (msg.includes('toy') && msg.includes('hit')) {
+
+    return 'Seeing your son mirror your reactions with throwing and yelling is tough, but your awareness is the first step to change. Take a moment in another room, take three deep breaths, then return. When you slip up, model honest repair: Remember - kids learn more from how we repair than from our perfect moments.'
+  
+  }
+
+  if (msg.includes('better') && msg.includes('example')) {
+
+    return "I know it's not easy, but the fact that you're so committed to doing better is really admirable. You're a great dad, and your kids are lucky to have you make this a priority. With time and practice, these new skills will become habits. I'm here to support you every step of the way."
+
+  }
+
+  return "I'm sorry, I don't understand that. Can you please rephrase it?";
+
+
+}
+
+
+export { getCheckInQuestions, getMoodValueWeekly, getQuestionById, convertDateToMonthDayFormat, timeSelector, countDownTimerHeader, countDownTimerDisplay, getPastWeekMoods, getChatResponse };
 
